@@ -6,7 +6,7 @@
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <Copyright>Copyright 2026 Zavudev</Copyright>
     <PackageProjectUrl>https://docs.zavu.dev</PackageProjectUrl>
-    <RepositoryUrl>https://www.github.com/stainless-sdks/zavudev-csharp</RepositoryUrl>
+    <RepositoryUrl>https://www.github.com/zavudev/sdk-csharp</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
 
     <!-- Documentation-->
