@@ -3,7 +3,7 @@
     <!-- Metadata -->
     <AssemblyTitle>Zavudev C#</AssemblyTitle>
     <AssemblyName>Zavudev</AssemblyName>
-    <VersionPrefix>0.0.1</VersionPrefix>
+    <VersionPrefix>0.0.2</VersionPrefix>
     <Description>The official .NET library for the Zavudev API.</Description>
     <OutputType>Library</OutputType>
     <PackageReadmeFile>README.md</PackageReadmeFile>
