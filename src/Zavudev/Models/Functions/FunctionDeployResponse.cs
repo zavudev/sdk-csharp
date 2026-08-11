@@ -132,6 +132,9 @@ public sealed record class Deployment : JsonModel
         init { this._rawData.Set("version", value); }
     }
 
+    /// <summary>
+    /// Size of the built bundle in bytes. Null until the build finishes.
+    /// </summary>
     public long? BundleBytes
     {
         get
@@ -165,6 +168,9 @@ public sealed record class Deployment : JsonModel
         init { this._rawData.Set("errorMessage", value); }
     }
 
+    /// <summary>
+    /// Total size of the deployed source tree in bytes.
+    /// </summary>
     public long? SourceCodeBytes
     {
         get
