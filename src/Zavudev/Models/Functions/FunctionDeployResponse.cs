@@ -133,6 +133,23 @@ public sealed record class Deployment : JsonModel
     }
 
     /// <summary>
+    /// What the build printed: dependency installation, the bundler's output, and
+    /// the compiler's message when it failed. Returned when fetching a single deployment,
+    /// omitted from the list. Read this first when a deploy fails — `errorMessage`
+    /// is often the outer wrapper's summary, and the line that names the broken
+    /// import or the syntax error is here.
+    /// </summary>
+    public string? BuildLogs
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("buildLogs");
+        }
+        init { this._rawData.Set("buildLogs", value); }
+    }
+
+    /// <summary>
     /// Size of the built bundle in bytes. Null until the build finishes.
     /// </summary>
     public long? BundleBytes
@@ -189,6 +206,7 @@ public sealed record class Deployment : JsonModel
         _ = this.FunctionID;
         this.Status.Validate();
         _ = this.Version;
+        _ = this.BuildLogs;
         _ = this.BundleBytes;
         _ = this.DeployedAt;
         _ = this.ErrorMessage;

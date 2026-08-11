@@ -20,6 +20,7 @@ public class FunctionGetDeploymentResponseTest : TestBase
                 FunctionID = "functionId",
                 Status = FunctionGetDeploymentResponseDeploymentStatus.Pending,
                 Version = 0,
+                BuildLogs = "buildLogs",
                 BundleBytes = 0,
                 DeployedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 ErrorMessage = "errorMessage",
@@ -34,6 +35,7 @@ public class FunctionGetDeploymentResponseTest : TestBase
             FunctionID = "functionId",
             Status = FunctionGetDeploymentResponseDeploymentStatus.Pending,
             Version = 0,
+            BuildLogs = "buildLogs",
             BundleBytes = 0,
             DeployedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ErrorMessage = "errorMessage",
@@ -55,6 +57,7 @@ public class FunctionGetDeploymentResponseTest : TestBase
                 FunctionID = "functionId",
                 Status = FunctionGetDeploymentResponseDeploymentStatus.Pending,
                 Version = 0,
+                BuildLogs = "buildLogs",
                 BundleBytes = 0,
                 DeployedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 ErrorMessage = "errorMessage",
@@ -83,6 +86,7 @@ public class FunctionGetDeploymentResponseTest : TestBase
                 FunctionID = "functionId",
                 Status = FunctionGetDeploymentResponseDeploymentStatus.Pending,
                 Version = 0,
+                BuildLogs = "buildLogs",
                 BundleBytes = 0,
                 DeployedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 ErrorMessage = "errorMessage",
@@ -104,6 +108,7 @@ public class FunctionGetDeploymentResponseTest : TestBase
             FunctionID = "functionId",
             Status = FunctionGetDeploymentResponseDeploymentStatus.Pending,
             Version = 0,
+            BuildLogs = "buildLogs",
             BundleBytes = 0,
             DeployedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ErrorMessage = "errorMessage",
@@ -125,6 +130,7 @@ public class FunctionGetDeploymentResponseTest : TestBase
                 FunctionID = "functionId",
                 Status = FunctionGetDeploymentResponseDeploymentStatus.Pending,
                 Version = 0,
+                BuildLogs = "buildLogs",
                 BundleBytes = 0,
                 DeployedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 ErrorMessage = "errorMessage",
@@ -147,6 +153,7 @@ public class FunctionGetDeploymentResponseTest : TestBase
                 FunctionID = "functionId",
                 Status = FunctionGetDeploymentResponseDeploymentStatus.Pending,
                 Version = 0,
+                BuildLogs = "buildLogs",
                 BundleBytes = 0,
                 DeployedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 ErrorMessage = "errorMessage",
@@ -172,6 +179,7 @@ public class FunctionGetDeploymentResponseDeploymentTest : TestBase
             FunctionID = "functionId",
             Status = FunctionGetDeploymentResponseDeploymentStatus.Pending,
             Version = 0,
+            BuildLogs = "buildLogs",
             BundleBytes = 0,
             DeployedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ErrorMessage = "errorMessage",
@@ -184,6 +192,7 @@ public class FunctionGetDeploymentResponseDeploymentTest : TestBase
         ApiEnum<string, FunctionGetDeploymentResponseDeploymentStatus> expectedStatus =
             FunctionGetDeploymentResponseDeploymentStatus.Pending;
         long expectedVersion = 0;
+        string expectedBuildLogs = "buildLogs";
         long expectedBundleBytes = 0;
         DateTimeOffset expectedDeployedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedErrorMessage = "errorMessage";
@@ -194,6 +203,7 @@ public class FunctionGetDeploymentResponseDeploymentTest : TestBase
         Assert.Equal(expectedFunctionID, model.FunctionID);
         Assert.Equal(expectedStatus, model.Status);
         Assert.Equal(expectedVersion, model.Version);
+        Assert.Equal(expectedBuildLogs, model.BuildLogs);
         Assert.Equal(expectedBundleBytes, model.BundleBytes);
         Assert.Equal(expectedDeployedAt, model.DeployedAt);
         Assert.Equal(expectedErrorMessage, model.ErrorMessage);
@@ -210,6 +220,7 @@ public class FunctionGetDeploymentResponseDeploymentTest : TestBase
             FunctionID = "functionId",
             Status = FunctionGetDeploymentResponseDeploymentStatus.Pending,
             Version = 0,
+            BuildLogs = "buildLogs",
             BundleBytes = 0,
             DeployedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ErrorMessage = "errorMessage",
@@ -235,6 +246,7 @@ public class FunctionGetDeploymentResponseDeploymentTest : TestBase
             FunctionID = "functionId",
             Status = FunctionGetDeploymentResponseDeploymentStatus.Pending,
             Version = 0,
+            BuildLogs = "buildLogs",
             BundleBytes = 0,
             DeployedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ErrorMessage = "errorMessage",
@@ -254,6 +266,7 @@ public class FunctionGetDeploymentResponseDeploymentTest : TestBase
         ApiEnum<string, FunctionGetDeploymentResponseDeploymentStatus> expectedStatus =
             FunctionGetDeploymentResponseDeploymentStatus.Pending;
         long expectedVersion = 0;
+        string expectedBuildLogs = "buildLogs";
         long expectedBundleBytes = 0;
         DateTimeOffset expectedDeployedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedErrorMessage = "errorMessage";
@@ -264,6 +277,7 @@ public class FunctionGetDeploymentResponseDeploymentTest : TestBase
         Assert.Equal(expectedFunctionID, deserialized.FunctionID);
         Assert.Equal(expectedStatus, deserialized.Status);
         Assert.Equal(expectedVersion, deserialized.Version);
+        Assert.Equal(expectedBuildLogs, deserialized.BuildLogs);
         Assert.Equal(expectedBundleBytes, deserialized.BundleBytes);
         Assert.Equal(expectedDeployedAt, deserialized.DeployedAt);
         Assert.Equal(expectedErrorMessage, deserialized.ErrorMessage);
@@ -280,6 +294,7 @@ public class FunctionGetDeploymentResponseDeploymentTest : TestBase
             FunctionID = "functionId",
             Status = FunctionGetDeploymentResponseDeploymentStatus.Pending,
             Version = 0,
+            BuildLogs = "buildLogs",
             BundleBytes = 0,
             DeployedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ErrorMessage = "errorMessage",
@@ -301,6 +316,8 @@ public class FunctionGetDeploymentResponseDeploymentTest : TestBase
             Version = 0,
         };
 
+        Assert.Null(model.BuildLogs);
+        Assert.False(model.RawData.ContainsKey("buildLogs"));
         Assert.Null(model.BundleBytes);
         Assert.False(model.RawData.ContainsKey("bundleBytes"));
         Assert.Null(model.DeployedAt);
@@ -337,12 +354,15 @@ public class FunctionGetDeploymentResponseDeploymentTest : TestBase
             Status = FunctionGetDeploymentResponseDeploymentStatus.Pending,
             Version = 0,
 
+            BuildLogs = null,
             BundleBytes = null,
             DeployedAt = null,
             ErrorMessage = null,
             SourceCodeBytes = null,
         };
 
+        Assert.Null(model.BuildLogs);
+        Assert.True(model.RawData.ContainsKey("buildLogs"));
         Assert.Null(model.BundleBytes);
         Assert.True(model.RawData.ContainsKey("bundleBytes"));
         Assert.Null(model.DeployedAt);
@@ -364,6 +384,7 @@ public class FunctionGetDeploymentResponseDeploymentTest : TestBase
             Status = FunctionGetDeploymentResponseDeploymentStatus.Pending,
             Version = 0,
 
+            BuildLogs = null,
             BundleBytes = null,
             DeployedAt = null,
             ErrorMessage = null,
@@ -383,6 +404,7 @@ public class FunctionGetDeploymentResponseDeploymentTest : TestBase
             FunctionID = "functionId",
             Status = FunctionGetDeploymentResponseDeploymentStatus.Pending,
             Version = 0,
+            BuildLogs = "buildLogs",
             BundleBytes = 0,
             DeployedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ErrorMessage = "errorMessage",
