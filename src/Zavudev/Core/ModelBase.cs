@@ -1,7 +1,10 @@
 using System.Text.Json;
 using Zavudev.Exceptions;
 using Zavudev.Models.Addresses;
+using Zavudev.Models.AgentTemplates;
 using Zavudev.Models.Broadcasts;
+using Zavudev.Models.EmailDomains;
+using Zavudev.Models.Functions.GitLink;
 using Zavudev.Models.Introspect;
 using Zavudev.Models.Messages;
 using Zavudev.Models.PhoneNumbers;
@@ -9,10 +12,13 @@ using Zavudev.Models.Senders;
 using Zavudev.Models.Senders.Agent;
 using Zavudev.Models.Senders.Agent.Flows;
 using Zavudev.Models.SubAccounts.ApiKeys;
+using Agents = Zavudev.Models.Agents;
 using Brands = Zavudev.Models.Number10dlc.Brands;
+using Calls = Zavudev.Models.Calls;
 using Campaigns = Zavudev.Models.Number10dlc.Campaigns;
 using Channels = Zavudev.Models.Contacts.Channels;
 using Contacts = Zavudev.Models.Contacts;
+using Conversations = Zavudev.Models.Conversations;
 using Functions = Zavudev.Models.Functions;
 using Invitations = Zavudev.Models.Invitations;
 using PhoneNumbers = Zavudev.Models.Number10dlc.Campaigns.PhoneNumbers;
@@ -85,6 +91,8 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, BroadcastMessageType>(),
             new ApiEnumConverter<string, BroadcastStatus>(),
             new ApiEnumConverter<string, LineType>(),
+            new ApiEnumConverter<string, Reason>(),
+            new ApiEnumConverter<string, Verdict>(),
             new ApiEnumConverter<string, PhoneNumberStatus>(),
             new ApiEnumConverter<string, PhoneNumberType>(),
             new ApiEnumConverter<string, RequirementFieldType>(),
@@ -122,8 +130,58 @@ public abstract record class ModelBase
                 string,
                 Functions::FunctionGetDeploymentResponseDeploymentStatus
             >(),
+            new ApiEnumConverter<
+                string,
+                Functions::FunctionListDeploymentsResponseDeploymentStatus
+            >(),
+            new ApiEnumConverter<
+                string,
+                Functions::FunctionRollbackDeploymentResponseDeploymentStatus
+            >(),
             new ApiEnumConverter<long, Functions::MemoryMB>(),
             new ApiEnumConverter<string, Functions::Runtime>(),
+            new ApiEnumConverter<string, Connection>(),
+            new ApiEnumConverter<string, Provider>(),
+            new ApiEnumConverter<string, LastStatus>(),
+            new ApiEnumConverter<string, GitLinkUpdateResponseLinkConnection>(),
+            new ApiEnumConverter<string, GitLinkUpdateResponseLinkProvider>(),
+            new ApiEnumConverter<string, GitLinkUpdateResponseLinkLastStatus>(),
+            new ApiEnumConverter<string, GitLinkLinkResponseLinkConnection>(),
+            new ApiEnumConverter<string, GitLinkLinkResponseLinkProvider>(),
+            new ApiEnumConverter<string, GitLinkLinkResponseLinkLastStatus>(),
+            new ApiEnumConverter<string, Conversations::Direction>(),
+            new ApiEnumConverter<
+                string,
+                Conversations::ConversationListResponseLastMessageDirection
+            >(),
+            new ApiEnumConverter<
+                string,
+                Conversations::ConversationMarkAsReadResponseConversationLastMessageDirection
+            >(),
+            new ApiEnumConverter<string, Conversations::Channel>(),
+            new ApiEnumConverter<string, Calls::CallDirection>(),
+            new ApiEnumConverter<string, Calls::CallStatus>(),
+            new ApiEnumConverter<string, Calls::Role>(),
+            new ApiEnumConverter<string, Calls::CallRetrieveResponseCallDirection>(),
+            new ApiEnumConverter<string, Calls::CallRetrieveResponseCallStatus>(),
+            new ApiEnumConverter<string, Calls::CallRetrieveResponseCallTranscriptRole>(),
+            new ApiEnumConverter<string, Calls::CallListResponseDirection>(),
+            new ApiEnumConverter<string, Calls::CallListResponseStatus>(),
+            new ApiEnumConverter<string, Calls::CallListResponseTranscriptRole>(),
+            new ApiEnumConverter<string, Calls::CallHangupResponseCallDirection>(),
+            new ApiEnumConverter<string, Calls::CallHangupResponseCallStatus>(),
+            new ApiEnumConverter<string, Calls::CallHangupResponseCallTranscriptRole>(),
+            new ApiEnumConverter<string, Calls::Direction>(),
+            new ApiEnumConverter<string, Calls::Status>(),
+            new ApiEnumConverter<string, Category>(),
+            new ApiEnumConverter<string, ItemCategory>(),
+            new ApiEnumConverter<string, Purpose>(),
+            new ApiEnumConverter<string, EmailDomainRetrieveResponseDomainDnsRecordPurpose>(),
+            new ApiEnumConverter<string, ItemDnsRecordPurpose>(),
+            new ApiEnumConverter<string, EmailDomainVerifyResponseDomainDnsRecordPurpose>(),
+            new ApiEnumConverter<string, Agents::VoicemailAction>(),
+            new ApiEnumConverter<string, Agents::AgentUpdateParamsVoiceVoicemailAction>(),
+            new ApiEnumConverter<string, Agents::Role>(),
         },
     };
 

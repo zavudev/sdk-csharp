@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Zavudev.Core;
 using Zavudev.Models.Senders.Agent.Tools;
+using Zavudev.Services.Senders.Agent.Tools;
 
 namespace Zavudev.Services.Senders.Agent;
 
@@ -25,6 +26,8 @@ public interface IToolService
     /// <para>The original service is not modified.</para>
     /// </summary>
     IToolService WithOptions(Func<ClientOptions, ClientOptions> modifier);
+
+    IWebhookService Webhook { get; }
 
     /// <summary>
     /// Create a new tool for an agent. Tools allow the agent to call external webhooks.
@@ -99,6 +102,23 @@ public interface IToolService
     );
 
     /// <summary>
+    /// Recent runs of this tool triggered from the test endpoint, newest first. Covers
+    /// manual tests only: a tool called by an agent during a real conversation is not
+    /// recorded here.
+    /// </summary>
+    Task<ToolListTestRunsResponse> ListTestRuns(
+        ToolListTestRunsParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="ListTestRuns(ToolListTestRunsParams, CancellationToken)"/>
+    Task<ToolListTestRunsResponse> ListTestRuns(
+        string toolID,
+        ToolListTestRunsParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// Run a tool with the parameters you supply and return what it answered.
     ///
     /// <para>The call is synchronous: the response carries the tool's status, body, and
@@ -135,6 +155,8 @@ public interface IToolServiceWithRawResponse
     /// <para>The original service is not modified.</para>
     /// </summary>
     IToolServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
+
+    IWebhookServiceWithRawResponse Webhook { get; }
 
     /// <summary>
     /// Returns a raw HTTP response for <c>post /v1/senders/{senderId}/agent/tools</c>, but is otherwise the
@@ -213,6 +235,22 @@ public interface IToolServiceWithRawResponse
     Task<HttpResponse> Delete(
         string toolID,
         ToolDeleteParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for <c>get /v1/senders/{senderId}/agent/tools/{toolId}/test-runs</c>, but is otherwise the
+    /// same as <see cref="IToolService.ListTestRuns(ToolListTestRunsParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<ToolListTestRunsResponse>> ListTestRuns(
+        ToolListTestRunsParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="ListTestRuns(ToolListTestRunsParams, CancellationToken)"/>
+    Task<HttpResponse<ToolListTestRunsResponse>> ListTestRuns(
+        string toolID,
+        ToolListTestRunsParams parameters,
         CancellationToken cancellationToken = default
     );
 

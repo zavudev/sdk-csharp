@@ -168,6 +168,36 @@ public sealed class ZavudevClient : IZavudevClient
         get { return _functions.Value; }
     }
 
+    readonly Lazy<IConversationService> _conversations;
+    public IConversationService Conversations
+    {
+        get { return _conversations.Value; }
+    }
+
+    readonly Lazy<ICallService> _calls;
+    public ICallService Calls
+    {
+        get { return _calls.Value; }
+    }
+
+    readonly Lazy<IAgentTemplateService> _agentTemplates;
+    public IAgentTemplateService AgentTemplates
+    {
+        get { return _agentTemplates.Value; }
+    }
+
+    readonly Lazy<IEmailDomainService> _emailDomains;
+    public IEmailDomainService EmailDomains
+    {
+        get { return _emailDomains.Value; }
+    }
+
+    readonly Lazy<IAgentService> _agents;
+    public IAgentService Agents
+    {
+        get { return _agents.Value; }
+    }
+
     public void Dispose() => this.HttpClient.Dispose();
 
     public ZavudevClient()
@@ -191,6 +221,11 @@ public sealed class ZavudevClient : IZavudevClient
         _number10dlc = new(() => new Number10dlcService(this));
         _me = new(() => new MeService(this));
         _functions = new(() => new FunctionService(this));
+        _conversations = new(() => new ConversationService(this));
+        _calls = new(() => new CallService(this));
+        _agentTemplates = new(() => new AgentTemplateService(this));
+        _emailDomains = new(() => new EmailDomainService(this));
+        _agents = new(() => new AgentService(this));
     }
 
     public ZavudevClient(ClientOptions options)
@@ -360,6 +395,36 @@ public sealed class ZavudevClientWithRawResponse : IZavudevClientWithRawResponse
     public IFunctionServiceWithRawResponse Functions
     {
         get { return _functions.Value; }
+    }
+
+    readonly Lazy<IConversationServiceWithRawResponse> _conversations;
+    public IConversationServiceWithRawResponse Conversations
+    {
+        get { return _conversations.Value; }
+    }
+
+    readonly Lazy<ICallServiceWithRawResponse> _calls;
+    public ICallServiceWithRawResponse Calls
+    {
+        get { return _calls.Value; }
+    }
+
+    readonly Lazy<IAgentTemplateServiceWithRawResponse> _agentTemplates;
+    public IAgentTemplateServiceWithRawResponse AgentTemplates
+    {
+        get { return _agentTemplates.Value; }
+    }
+
+    readonly Lazy<IEmailDomainServiceWithRawResponse> _emailDomains;
+    public IEmailDomainServiceWithRawResponse EmailDomains
+    {
+        get { return _emailDomains.Value; }
+    }
+
+    readonly Lazy<IAgentServiceWithRawResponse> _agents;
+    public IAgentServiceWithRawResponse Agents
+    {
+        get { return _agents.Value; }
     }
 
     /// <inheritdoc/>
@@ -576,6 +641,11 @@ public sealed class ZavudevClientWithRawResponse : IZavudevClientWithRawResponse
         _number10dlc = new(() => new Number10dlcServiceWithRawResponse(this));
         _me = new(() => new MeServiceWithRawResponse(this));
         _functions = new(() => new FunctionServiceWithRawResponse(this));
+        _conversations = new(() => new ConversationServiceWithRawResponse(this));
+        _calls = new(() => new CallServiceWithRawResponse(this));
+        _agentTemplates = new(() => new AgentTemplateServiceWithRawResponse(this));
+        _emailDomains = new(() => new EmailDomainServiceWithRawResponse(this));
+        _agents = new(() => new AgentServiceWithRawResponse(this));
     }
 
     public ZavudevClientWithRawResponse(ClientOptions options)

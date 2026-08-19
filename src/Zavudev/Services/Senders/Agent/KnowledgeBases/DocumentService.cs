@@ -97,6 +97,50 @@ public sealed class DocumentService : IDocumentService
         await this.Delete(parameters with { DocID = docID }, cancellationToken)
             .ConfigureAwait(false);
     }
+
+    /// <inheritdoc/>
+    public async Task<DocumentRetrieveDocumentResponse> RetrieveDocument(
+        DocumentRetrieveDocumentParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.RetrieveDocument(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public Task<DocumentRetrieveDocumentResponse> RetrieveDocument(
+        string docID,
+        DocumentRetrieveDocumentParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        return this.RetrieveDocument(parameters with { DocID = docID }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public async Task<DocumentUpdateDocumentResponse> UpdateDocument(
+        DocumentUpdateDocumentParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.UpdateDocument(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public Task<DocumentUpdateDocumentResponse> UpdateDocument(
+        string docID,
+        DocumentUpdateDocumentParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        return this.UpdateDocument(parameters with { DocID = docID }, cancellationToken);
+    }
 }
 
 /// <inheritdoc/>
@@ -228,5 +272,91 @@ public sealed class DocumentServiceWithRawResponse : IDocumentServiceWithRawResp
     )
     {
         return this.Delete(parameters with { DocID = docID }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public async Task<HttpResponse<DocumentRetrieveDocumentResponse>> RetrieveDocument(
+        DocumentRetrieveDocumentParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        if (parameters.DocID == null)
+        {
+            throw new ZavudevInvalidDataException("'parameters.DocID' cannot be null");
+        }
+
+        HttpRequest<DocumentRetrieveDocumentParams> request = new()
+        {
+            Method = HttpMethod.Get,
+            Params = parameters,
+        };
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var deserializedResponse = await response
+                    .Deserialize<DocumentRetrieveDocumentResponse>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    deserializedResponse.Validate();
+                }
+                return deserializedResponse;
+            }
+        );
+    }
+
+    /// <inheritdoc/>
+    public Task<HttpResponse<DocumentRetrieveDocumentResponse>> RetrieveDocument(
+        string docID,
+        DocumentRetrieveDocumentParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        return this.RetrieveDocument(parameters with { DocID = docID }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public async Task<HttpResponse<DocumentUpdateDocumentResponse>> UpdateDocument(
+        DocumentUpdateDocumentParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        if (parameters.DocID == null)
+        {
+            throw new ZavudevInvalidDataException("'parameters.DocID' cannot be null");
+        }
+
+        HttpRequest<DocumentUpdateDocumentParams> request = new()
+        {
+            Method = ZavudevClientWithRawResponse.PatchMethod,
+            Params = parameters,
+        };
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var deserializedResponse = await response
+                    .Deserialize<DocumentUpdateDocumentResponse>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    deserializedResponse.Validate();
+                }
+                return deserializedResponse;
+            }
+        );
+    }
+
+    /// <inheritdoc/>
+    public Task<HttpResponse<DocumentUpdateDocumentResponse>> UpdateDocument(
+        string docID,
+        DocumentUpdateDocumentParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        return this.UpdateDocument(parameters with { DocID = docID }, cancellationToken);
     }
 }

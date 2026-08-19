@@ -29,6 +29,10 @@ public interface IFunctionService
 
     ISecretService Secrets { get; }
 
+    ITriggerService Triggers { get; }
+
+    IGitLinkService GitLink { get; }
+
     /// <summary>
     /// Create a new Zavu Function. The function starts in `draft` status. A dedicated
     /// API key is auto-provisioned and injected as the `ZAVU_API_KEY` secret so the
@@ -127,6 +131,51 @@ public interface IFunctionService
     );
 
     /// <summary>
+    /// List a function's deployment history, newest first. Source code is omitted;
+    /// fetch a single deployment via GET /v1/functions/deployments/{deploymentId} for
+    /// full details.
+    /// </summary>
+    Task<FunctionListDeploymentsResponse> ListDeployments(
+        FunctionListDeploymentsParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="ListDeployments(FunctionListDeploymentsParams, CancellationToken)"/>
+    Task<FunctionListDeploymentsResponse> ListDeployments(
+        string functionID,
+        FunctionListDeploymentsParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// List the event types a function trigger can subscribe to. Includes the special
+    /// type `cron`, which fires on a schedule (see POST
+    /// /v1/functions/{functionId}/triggers) rather than on a messaging event.
+    /// </summary>
+    Task<FunctionListEventTypesResponse> ListEventTypes(
+        FunctionListEventTypesParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Re-deploy a previous version by copying its source, dependencies, and runtime
+    /// pin onto the function's draft, then deploying. Returns immediately with a
+    /// deployment ID — poll GET /v1/functions/deployments/{deploymentId} until status
+    /// is active or failed. Secrets are not rolled back.
+    /// </summary>
+    Task<FunctionRollbackDeploymentResponse> RollbackDeployment(
+        FunctionRollbackDeploymentParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="RollbackDeployment(FunctionRollbackDeploymentParams, CancellationToken)"/>
+    Task<FunctionRollbackDeploymentResponse> RollbackDeployment(
+        string functionID,
+        FunctionRollbackDeploymentParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// Fetch invocation logs for a function. Logs are paginated via `nextToken`. Pass
     /// `startTime` / `endTime` (Unix epoch milliseconds) to bound the window, or
     /// `filterPattern` to filter messages.
@@ -158,6 +207,10 @@ public interface IFunctionServiceWithRawResponse
     IFunctionServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     ISecretServiceWithRawResponse Secrets { get; }
+
+    ITriggerServiceWithRawResponse Triggers { get; }
+
+    IGitLinkServiceWithRawResponse GitLink { get; }
 
     /// <summary>
     /// Returns a raw HTTP response for <c>post /v1/functions</c>, but is otherwise the
@@ -245,6 +298,47 @@ public interface IFunctionServiceWithRawResponse
     Task<HttpResponse<FunctionGetDeploymentResponse>> GetDeployment(
         string deploymentID,
         FunctionGetDeploymentParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for <c>get /v1/functions/{functionId}/deployments</c>, but is otherwise the
+    /// same as <see cref="IFunctionService.ListDeployments(FunctionListDeploymentsParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<FunctionListDeploymentsResponse>> ListDeployments(
+        FunctionListDeploymentsParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="ListDeployments(FunctionListDeploymentsParams, CancellationToken)"/>
+    Task<HttpResponse<FunctionListDeploymentsResponse>> ListDeployments(
+        string functionID,
+        FunctionListDeploymentsParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for <c>get /v1/functions/event-types</c>, but is otherwise the
+    /// same as <see cref="IFunctionService.ListEventTypes(FunctionListEventTypesParams?, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<FunctionListEventTypesResponse>> ListEventTypes(
+        FunctionListEventTypesParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for <c>post /v1/functions/{functionId}/rollback</c>, but is otherwise the
+    /// same as <see cref="IFunctionService.RollbackDeployment(FunctionRollbackDeploymentParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<FunctionRollbackDeploymentResponse>> RollbackDeployment(
+        FunctionRollbackDeploymentParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="RollbackDeployment(FunctionRollbackDeploymentParams, CancellationToken)"/>
+    Task<HttpResponse<FunctionRollbackDeploymentResponse>> RollbackDeployment(
+        string functionID,
+        FunctionRollbackDeploymentParams parameters,
         CancellationToken cancellationToken = default
     );
 
