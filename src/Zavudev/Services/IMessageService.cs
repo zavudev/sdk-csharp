@@ -50,6 +50,26 @@ public interface IMessageService
     );
 
     /// <summary>
+    /// List the stored file attachments for an email message and get a short-lived
+    /// signed `downloadUrl` for each. Works for both inbound emails (received via
+    /// `message.inbound`) and outbound emails you sent with attachments. Messages
+    /// without stored attachments (including SMS, WhatsApp, and other channels) return
+    /// an empty list. Each `downloadUrl` is generated fresh per request and expires —
+    /// fetch the file promptly and do not cache the URL.
+    /// </summary>
+    Task<MessageListAttachmentsResponse> ListAttachments(
+        MessageListAttachmentsParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="ListAttachments(MessageListAttachmentsParams, CancellationToken)"/>
+    Task<MessageListAttachmentsResponse> ListAttachments(
+        string messageID,
+        MessageListAttachmentsParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// Send an emoji reaction to an existing WhatsApp message. Reactions are only
     /// supported for WhatsApp messages.
     /// </summary>
@@ -159,6 +179,22 @@ public interface IMessageServiceWithRawResponse
     /// </summary>
     Task<HttpResponse<MessageListPage>> List(
         MessageListParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for <c>get /v1/messages/{messageId}/attachments</c>, but is otherwise the
+    /// same as <see cref="IMessageService.ListAttachments(MessageListAttachmentsParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<MessageListAttachmentsResponse>> ListAttachments(
+        MessageListAttachmentsParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="ListAttachments(MessageListAttachmentsParams, CancellationToken)"/>
+    Task<HttpResponse<MessageListAttachmentsResponse>> ListAttachments(
+        string messageID,
+        MessageListAttachmentsParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 
