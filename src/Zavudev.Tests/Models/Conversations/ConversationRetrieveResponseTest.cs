@@ -4,7 +4,7 @@ using System.Text.Json;
 using Zavudev.Core;
 using Zavudev.Exceptions;
 using Zavudev.Models.Conversations;
-using Zavudev.Models.Messages;
+using Messages = Zavudev.Models.Messages;
 
 namespace Zavudev.Tests.Models.Conversations;
 
@@ -25,7 +25,7 @@ public class ConversationRetrieveResponseTest : TestBase
                 {
                     ID = "id",
                     At = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Channel = MessageChannel.Auto,
+                    Channel = Messages::MessageChannel.Auto,
                     Direction = Direction.Inbound,
                     Text = "text",
                 },
@@ -55,7 +55,7 @@ public class ConversationRetrieveResponseTest : TestBase
             {
                 ID = "id",
                 At = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                Channel = MessageChannel.Auto,
+                Channel = Messages::MessageChannel.Auto,
                 Direction = Direction.Inbound,
                 Text = "text",
             },
@@ -92,7 +92,7 @@ public class ConversationRetrieveResponseTest : TestBase
                 {
                     ID = "id",
                     At = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Channel = MessageChannel.Auto,
+                    Channel = Messages::MessageChannel.Auto,
                     Direction = Direction.Inbound,
                     Text = "text",
                 },
@@ -136,7 +136,7 @@ public class ConversationRetrieveResponseTest : TestBase
                 {
                     ID = "id",
                     At = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Channel = MessageChannel.Auto,
+                    Channel = Messages::MessageChannel.Auto,
                     Direction = Direction.Inbound,
                     Text = "text",
                 },
@@ -173,7 +173,7 @@ public class ConversationRetrieveResponseTest : TestBase
             {
                 ID = "id",
                 At = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                Channel = MessageChannel.Auto,
+                Channel = Messages::MessageChannel.Auto,
                 Direction = Direction.Inbound,
                 Text = "text",
             },
@@ -210,7 +210,7 @@ public class ConversationRetrieveResponseTest : TestBase
                 {
                     ID = "id",
                     At = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Channel = MessageChannel.Auto,
+                    Channel = Messages::MessageChannel.Auto,
                     Direction = Direction.Inbound,
                     Text = "text",
                 },
@@ -248,7 +248,7 @@ public class ConversationRetrieveResponseTest : TestBase
                 {
                     ID = "id",
                     At = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Channel = MessageChannel.Auto,
+                    Channel = Messages::MessageChannel.Auto,
                     Direction = Direction.Inbound,
                     Text = "text",
                 },
@@ -289,7 +289,7 @@ public class ConversationTest : TestBase
             {
                 ID = "id",
                 At = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                Channel = MessageChannel.Auto,
+                Channel = Messages::MessageChannel.Auto,
                 Direction = Direction.Inbound,
                 Text = "text",
             },
@@ -316,7 +316,7 @@ public class ConversationTest : TestBase
         {
             ID = "id",
             At = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Channel = MessageChannel.Auto,
+            Channel = Messages::MessageChannel.Auto,
             Direction = Direction.Inbound,
             Text = "text",
         };
@@ -366,7 +366,7 @@ public class ConversationTest : TestBase
             {
                 ID = "id",
                 At = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                Channel = MessageChannel.Auto,
+                Channel = Messages::MessageChannel.Auto,
                 Direction = Direction.Inbound,
                 Text = "text",
             },
@@ -407,7 +407,7 @@ public class ConversationTest : TestBase
             {
                 ID = "id",
                 At = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                Channel = MessageChannel.Auto,
+                Channel = Messages::MessageChannel.Auto,
                 Direction = Direction.Inbound,
                 Text = "text",
             },
@@ -441,7 +441,7 @@ public class ConversationTest : TestBase
         {
             ID = "id",
             At = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Channel = MessageChannel.Auto,
+            Channel = Messages::MessageChannel.Auto,
             Direction = Direction.Inbound,
             Text = "text",
         };
@@ -491,7 +491,7 @@ public class ConversationTest : TestBase
             {
                 ID = "id",
                 At = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                Channel = MessageChannel.Auto,
+                Channel = Messages::MessageChannel.Auto,
                 Direction = Direction.Inbound,
                 Text = "text",
             },
@@ -526,7 +526,7 @@ public class ConversationTest : TestBase
             {
                 ID = "id",
                 At = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                Channel = MessageChannel.Auto,
+                Channel = Messages::MessageChannel.Auto,
                 Direction = Direction.Inbound,
                 Text = "text",
             },
@@ -560,7 +560,7 @@ public class ConversationTest : TestBase
             {
                 ID = "id",
                 At = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                Channel = MessageChannel.Auto,
+                Channel = Messages::MessageChannel.Auto,
                 Direction = Direction.Inbound,
                 Text = "text",
             },
@@ -585,7 +585,7 @@ public class ConversationTest : TestBase
             {
                 ID = "id",
                 At = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                Channel = MessageChannel.Auto,
+                Channel = Messages::MessageChannel.Auto,
                 Direction = Direction.Inbound,
                 Text = "text",
             },
@@ -626,7 +626,7 @@ public class ConversationTest : TestBase
             {
                 ID = "id",
                 At = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                Channel = MessageChannel.Auto,
+                Channel = Messages::MessageChannel.Auto,
                 Direction = Direction.Inbound,
                 Text = "text",
             },
@@ -658,7 +658,7 @@ public class ConversationTest : TestBase
             {
                 ID = "id",
                 At = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                Channel = MessageChannel.Auto,
+                Channel = Messages::MessageChannel.Auto,
                 Direction = Direction.Inbound,
                 Text = "text",
             },
@@ -692,14 +692,14 @@ public class LastMessageTest : TestBase
         {
             ID = "id",
             At = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Channel = MessageChannel.Auto,
+            Channel = Messages::MessageChannel.Auto,
             Direction = Direction.Inbound,
             Text = "text",
         };
 
         string expectedID = "id";
         DateTimeOffset expectedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        ApiEnum<string, MessageChannel> expectedChannel = MessageChannel.Auto;
+        ApiEnum<string, Messages::MessageChannel> expectedChannel = Messages::MessageChannel.Auto;
         ApiEnum<string, Direction> expectedDirection = Direction.Inbound;
         string expectedText = "text";
 
@@ -717,7 +717,7 @@ public class LastMessageTest : TestBase
         {
             ID = "id",
             At = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Channel = MessageChannel.Auto,
+            Channel = Messages::MessageChannel.Auto,
             Direction = Direction.Inbound,
             Text = "text",
         };
@@ -738,7 +738,7 @@ public class LastMessageTest : TestBase
         {
             ID = "id",
             At = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Channel = MessageChannel.Auto,
+            Channel = Messages::MessageChannel.Auto,
             Direction = Direction.Inbound,
             Text = "text",
         };
@@ -752,7 +752,7 @@ public class LastMessageTest : TestBase
 
         string expectedID = "id";
         DateTimeOffset expectedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        ApiEnum<string, MessageChannel> expectedChannel = MessageChannel.Auto;
+        ApiEnum<string, Messages::MessageChannel> expectedChannel = Messages::MessageChannel.Auto;
         ApiEnum<string, Direction> expectedDirection = Direction.Inbound;
         string expectedText = "text";
 
@@ -770,7 +770,7 @@ public class LastMessageTest : TestBase
         {
             ID = "id",
             At = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Channel = MessageChannel.Auto,
+            Channel = Messages::MessageChannel.Auto,
             Direction = Direction.Inbound,
             Text = "text",
         };
@@ -785,7 +785,7 @@ public class LastMessageTest : TestBase
         {
             ID = "id",
             At = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Channel = MessageChannel.Auto,
+            Channel = Messages::MessageChannel.Auto,
             Direction = Direction.Inbound,
             Text = "text",
         };

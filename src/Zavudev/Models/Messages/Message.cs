@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Zavudev.Core;
+using Zavudev.Exceptions;
 
 namespace Zavudev.Models.Messages;
 
@@ -42,6 +43,20 @@ public sealed record class Message : JsonModel
             return this._rawData.GetNotNullStruct<DateTimeOffset>("createdAt");
         }
         init { this._rawData.Set("createdAt", value); }
+    }
+
+    /// <summary>
+    /// Who sent the message. Needed to render a thread: `status` cannot tell the
+    /// two apart, because an inbound message is also stored as `delivered`.
+    /// </summary>
+    public required ApiEnum<string, Direction> Direction
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, Direction>>("direction");
+        }
+        init { this._rawData.Set("direction", value); }
     }
 
     /// <summary>
@@ -319,6 +334,7 @@ public sealed record class Message : JsonModel
         _ = this.ID;
         this.Channel.Validate();
         _ = this.CreatedAt;
+        this.Direction.Validate();
         this.MessageType.Validate();
         this.Status.Validate();
         _ = this.To;
@@ -370,4 +386,52 @@ class MessageFromRaw : IFromRawJson<Message>
     /// <inheritdoc/>
     public Message FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Message.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Who sent the message. Needed to render a thread: `status` cannot tell the two
+/// apart, because an inbound message is also stored as `delivered`.
+/// </summary>
+[JsonConverter(typeof(DirectionConverter))]
+public enum Direction
+{
+    Inbound,
+    Outbound,
+}
+
+sealed class DirectionConverter : JsonConverter<Direction>
+{
+    public override Direction Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "inbound" => Direction.Inbound,
+            "outbound" => Direction.Outbound,
+            _ => (Direction)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        Direction value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                Direction.Inbound => "inbound",
+                Direction.Outbound => "outbound",
+                _ => throw new ZavudevInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
 }
