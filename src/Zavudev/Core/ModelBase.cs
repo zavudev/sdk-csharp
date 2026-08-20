@@ -49,6 +49,7 @@ public abstract record class ModelBase
         {
             new FrozenDictionaryConverterFactory(),
             new ApiEnumConverter<string, MessageChannel>(),
+            new ApiEnumConverter<string, Direction>(),
             new ApiEnumConverter<string, CtaHeaderType>(),
             new ApiEnumConverter<string, MediaType>(),
             new ApiEnumConverter<string, SourceType>(),

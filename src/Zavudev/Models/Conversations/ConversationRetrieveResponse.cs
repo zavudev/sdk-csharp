@@ -390,12 +390,14 @@ public sealed record class LastMessage : JsonModel
         init { this._rawData.Set("channel", value); }
     }
 
-    public required ApiEnum<string, Direction> Direction
+    public required ApiEnum<string, global::Zavudev.Models.Conversations.Direction> Direction
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, Direction>>("direction");
+            return this._rawData.GetNotNullClass<
+                ApiEnum<string, global::Zavudev.Models.Conversations.Direction>
+            >("direction");
         }
         init { this._rawData.Set("direction", value); }
     }
@@ -458,16 +460,16 @@ class LastMessageFromRaw : IFromRawJson<LastMessage>
         LastMessage.FromRawUnchecked(rawData);
 }
 
-[JsonConverter(typeof(DirectionConverter))]
+[JsonConverter(typeof(global::Zavudev.Models.Conversations.DirectionConverter))]
 public enum Direction
 {
     Inbound,
     Outbound,
 }
 
-sealed class DirectionConverter : JsonConverter<Direction>
+sealed class DirectionConverter : JsonConverter<global::Zavudev.Models.Conversations.Direction>
 {
-    public override Direction Read(
+    public override global::Zavudev.Models.Conversations.Direction Read(
         ref Utf8JsonReader reader,
         Type typeToConvert,
         JsonSerializerOptions options
@@ -475,15 +477,15 @@ sealed class DirectionConverter : JsonConverter<Direction>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "inbound" => Direction.Inbound,
-            "outbound" => Direction.Outbound,
-            _ => (Direction)(-1),
+            "inbound" => global::Zavudev.Models.Conversations.Direction.Inbound,
+            "outbound" => global::Zavudev.Models.Conversations.Direction.Outbound,
+            _ => (global::Zavudev.Models.Conversations.Direction)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        Direction value,
+        global::Zavudev.Models.Conversations.Direction value,
         JsonSerializerOptions options
     )
     {
@@ -491,8 +493,8 @@ sealed class DirectionConverter : JsonConverter<Direction>
             writer,
             value switch
             {
-                Direction.Inbound => "inbound",
-                Direction.Outbound => "outbound",
+                global::Zavudev.Models.Conversations.Direction.Inbound => "inbound",
+                global::Zavudev.Models.Conversations.Direction.Outbound => "outbound",
                 _ => throw new ZavudevInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

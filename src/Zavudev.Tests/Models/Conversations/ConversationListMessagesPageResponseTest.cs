@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Zavudev.Core;
 using Zavudev.Models.Conversations;
-using Zavudev.Models.Messages;
+using Messages = Zavudev.Models.Messages;
 
 namespace Zavudev.Tests.Models.Conversations;
 
@@ -19,10 +19,11 @@ public class ConversationListMessagesPageResponseTest : TestBase
                 new()
                 {
                     ID = "jd7x2k3m4n5p6q7r8s9t0",
-                    Channel = MessageChannel.Auto,
+                    Channel = Messages::MessageChannel.Auto,
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    MessageType = MessageType.Text,
-                    Status = MessageStatus.Queued,
+                    Direction = Messages::Direction.Inbound,
+                    MessageType = Messages::MessageType.Text,
+                    Status = Messages::MessageStatus.Queued,
                     To = "+56912345678",
                     Content = new()
                     {
@@ -31,7 +32,7 @@ public class ConversationListMessagesPageResponseTest : TestBase
                         CtaDisplayText = "See Dates",
                         CtaHeaderMediaUrl = "https://example.com",
                         CtaHeaderText = "ctaHeaderText",
-                        CtaHeaderType = CtaHeaderType.Text,
+                        CtaHeaderType = Messages::CtaHeaderType.Text,
                         CtaUrl = "https://example.com/schedule",
                         Emoji = "emoji",
                         Filename = "invoice.pdf",
@@ -51,9 +52,9 @@ public class ConversationListMessagesPageResponseTest : TestBase
                             CtwaClid = "ARIzZm9vYmFyY3R3YWNsaWQ",
                             Headline = "headline",
                             ImageUrl = "https://example.com",
-                            MediaType = MediaType.Image,
+                            MediaType = Messages::MediaType.Image,
                             SourceID = "120210000000000000",
-                            SourceType = SourceType.Ad,
+                            SourceType = Messages::SourceType.Ad,
                             SourceUrl = "https://example.com",
                             ThumbnailUrl = "https://example.com",
                             VideoUrl = "https://example.com",
@@ -111,15 +112,16 @@ public class ConversationListMessagesPageResponseTest : TestBase
             NextCursor = "nextCursor",
         };
 
-        List<Message> expectedItems =
+        List<Messages::Message> expectedItems =
         [
             new()
             {
                 ID = "jd7x2k3m4n5p6q7r8s9t0",
-                Channel = MessageChannel.Auto,
+                Channel = Messages::MessageChannel.Auto,
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                MessageType = MessageType.Text,
-                Status = MessageStatus.Queued,
+                Direction = Messages::Direction.Inbound,
+                MessageType = Messages::MessageType.Text,
+                Status = Messages::MessageStatus.Queued,
                 To = "+56912345678",
                 Content = new()
                 {
@@ -128,7 +130,7 @@ public class ConversationListMessagesPageResponseTest : TestBase
                     CtaDisplayText = "See Dates",
                     CtaHeaderMediaUrl = "https://example.com",
                     CtaHeaderText = "ctaHeaderText",
-                    CtaHeaderType = CtaHeaderType.Text,
+                    CtaHeaderType = Messages::CtaHeaderType.Text,
                     CtaUrl = "https://example.com/schedule",
                     Emoji = "emoji",
                     Filename = "invoice.pdf",
@@ -148,9 +150,9 @@ public class ConversationListMessagesPageResponseTest : TestBase
                         CtwaClid = "ARIzZm9vYmFyY3R3YWNsaWQ",
                         Headline = "headline",
                         ImageUrl = "https://example.com",
-                        MediaType = MediaType.Image,
+                        MediaType = Messages::MediaType.Image,
                         SourceID = "120210000000000000",
-                        SourceType = SourceType.Ad,
+                        SourceType = Messages::SourceType.Ad,
                         SourceUrl = "https://example.com",
                         ThumbnailUrl = "https://example.com",
                         VideoUrl = "https://example.com",
@@ -225,10 +227,11 @@ public class ConversationListMessagesPageResponseTest : TestBase
                 new()
                 {
                     ID = "jd7x2k3m4n5p6q7r8s9t0",
-                    Channel = MessageChannel.Auto,
+                    Channel = Messages::MessageChannel.Auto,
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    MessageType = MessageType.Text,
-                    Status = MessageStatus.Queued,
+                    Direction = Messages::Direction.Inbound,
+                    MessageType = Messages::MessageType.Text,
+                    Status = Messages::MessageStatus.Queued,
                     To = "+56912345678",
                     Content = new()
                     {
@@ -237,7 +240,7 @@ public class ConversationListMessagesPageResponseTest : TestBase
                         CtaDisplayText = "See Dates",
                         CtaHeaderMediaUrl = "https://example.com",
                         CtaHeaderText = "ctaHeaderText",
-                        CtaHeaderType = CtaHeaderType.Text,
+                        CtaHeaderType = Messages::CtaHeaderType.Text,
                         CtaUrl = "https://example.com/schedule",
                         Emoji = "emoji",
                         Filename = "invoice.pdf",
@@ -257,9 +260,9 @@ public class ConversationListMessagesPageResponseTest : TestBase
                             CtwaClid = "ARIzZm9vYmFyY3R3YWNsaWQ",
                             Headline = "headline",
                             ImageUrl = "https://example.com",
-                            MediaType = MediaType.Image,
+                            MediaType = Messages::MediaType.Image,
                             SourceID = "120210000000000000",
-                            SourceType = SourceType.Ad,
+                            SourceType = Messages::SourceType.Ad,
                             SourceUrl = "https://example.com",
                             ThumbnailUrl = "https://example.com",
                             VideoUrl = "https://example.com",
@@ -336,10 +339,11 @@ public class ConversationListMessagesPageResponseTest : TestBase
                 new()
                 {
                     ID = "jd7x2k3m4n5p6q7r8s9t0",
-                    Channel = MessageChannel.Auto,
+                    Channel = Messages::MessageChannel.Auto,
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    MessageType = MessageType.Text,
-                    Status = MessageStatus.Queued,
+                    Direction = Messages::Direction.Inbound,
+                    MessageType = Messages::MessageType.Text,
+                    Status = Messages::MessageStatus.Queued,
                     To = "+56912345678",
                     Content = new()
                     {
@@ -348,7 +352,7 @@ public class ConversationListMessagesPageResponseTest : TestBase
                         CtaDisplayText = "See Dates",
                         CtaHeaderMediaUrl = "https://example.com",
                         CtaHeaderText = "ctaHeaderText",
-                        CtaHeaderType = CtaHeaderType.Text,
+                        CtaHeaderType = Messages::CtaHeaderType.Text,
                         CtaUrl = "https://example.com/schedule",
                         Emoji = "emoji",
                         Filename = "invoice.pdf",
@@ -368,9 +372,9 @@ public class ConversationListMessagesPageResponseTest : TestBase
                             CtwaClid = "ARIzZm9vYmFyY3R3YWNsaWQ",
                             Headline = "headline",
                             ImageUrl = "https://example.com",
-                            MediaType = MediaType.Image,
+                            MediaType = Messages::MediaType.Image,
                             SourceID = "120210000000000000",
-                            SourceType = SourceType.Ad,
+                            SourceType = Messages::SourceType.Ad,
                             SourceUrl = "https://example.com",
                             ThumbnailUrl = "https://example.com",
                             VideoUrl = "https://example.com",
@@ -435,15 +439,16 @@ public class ConversationListMessagesPageResponseTest : TestBase
         );
         Assert.NotNull(deserialized);
 
-        List<Message> expectedItems =
+        List<Messages::Message> expectedItems =
         [
             new()
             {
                 ID = "jd7x2k3m4n5p6q7r8s9t0",
-                Channel = MessageChannel.Auto,
+                Channel = Messages::MessageChannel.Auto,
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                MessageType = MessageType.Text,
-                Status = MessageStatus.Queued,
+                Direction = Messages::Direction.Inbound,
+                MessageType = Messages::MessageType.Text,
+                Status = Messages::MessageStatus.Queued,
                 To = "+56912345678",
                 Content = new()
                 {
@@ -452,7 +457,7 @@ public class ConversationListMessagesPageResponseTest : TestBase
                     CtaDisplayText = "See Dates",
                     CtaHeaderMediaUrl = "https://example.com",
                     CtaHeaderText = "ctaHeaderText",
-                    CtaHeaderType = CtaHeaderType.Text,
+                    CtaHeaderType = Messages::CtaHeaderType.Text,
                     CtaUrl = "https://example.com/schedule",
                     Emoji = "emoji",
                     Filename = "invoice.pdf",
@@ -472,9 +477,9 @@ public class ConversationListMessagesPageResponseTest : TestBase
                         CtwaClid = "ARIzZm9vYmFyY3R3YWNsaWQ",
                         Headline = "headline",
                         ImageUrl = "https://example.com",
-                        MediaType = MediaType.Image,
+                        MediaType = Messages::MediaType.Image,
                         SourceID = "120210000000000000",
-                        SourceType = SourceType.Ad,
+                        SourceType = Messages::SourceType.Ad,
                         SourceUrl = "https://example.com",
                         ThumbnailUrl = "https://example.com",
                         VideoUrl = "https://example.com",
@@ -549,10 +554,11 @@ public class ConversationListMessagesPageResponseTest : TestBase
                 new()
                 {
                     ID = "jd7x2k3m4n5p6q7r8s9t0",
-                    Channel = MessageChannel.Auto,
+                    Channel = Messages::MessageChannel.Auto,
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    MessageType = MessageType.Text,
-                    Status = MessageStatus.Queued,
+                    Direction = Messages::Direction.Inbound,
+                    MessageType = Messages::MessageType.Text,
+                    Status = Messages::MessageStatus.Queued,
                     To = "+56912345678",
                     Content = new()
                     {
@@ -561,7 +567,7 @@ public class ConversationListMessagesPageResponseTest : TestBase
                         CtaDisplayText = "See Dates",
                         CtaHeaderMediaUrl = "https://example.com",
                         CtaHeaderText = "ctaHeaderText",
-                        CtaHeaderType = CtaHeaderType.Text,
+                        CtaHeaderType = Messages::CtaHeaderType.Text,
                         CtaUrl = "https://example.com/schedule",
                         Emoji = "emoji",
                         Filename = "invoice.pdf",
@@ -581,9 +587,9 @@ public class ConversationListMessagesPageResponseTest : TestBase
                             CtwaClid = "ARIzZm9vYmFyY3R3YWNsaWQ",
                             Headline = "headline",
                             ImageUrl = "https://example.com",
-                            MediaType = MediaType.Image,
+                            MediaType = Messages::MediaType.Image,
                             SourceID = "120210000000000000",
-                            SourceType = SourceType.Ad,
+                            SourceType = Messages::SourceType.Ad,
                             SourceUrl = "https://example.com",
                             ThumbnailUrl = "https://example.com",
                             VideoUrl = "https://example.com",
@@ -654,10 +660,11 @@ public class ConversationListMessagesPageResponseTest : TestBase
                 new()
                 {
                     ID = "jd7x2k3m4n5p6q7r8s9t0",
-                    Channel = MessageChannel.Auto,
+                    Channel = Messages::MessageChannel.Auto,
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    MessageType = MessageType.Text,
-                    Status = MessageStatus.Queued,
+                    Direction = Messages::Direction.Inbound,
+                    MessageType = Messages::MessageType.Text,
+                    Status = Messages::MessageStatus.Queued,
                     To = "+56912345678",
                     Content = new()
                     {
@@ -666,7 +673,7 @@ public class ConversationListMessagesPageResponseTest : TestBase
                         CtaDisplayText = "See Dates",
                         CtaHeaderMediaUrl = "https://example.com",
                         CtaHeaderText = "ctaHeaderText",
-                        CtaHeaderType = CtaHeaderType.Text,
+                        CtaHeaderType = Messages::CtaHeaderType.Text,
                         CtaUrl = "https://example.com/schedule",
                         Emoji = "emoji",
                         Filename = "invoice.pdf",
@@ -686,9 +693,9 @@ public class ConversationListMessagesPageResponseTest : TestBase
                             CtwaClid = "ARIzZm9vYmFyY3R3YWNsaWQ",
                             Headline = "headline",
                             ImageUrl = "https://example.com",
-                            MediaType = MediaType.Image,
+                            MediaType = Messages::MediaType.Image,
                             SourceID = "120210000000000000",
-                            SourceType = SourceType.Ad,
+                            SourceType = Messages::SourceType.Ad,
                             SourceUrl = "https://example.com",
                             ThumbnailUrl = "https://example.com",
                             VideoUrl = "https://example.com",
@@ -759,10 +766,11 @@ public class ConversationListMessagesPageResponseTest : TestBase
                 new()
                 {
                     ID = "jd7x2k3m4n5p6q7r8s9t0",
-                    Channel = MessageChannel.Auto,
+                    Channel = Messages::MessageChannel.Auto,
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    MessageType = MessageType.Text,
-                    Status = MessageStatus.Queued,
+                    Direction = Messages::Direction.Inbound,
+                    MessageType = Messages::MessageType.Text,
+                    Status = Messages::MessageStatus.Queued,
                     To = "+56912345678",
                     Content = new()
                     {
@@ -771,7 +779,7 @@ public class ConversationListMessagesPageResponseTest : TestBase
                         CtaDisplayText = "See Dates",
                         CtaHeaderMediaUrl = "https://example.com",
                         CtaHeaderText = "ctaHeaderText",
-                        CtaHeaderType = CtaHeaderType.Text,
+                        CtaHeaderType = Messages::CtaHeaderType.Text,
                         CtaUrl = "https://example.com/schedule",
                         Emoji = "emoji",
                         Filename = "invoice.pdf",
@@ -791,9 +799,9 @@ public class ConversationListMessagesPageResponseTest : TestBase
                             CtwaClid = "ARIzZm9vYmFyY3R3YWNsaWQ",
                             Headline = "headline",
                             ImageUrl = "https://example.com",
-                            MediaType = MediaType.Image,
+                            MediaType = Messages::MediaType.Image,
                             SourceID = "120210000000000000",
-                            SourceType = SourceType.Ad,
+                            SourceType = Messages::SourceType.Ad,
                             SourceUrl = "https://example.com",
                             ThumbnailUrl = "https://example.com",
                             VideoUrl = "https://example.com",
@@ -863,10 +871,11 @@ public class ConversationListMessagesPageResponseTest : TestBase
                 new()
                 {
                     ID = "jd7x2k3m4n5p6q7r8s9t0",
-                    Channel = MessageChannel.Auto,
+                    Channel = Messages::MessageChannel.Auto,
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    MessageType = MessageType.Text,
-                    Status = MessageStatus.Queued,
+                    Direction = Messages::Direction.Inbound,
+                    MessageType = Messages::MessageType.Text,
+                    Status = Messages::MessageStatus.Queued,
                     To = "+56912345678",
                     Content = new()
                     {
@@ -875,7 +884,7 @@ public class ConversationListMessagesPageResponseTest : TestBase
                         CtaDisplayText = "See Dates",
                         CtaHeaderMediaUrl = "https://example.com",
                         CtaHeaderText = "ctaHeaderText",
-                        CtaHeaderType = CtaHeaderType.Text,
+                        CtaHeaderType = Messages::CtaHeaderType.Text,
                         CtaUrl = "https://example.com/schedule",
                         Emoji = "emoji",
                         Filename = "invoice.pdf",
@@ -895,9 +904,9 @@ public class ConversationListMessagesPageResponseTest : TestBase
                             CtwaClid = "ARIzZm9vYmFyY3R3YWNsaWQ",
                             Headline = "headline",
                             ImageUrl = "https://example.com",
-                            MediaType = MediaType.Image,
+                            MediaType = Messages::MediaType.Image,
                             SourceID = "120210000000000000",
-                            SourceType = SourceType.Ad,
+                            SourceType = Messages::SourceType.Ad,
                             SourceUrl = "https://example.com",
                             ThumbnailUrl = "https://example.com",
                             VideoUrl = "https://example.com",
@@ -970,10 +979,11 @@ public class ConversationListMessagesPageResponseTest : TestBase
                 new()
                 {
                     ID = "jd7x2k3m4n5p6q7r8s9t0",
-                    Channel = MessageChannel.Auto,
+                    Channel = Messages::MessageChannel.Auto,
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    MessageType = MessageType.Text,
-                    Status = MessageStatus.Queued,
+                    Direction = Messages::Direction.Inbound,
+                    MessageType = Messages::MessageType.Text,
+                    Status = Messages::MessageStatus.Queued,
                     To = "+56912345678",
                     Content = new()
                     {
@@ -982,7 +992,7 @@ public class ConversationListMessagesPageResponseTest : TestBase
                         CtaDisplayText = "See Dates",
                         CtaHeaderMediaUrl = "https://example.com",
                         CtaHeaderText = "ctaHeaderText",
-                        CtaHeaderType = CtaHeaderType.Text,
+                        CtaHeaderType = Messages::CtaHeaderType.Text,
                         CtaUrl = "https://example.com/schedule",
                         Emoji = "emoji",
                         Filename = "invoice.pdf",
@@ -1002,9 +1012,9 @@ public class ConversationListMessagesPageResponseTest : TestBase
                             CtwaClid = "ARIzZm9vYmFyY3R3YWNsaWQ",
                             Headline = "headline",
                             ImageUrl = "https://example.com",
-                            MediaType = MediaType.Image,
+                            MediaType = Messages::MediaType.Image,
                             SourceID = "120210000000000000",
-                            SourceType = SourceType.Ad,
+                            SourceType = Messages::SourceType.Ad,
                             SourceUrl = "https://example.com",
                             ThumbnailUrl = "https://example.com",
                             VideoUrl = "https://example.com",
@@ -1076,10 +1086,11 @@ public class ConversationListMessagesPageResponseTest : TestBase
                 new()
                 {
                     ID = "jd7x2k3m4n5p6q7r8s9t0",
-                    Channel = MessageChannel.Auto,
+                    Channel = Messages::MessageChannel.Auto,
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    MessageType = MessageType.Text,
-                    Status = MessageStatus.Queued,
+                    Direction = Messages::Direction.Inbound,
+                    MessageType = Messages::MessageType.Text,
+                    Status = Messages::MessageStatus.Queued,
                     To = "+56912345678",
                     Content = new()
                     {
@@ -1088,7 +1099,7 @@ public class ConversationListMessagesPageResponseTest : TestBase
                         CtaDisplayText = "See Dates",
                         CtaHeaderMediaUrl = "https://example.com",
                         CtaHeaderText = "ctaHeaderText",
-                        CtaHeaderType = CtaHeaderType.Text,
+                        CtaHeaderType = Messages::CtaHeaderType.Text,
                         CtaUrl = "https://example.com/schedule",
                         Emoji = "emoji",
                         Filename = "invoice.pdf",
@@ -1108,9 +1119,9 @@ public class ConversationListMessagesPageResponseTest : TestBase
                             CtwaClid = "ARIzZm9vYmFyY3R3YWNsaWQ",
                             Headline = "headline",
                             ImageUrl = "https://example.com",
-                            MediaType = MediaType.Image,
+                            MediaType = Messages::MediaType.Image,
                             SourceID = "120210000000000000",
-                            SourceType = SourceType.Ad,
+                            SourceType = Messages::SourceType.Ad,
                             SourceUrl = "https://example.com",
                             ThumbnailUrl = "https://example.com",
                             VideoUrl = "https://example.com",
