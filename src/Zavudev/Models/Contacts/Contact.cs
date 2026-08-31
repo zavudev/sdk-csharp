@@ -243,27 +243,6 @@ public sealed record class Contact : JsonModel
         init { this._rawData.Set("profileName", value); }
     }
 
-    /// <summary>
-    /// ID of a contact suggested for merging.
-    /// </summary>
-    public string? SuggestedMergeWith
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<string>("suggestedMergeWith");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("suggestedMergeWith", value);
-        }
-    }
-
     public DateTimeOffset? UpdatedAt
     {
         get
@@ -301,7 +280,6 @@ public sealed record class Contact : JsonModel
         _ = this.PrimaryEmail;
         _ = this.PrimaryPhone;
         _ = this.ProfileName;
-        _ = this.SuggestedMergeWith;
         _ = this.UpdatedAt;
     }
 

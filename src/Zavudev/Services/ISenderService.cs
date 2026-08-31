@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Zavudev.Core;
 using Zavudev.Models.Senders;
-using Zavudev.Services.Senders;
+using Senders = Zavudev.Services.Senders;
 
 namespace Zavudev.Services;
 
@@ -27,9 +27,11 @@ public interface ISenderService
     /// </summary>
     ISenderService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
-    IAgentService Agent { get; }
+    Senders::IAgentService Agent { get; }
 
-    IWhatsappSyncService WhatsappSync { get; }
+    Senders::IWhatsappSyncService WhatsappSync { get; }
+
+    Senders::ITelegramService Telegram { get; }
 
     /// <summary>
     /// Create sender
@@ -167,9 +169,11 @@ public interface ISenderServiceWithRawResponse
     /// </summary>
     ISenderServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
-    IAgentServiceWithRawResponse Agent { get; }
+    Senders::IAgentServiceWithRawResponse Agent { get; }
 
-    IWhatsappSyncServiceWithRawResponse WhatsappSync { get; }
+    Senders::IWhatsappSyncServiceWithRawResponse WhatsappSync { get; }
+
+    Senders::ITelegramServiceWithRawResponse Telegram { get; }
 
     /// <summary>
     /// Returns a raw HTTP response for <c>post /v1/senders</c>, but is otherwise the

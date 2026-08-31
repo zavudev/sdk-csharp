@@ -99,6 +99,58 @@ public record class FunctionCreateParams : ParamsBase
     }
 
     /// <summary>
+    /// Which file in `files` is the entry point. Defaults to `index.ts`.
+    /// </summary>
+    public string? Entrypoint
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("entrypoint");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawBodyData.Set("entrypoint", value);
+        }
+    }
+
+    /// <summary>
+    /// The project's source files, keyed by path relative to the project root (e.g.
+    /// `index.ts`, `lib/orders.ts`). Imports between them are resolved when the
+    /// function is built, so a function can be split across as many files as it needs.
+    ///
+    /// <para>Paths must be relative and use forward slashes; `..`, `node_modules/`
+    /// and `package.json` are rejected. npm packages are not uploaded here — declare
+    /// them under `dependencies` and Zavu installs them. Limits: 200 files and 900,000
+    /// bytes for the whole tree.</para>
+    /// </summary>
+    public IReadOnlyDictionary<string, string>? Files
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<FrozenDictionary<string, string>>("files");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawBodyData.Set<FrozenDictionary<string, string>?>(
+                "files",
+                value == null ? null : FrozenDictionary.ToFrozenDictionary(value)
+            );
+        }
+    }
+
+    /// <summary>
     /// Whether to expose a public HTTPS URL for this function.
     /// </summary>
     public bool? HttpEnabled
@@ -159,7 +211,9 @@ public record class FunctionCreateParams : ParamsBase
     }
 
     /// <summary>
-    /// TypeScript source code for the function entry point (max ~900KB).
+    /// Shortcut for a single-file function: exactly equivalent to sending `files`
+    /// with one entry named after `entrypoint` (`index.ts` by default). Fully supported
+    /// — use whichever fits. If both are sent, `files` wins.
     /// </summary>
     public string? SourceCode
     {

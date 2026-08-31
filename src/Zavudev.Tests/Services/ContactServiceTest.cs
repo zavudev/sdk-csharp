@@ -68,16 +68,6 @@ public class ContactServiceTest : TestBase
     }
 
     [Fact(Skip = "Mock server tests are disabled")]
-    public async Task DismissMergeSuggestion_Works()
-    {
-        await this.client.Contacts.DismissMergeSuggestion(
-            "contactId",
-            new(),
-            TestContext.Current.CancellationToken
-        );
-    }
-
-    [Fact(Skip = "Mock server tests are disabled")]
     public async Task Merge_Works()
     {
         var contact = await this.client.Contacts.Merge(

@@ -58,4 +58,14 @@ public class TemplateServiceTest : TestBase
         );
         template.Validate();
     }
+
+    [Fact(Skip = "Mock server tests are disabled")]
+    public async Task Sync_Works()
+    {
+        var response = await this.client.Templates.Sync(
+            new(),
+            TestContext.Current.CancellationToken
+        );
+        response.Validate();
+    }
 }

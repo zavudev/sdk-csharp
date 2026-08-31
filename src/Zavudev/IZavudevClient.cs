@@ -82,6 +82,16 @@ public interface IZavudevClient : IDisposable
     IMeService Me { get; }
 
     IFunctionService Functions { get; }
+
+    IConversationService Conversations { get; }
+
+    ICallService Calls { get; }
+
+    IAgentTemplateService AgentTemplates { get; }
+
+    IEmailDomainService EmailDomains { get; }
+
+    IAgentService Agents { get; }
 }
 
 /// <summary>
@@ -144,6 +154,16 @@ public interface IZavudevClientWithRawResponse : IDisposable
     IMeServiceWithRawResponse Me { get; }
 
     IFunctionServiceWithRawResponse Functions { get; }
+
+    IConversationServiceWithRawResponse Conversations { get; }
+
+    ICallServiceWithRawResponse Calls { get; }
+
+    IAgentTemplateServiceWithRawResponse AgentTemplates { get; }
+
+    IEmailDomainServiceWithRawResponse EmailDomains { get; }
+
+    IAgentServiceWithRawResponse Agents { get; }
 
     /// <summary>
     /// Sends a request to the Zavudev REST API.

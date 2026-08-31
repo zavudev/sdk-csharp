@@ -425,6 +425,35 @@ public sealed record class MessageContent : JsonModel
     }
 
     /// <summary>
+    /// Click-to-WhatsApp (CTWA) ad attribution: where an inbound conversation came from.
+    ///
+    /// <para>WhatsApp only. Present on the **first inbound message** of a conversation
+    /// opened from a Meta ad or post, and on no message after it — so store it when
+    /// it arrives rather than expecting it again. Organic conversations never carry it.</para>
+    ///
+    /// <para>Field names are camelCased to match the rest of this API; Meta sends
+    /// them as snake_case (`ctwa_clid`, `source_id`, ...). Fields that do not apply
+    /// are omitted: a `post` source has no click id, and an image ad has no `videoUrl`.</para>
+    /// </summary>
+    public Referral? Referral
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<Referral>("referral");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("referral", value);
+        }
+    }
+
+    /// <summary>
     /// Sender of the quoted message (phone number in E.164 format).
     /// </summary>
     public string? ReplyToFrom
@@ -701,6 +730,7 @@ public sealed record class MessageContent : JsonModel
         _ = this.MediaUrl;
         _ = this.MimeType;
         _ = this.ReactToMessageID;
+        this.Referral?.Validate();
         _ = this.ReplyToFrom;
         _ = this.ReplyToMessageID;
         _ = this.ReplyToMessageType;
@@ -944,6 +974,376 @@ sealed class CtaHeaderTypeConverter : JsonConverter<CtaHeaderType>
                 CtaHeaderType.Image => "image",
                 CtaHeaderType.Video => "video",
                 CtaHeaderType.Document => "document",
+                _ => throw new ZavudevInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// Click-to-WhatsApp (CTWA) ad attribution: where an inbound conversation came from.
+///
+/// <para>WhatsApp only. Present on the **first inbound message** of a conversation
+/// opened from a Meta ad or post, and on no message after it — so store it when it
+/// arrives rather than expecting it again. Organic conversations never carry it.</para>
+///
+/// <para>Field names are camelCased to match the rest of this API; Meta sends them
+/// as snake_case (`ctwa_clid`, `source_id`, ...). Fields that do not apply are omitted:
+/// a `post` source has no click id, and an image ad has no `videoUrl`.</para>
+/// </summary>
+[JsonConverter(typeof(JsonModelConverter<Referral, ReferralFromRaw>))]
+public sealed record class Referral : JsonModel
+{
+    /// <summary>
+    /// Body copy of the ad or post.
+    /// </summary>
+    public string? Body
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("body");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("body", value);
+        }
+    }
+
+    /// <summary>
+    /// Click-to-WhatsApp click identifier. This is the value Meta's Conversions API
+    /// needs to credit a conversion back to the ad that produced the conversation.
+    /// Present on `ad` sources; a `post` source has none.
+    /// </summary>
+    public string? CtwaClid
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("ctwaClid");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("ctwaClid", value);
+        }
+    }
+
+    /// <summary>
+    /// Headline of the ad or post.
+    /// </summary>
+    public string? Headline
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("headline");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("headline", value);
+        }
+    }
+
+    /// <summary>
+    /// Image of the ad. Present when `mediaType` is `image`.
+    /// </summary>
+    public string? ImageUrl
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("imageUrl");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("imageUrl", value);
+        }
+    }
+
+    /// <summary>
+    /// Type of media on the ad, when it had any.
+    /// </summary>
+    public ApiEnum<string, MediaType>? MediaType
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<ApiEnum<string, MediaType>>("mediaType");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("mediaType", value);
+        }
+    }
+
+    /// <summary>
+    /// Identifier of the ad or post that produced the click.
+    /// </summary>
+    public string? SourceID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("sourceId");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("sourceId", value);
+        }
+    }
+
+    /// <summary>
+    /// Where the click came from.
+    /// </summary>
+    public ApiEnum<string, SourceType>? SourceType
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<ApiEnum<string, SourceType>>("sourceType");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("sourceType", value);
+        }
+    }
+
+    /// <summary>
+    /// Meta permalink to the ad or post.
+    /// </summary>
+    public string? SourceUrl
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("sourceUrl");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("sourceUrl", value);
+        }
+    }
+
+    /// <summary>
+    /// Thumbnail of the ad media.
+    /// </summary>
+    public string? ThumbnailUrl
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("thumbnailUrl");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("thumbnailUrl", value);
+        }
+    }
+
+    /// <summary>
+    /// Video of the ad. Present when `mediaType` is `video`.
+    /// </summary>
+    public string? VideoUrl
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("videoUrl");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("videoUrl", value);
+        }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.Body;
+        _ = this.CtwaClid;
+        _ = this.Headline;
+        _ = this.ImageUrl;
+        this.MediaType?.Validate();
+        _ = this.SourceID;
+        this.SourceType?.Validate();
+        _ = this.SourceUrl;
+        _ = this.ThumbnailUrl;
+        _ = this.VideoUrl;
+    }
+
+    public Referral() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public Referral(Referral referral)
+        : base(referral) { }
+#pragma warning restore CS8618
+
+    public Referral(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    Referral(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="ReferralFromRaw.FromRawUnchecked"/>
+    public static Referral FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class ReferralFromRaw : IFromRawJson<Referral>
+{
+    /// <inheritdoc/>
+    public Referral FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Referral.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Type of media on the ad, when it had any.
+/// </summary>
+[JsonConverter(typeof(MediaTypeConverter))]
+public enum MediaType
+{
+    Image,
+    Video,
+}
+
+sealed class MediaTypeConverter : JsonConverter<MediaType>
+{
+    public override MediaType Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "image" => MediaType.Image,
+            "video" => MediaType.Video,
+            _ => (MediaType)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        MediaType value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                MediaType.Image => "image",
+                MediaType.Video => "video",
+                _ => throw new ZavudevInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// Where the click came from.
+/// </summary>
+[JsonConverter(typeof(SourceTypeConverter))]
+public enum SourceType
+{
+    Ad,
+    Post,
+}
+
+sealed class SourceTypeConverter : JsonConverter<SourceType>
+{
+    public override SourceType Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "ad" => SourceType.Ad,
+            "post" => SourceType.Post,
+            _ => (SourceType)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        SourceType value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                SourceType.Ad => "ad",
+                SourceType.Post => "post",
                 _ => throw new ZavudevInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

@@ -93,21 +93,6 @@ public interface IContactService
     );
 
     /// <summary>
-    /// Dismiss the merge suggestion for a contact.
-    /// </summary>
-    Task DismissMergeSuggestion(
-        ContactDismissMergeSuggestionParams parameters,
-        CancellationToken cancellationToken = default
-    );
-
-    /// <inheritdoc cref="DismissMergeSuggestion(ContactDismissMergeSuggestionParams, CancellationToken)"/>
-    Task DismissMergeSuggestion(
-        string contactID,
-        ContactDismissMergeSuggestionParams? parameters = null,
-        CancellationToken cancellationToken = default
-    );
-
-    /// <summary>
     /// Merge a source contact into this contact. All channels from the source contact
     /// will be moved to the target contact, and the source contact will be marked as
     /// merged.
@@ -218,22 +203,6 @@ public interface IContactServiceWithRawResponse
     Task<HttpResponse> Delete(
         string contactID,
         ContactDeleteParams? parameters = null,
-        CancellationToken cancellationToken = default
-    );
-
-    /// <summary>
-    /// Returns a raw HTTP response for <c>delete /v1/contacts/{contactId}/merge-suggestion</c>, but is otherwise the
-    /// same as <see cref="IContactService.DismissMergeSuggestion(ContactDismissMergeSuggestionParams, CancellationToken)"/>.
-    /// </summary>
-    Task<HttpResponse> DismissMergeSuggestion(
-        ContactDismissMergeSuggestionParams parameters,
-        CancellationToken cancellationToken = default
-    );
-
-    /// <inheritdoc cref="DismissMergeSuggestion(ContactDismissMergeSuggestionParams, CancellationToken)"/>
-    Task<HttpResponse> DismissMergeSuggestion(
-        string contactID,
-        ContactDismissMergeSuggestionParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 
