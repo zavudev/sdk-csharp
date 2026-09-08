@@ -11,6 +11,7 @@ public class PhoneNumberTypeTest : TestBase
     [InlineData(PhoneNumberType.Local)]
     [InlineData(PhoneNumberType.National)]
     [InlineData(PhoneNumberType.TollFree)]
+    [InlineData(PhoneNumberType.Mobile)]
     public void Validation_Works(PhoneNumberType rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -34,6 +35,7 @@ public class PhoneNumberTypeTest : TestBase
     [InlineData(PhoneNumberType.Local)]
     [InlineData(PhoneNumberType.National)]
     [InlineData(PhoneNumberType.TollFree)]
+    [InlineData(PhoneNumberType.Mobile)]
     public void SerializationRoundtrip_Works(PhoneNumberType rawValue)
     {
         // force implicit conversion because Theory can't do that for us
