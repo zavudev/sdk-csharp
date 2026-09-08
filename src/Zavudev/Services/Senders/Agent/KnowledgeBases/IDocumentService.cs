@@ -68,6 +68,37 @@ public interface IDocumentService
         DocumentDeleteParams parameters,
         CancellationToken cancellationToken = default
     );
+
+    /// <summary>
+    /// Get a single document from a knowledge base.
+    /// </summary>
+    Task<DocumentRetrieveDocumentResponse> RetrieveDocument(
+        DocumentRetrieveDocumentParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="RetrieveDocument(DocumentRetrieveDocumentParams, CancellationToken)"/>
+    Task<DocumentRetrieveDocumentResponse> RetrieveDocument(
+        string docID,
+        DocumentRetrieveDocumentParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Update a document's title or content. Updating content reprocesses the document
+    /// for RAG.
+    /// </summary>
+    Task<DocumentUpdateDocumentResponse> UpdateDocument(
+        DocumentUpdateDocumentParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="UpdateDocument(DocumentUpdateDocumentParams, CancellationToken)"/>
+    Task<DocumentUpdateDocumentResponse> UpdateDocument(
+        string docID,
+        DocumentUpdateDocumentParams parameters,
+        CancellationToken cancellationToken = default
+    );
 }
 
 /// <summary>
@@ -128,6 +159,38 @@ public interface IDocumentServiceWithRawResponse
     Task<HttpResponse> Delete(
         string docID,
         DocumentDeleteParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for <c>get /v1/senders/{senderId}/agent/knowledge-bases/{kbId}/documents/{docId}</c>, but is otherwise the
+    /// same as <see cref="IDocumentService.RetrieveDocument(DocumentRetrieveDocumentParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<DocumentRetrieveDocumentResponse>> RetrieveDocument(
+        DocumentRetrieveDocumentParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="RetrieveDocument(DocumentRetrieveDocumentParams, CancellationToken)"/>
+    Task<HttpResponse<DocumentRetrieveDocumentResponse>> RetrieveDocument(
+        string docID,
+        DocumentRetrieveDocumentParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for <c>patch /v1/senders/{senderId}/agent/knowledge-bases/{kbId}/documents/{docId}</c>, but is otherwise the
+    /// same as <see cref="IDocumentService.UpdateDocument(DocumentUpdateDocumentParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<DocumentUpdateDocumentResponse>> UpdateDocument(
+        DocumentUpdateDocumentParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="UpdateDocument(DocumentUpdateDocumentParams, CancellationToken)"/>
+    Task<HttpResponse<DocumentUpdateDocumentResponse>> UpdateDocument(
+        string docID,
+        DocumentUpdateDocumentParams parameters,
         CancellationToken cancellationToken = default
     );
 }

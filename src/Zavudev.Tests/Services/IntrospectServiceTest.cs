@@ -5,6 +5,16 @@ namespace Zavudev.Tests.Services;
 public class IntrospectServiceTest : TestBase
 {
     [Fact(Skip = "Mock server tests are disabled")]
+    public async Task ValidateEmail_Works()
+    {
+        var response = await this.client.Introspect.ValidateEmail(
+            new(),
+            TestContext.Current.CancellationToken
+        );
+        response.Validate();
+    }
+
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task ValidatePhone_Works()
     {
         var response = await this.client.Introspect.ValidatePhone(

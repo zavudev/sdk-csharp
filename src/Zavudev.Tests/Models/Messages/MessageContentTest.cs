@@ -32,6 +32,19 @@ public class MessageContentTest : TestBase
             MediaUrl = "https://example.com/image.jpg",
             MimeType = "image/jpeg",
             ReactToMessageID = "reactToMessageId",
+            Referral = new()
+            {
+                Body = "body",
+                CtwaClid = "ARIzZm9vYmFyY3R3YWNsaWQ",
+                Headline = "headline",
+                ImageUrl = "https://example.com",
+                MediaType = MediaType.Image,
+                SourceID = "120210000000000000",
+                SourceType = SourceType.Ad,
+                SourceUrl = "https://example.com",
+                ThumbnailUrl = "https://example.com",
+                VideoUrl = "https://example.com",
+            },
             ReplyToFrom = "replyToFrom",
             ReplyToMessageID = "replyToMessageId",
             ReplyToMessageType = "replyToMessageType",
@@ -85,6 +98,19 @@ public class MessageContentTest : TestBase
         string expectedMediaUrl = "https://example.com/image.jpg";
         string expectedMimeType = "image/jpeg";
         string expectedReactToMessageID = "reactToMessageId";
+        Referral expectedReferral = new()
+        {
+            Body = "body",
+            CtwaClid = "ARIzZm9vYmFyY3R3YWNsaWQ",
+            Headline = "headline",
+            ImageUrl = "https://example.com",
+            MediaType = MediaType.Image,
+            SourceID = "120210000000000000",
+            SourceType = SourceType.Ad,
+            SourceUrl = "https://example.com",
+            ThumbnailUrl = "https://example.com",
+            VideoUrl = "https://example.com",
+        };
         string expectedReplyToFrom = "replyToFrom";
         string expectedReplyToMessageID = "replyToMessageId";
         string expectedReplyToMessageType = "replyToMessageType";
@@ -150,6 +176,7 @@ public class MessageContentTest : TestBase
         Assert.Equal(expectedMediaUrl, model.MediaUrl);
         Assert.Equal(expectedMimeType, model.MimeType);
         Assert.Equal(expectedReactToMessageID, model.ReactToMessageID);
+        Assert.Equal(expectedReferral, model.Referral);
         Assert.Equal(expectedReplyToFrom, model.ReplyToFrom);
         Assert.Equal(expectedReplyToMessageID, model.ReplyToMessageID);
         Assert.Equal(expectedReplyToMessageType, model.ReplyToMessageType);
@@ -212,6 +239,19 @@ public class MessageContentTest : TestBase
             MediaUrl = "https://example.com/image.jpg",
             MimeType = "image/jpeg",
             ReactToMessageID = "reactToMessageId",
+            Referral = new()
+            {
+                Body = "body",
+                CtwaClid = "ARIzZm9vYmFyY3R3YWNsaWQ",
+                Headline = "headline",
+                ImageUrl = "https://example.com",
+                MediaType = MediaType.Image,
+                SourceID = "120210000000000000",
+                SourceType = SourceType.Ad,
+                SourceUrl = "https://example.com",
+                ThumbnailUrl = "https://example.com",
+                VideoUrl = "https://example.com",
+            },
             ReplyToFrom = "replyToFrom",
             ReplyToMessageID = "replyToMessageId",
             ReplyToMessageType = "replyToMessageType",
@@ -279,6 +319,19 @@ public class MessageContentTest : TestBase
             MediaUrl = "https://example.com/image.jpg",
             MimeType = "image/jpeg",
             ReactToMessageID = "reactToMessageId",
+            Referral = new()
+            {
+                Body = "body",
+                CtwaClid = "ARIzZm9vYmFyY3R3YWNsaWQ",
+                Headline = "headline",
+                ImageUrl = "https://example.com",
+                MediaType = MediaType.Image,
+                SourceID = "120210000000000000",
+                SourceType = SourceType.Ad,
+                SourceUrl = "https://example.com",
+                ThumbnailUrl = "https://example.com",
+                VideoUrl = "https://example.com",
+            },
             ReplyToFrom = "replyToFrom",
             ReplyToMessageID = "replyToMessageId",
             ReplyToMessageType = "replyToMessageType",
@@ -339,6 +392,19 @@ public class MessageContentTest : TestBase
         string expectedMediaUrl = "https://example.com/image.jpg";
         string expectedMimeType = "image/jpeg";
         string expectedReactToMessageID = "reactToMessageId";
+        Referral expectedReferral = new()
+        {
+            Body = "body",
+            CtwaClid = "ARIzZm9vYmFyY3R3YWNsaWQ",
+            Headline = "headline",
+            ImageUrl = "https://example.com",
+            MediaType = MediaType.Image,
+            SourceID = "120210000000000000",
+            SourceType = SourceType.Ad,
+            SourceUrl = "https://example.com",
+            ThumbnailUrl = "https://example.com",
+            VideoUrl = "https://example.com",
+        };
         string expectedReplyToFrom = "replyToFrom";
         string expectedReplyToMessageID = "replyToMessageId";
         string expectedReplyToMessageType = "replyToMessageType";
@@ -404,6 +470,7 @@ public class MessageContentTest : TestBase
         Assert.Equal(expectedMediaUrl, deserialized.MediaUrl);
         Assert.Equal(expectedMimeType, deserialized.MimeType);
         Assert.Equal(expectedReactToMessageID, deserialized.ReactToMessageID);
+        Assert.Equal(expectedReferral, deserialized.Referral);
         Assert.Equal(expectedReplyToFrom, deserialized.ReplyToFrom);
         Assert.Equal(expectedReplyToMessageID, deserialized.ReplyToMessageID);
         Assert.Equal(expectedReplyToMessageType, deserialized.ReplyToMessageType);
@@ -472,6 +539,19 @@ public class MessageContentTest : TestBase
             MediaUrl = "https://example.com/image.jpg",
             MimeType = "image/jpeg",
             ReactToMessageID = "reactToMessageId",
+            Referral = new()
+            {
+                Body = "body",
+                CtwaClid = "ARIzZm9vYmFyY3R3YWNsaWQ",
+                Headline = "headline",
+                ImageUrl = "https://example.com",
+                MediaType = MediaType.Image,
+                SourceID = "120210000000000000",
+                SourceType = SourceType.Ad,
+                SourceUrl = "https://example.com",
+                ThumbnailUrl = "https://example.com",
+                VideoUrl = "https://example.com",
+            },
             ReplyToFrom = "replyToFrom",
             ReplyToMessageID = "replyToMessageId",
             ReplyToMessageType = "replyToMessageType",
@@ -552,6 +632,8 @@ public class MessageContentTest : TestBase
         Assert.False(model.RawData.ContainsKey("mimeType"));
         Assert.Null(model.ReactToMessageID);
         Assert.False(model.RawData.ContainsKey("reactToMessageId"));
+        Assert.Null(model.Referral);
+        Assert.False(model.RawData.ContainsKey("referral"));
         Assert.Null(model.ReplyToFrom);
         Assert.False(model.RawData.ContainsKey("replyToFrom"));
         Assert.Null(model.ReplyToMessageID);
@@ -607,6 +689,7 @@ public class MessageContentTest : TestBase
             MediaUrl = null,
             MimeType = null,
             ReactToMessageID = null,
+            Referral = null,
             ReplyToFrom = null,
             ReplyToMessageID = null,
             ReplyToMessageType = null,
@@ -657,6 +740,8 @@ public class MessageContentTest : TestBase
         Assert.False(model.RawData.ContainsKey("mimeType"));
         Assert.Null(model.ReactToMessageID);
         Assert.False(model.RawData.ContainsKey("reactToMessageId"));
+        Assert.Null(model.Referral);
+        Assert.False(model.RawData.ContainsKey("referral"));
         Assert.Null(model.ReplyToFrom);
         Assert.False(model.RawData.ContainsKey("replyToFrom"));
         Assert.Null(model.ReplyToMessageID);
@@ -704,6 +789,7 @@ public class MessageContentTest : TestBase
             MediaUrl = null,
             MimeType = null,
             ReactToMessageID = null,
+            Referral = null,
             ReplyToFrom = null,
             ReplyToMessageID = null,
             ReplyToMessageType = null,
@@ -743,6 +829,19 @@ public class MessageContentTest : TestBase
             MediaUrl = "https://example.com/image.jpg",
             MimeType = "image/jpeg",
             ReactToMessageID = "reactToMessageId",
+            Referral = new()
+            {
+                Body = "body",
+                CtwaClid = "ARIzZm9vYmFyY3R3YWNsaWQ",
+                Headline = "headline",
+                ImageUrl = "https://example.com",
+                MediaType = MediaType.Image,
+                SourceID = "120210000000000000",
+                SourceType = SourceType.Ad,
+                SourceUrl = "https://example.com",
+                ThumbnailUrl = "https://example.com",
+                VideoUrl = "https://example.com",
+            },
             ReplyToFrom = "replyToFrom",
             ReplyToMessageID = "replyToMessageId",
             ReplyToMessageType = "replyToMessageType",
@@ -1018,6 +1117,373 @@ public class CtaHeaderTypeTest : TestBase
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<ApiEnum<string, CtaHeaderType>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class ReferralTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new Referral
+        {
+            Body = "body",
+            CtwaClid = "ARIzZm9vYmFyY3R3YWNsaWQ",
+            Headline = "headline",
+            ImageUrl = "https://example.com",
+            MediaType = MediaType.Image,
+            SourceID = "120210000000000000",
+            SourceType = SourceType.Ad,
+            SourceUrl = "https://example.com",
+            ThumbnailUrl = "https://example.com",
+            VideoUrl = "https://example.com",
+        };
+
+        string expectedBody = "body";
+        string expectedCtwaClid = "ARIzZm9vYmFyY3R3YWNsaWQ";
+        string expectedHeadline = "headline";
+        string expectedImageUrl = "https://example.com";
+        ApiEnum<string, MediaType> expectedMediaType = MediaType.Image;
+        string expectedSourceID = "120210000000000000";
+        ApiEnum<string, SourceType> expectedSourceType = SourceType.Ad;
+        string expectedSourceUrl = "https://example.com";
+        string expectedThumbnailUrl = "https://example.com";
+        string expectedVideoUrl = "https://example.com";
+
+        Assert.Equal(expectedBody, model.Body);
+        Assert.Equal(expectedCtwaClid, model.CtwaClid);
+        Assert.Equal(expectedHeadline, model.Headline);
+        Assert.Equal(expectedImageUrl, model.ImageUrl);
+        Assert.Equal(expectedMediaType, model.MediaType);
+        Assert.Equal(expectedSourceID, model.SourceID);
+        Assert.Equal(expectedSourceType, model.SourceType);
+        Assert.Equal(expectedSourceUrl, model.SourceUrl);
+        Assert.Equal(expectedThumbnailUrl, model.ThumbnailUrl);
+        Assert.Equal(expectedVideoUrl, model.VideoUrl);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new Referral
+        {
+            Body = "body",
+            CtwaClid = "ARIzZm9vYmFyY3R3YWNsaWQ",
+            Headline = "headline",
+            ImageUrl = "https://example.com",
+            MediaType = MediaType.Image,
+            SourceID = "120210000000000000",
+            SourceType = SourceType.Ad,
+            SourceUrl = "https://example.com",
+            ThumbnailUrl = "https://example.com",
+            VideoUrl = "https://example.com",
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Referral>(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new Referral
+        {
+            Body = "body",
+            CtwaClid = "ARIzZm9vYmFyY3R3YWNsaWQ",
+            Headline = "headline",
+            ImageUrl = "https://example.com",
+            MediaType = MediaType.Image,
+            SourceID = "120210000000000000",
+            SourceType = SourceType.Ad,
+            SourceUrl = "https://example.com",
+            ThumbnailUrl = "https://example.com",
+            VideoUrl = "https://example.com",
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Referral>(
+            element,
+            ModelBase.SerializerOptions
+        );
+        Assert.NotNull(deserialized);
+
+        string expectedBody = "body";
+        string expectedCtwaClid = "ARIzZm9vYmFyY3R3YWNsaWQ";
+        string expectedHeadline = "headline";
+        string expectedImageUrl = "https://example.com";
+        ApiEnum<string, MediaType> expectedMediaType = MediaType.Image;
+        string expectedSourceID = "120210000000000000";
+        ApiEnum<string, SourceType> expectedSourceType = SourceType.Ad;
+        string expectedSourceUrl = "https://example.com";
+        string expectedThumbnailUrl = "https://example.com";
+        string expectedVideoUrl = "https://example.com";
+
+        Assert.Equal(expectedBody, deserialized.Body);
+        Assert.Equal(expectedCtwaClid, deserialized.CtwaClid);
+        Assert.Equal(expectedHeadline, deserialized.Headline);
+        Assert.Equal(expectedImageUrl, deserialized.ImageUrl);
+        Assert.Equal(expectedMediaType, deserialized.MediaType);
+        Assert.Equal(expectedSourceID, deserialized.SourceID);
+        Assert.Equal(expectedSourceType, deserialized.SourceType);
+        Assert.Equal(expectedSourceUrl, deserialized.SourceUrl);
+        Assert.Equal(expectedThumbnailUrl, deserialized.ThumbnailUrl);
+        Assert.Equal(expectedVideoUrl, deserialized.VideoUrl);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new Referral
+        {
+            Body = "body",
+            CtwaClid = "ARIzZm9vYmFyY3R3YWNsaWQ",
+            Headline = "headline",
+            ImageUrl = "https://example.com",
+            MediaType = MediaType.Image,
+            SourceID = "120210000000000000",
+            SourceType = SourceType.Ad,
+            SourceUrl = "https://example.com",
+            ThumbnailUrl = "https://example.com",
+            VideoUrl = "https://example.com",
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new Referral { };
+
+        Assert.Null(model.Body);
+        Assert.False(model.RawData.ContainsKey("body"));
+        Assert.Null(model.CtwaClid);
+        Assert.False(model.RawData.ContainsKey("ctwaClid"));
+        Assert.Null(model.Headline);
+        Assert.False(model.RawData.ContainsKey("headline"));
+        Assert.Null(model.ImageUrl);
+        Assert.False(model.RawData.ContainsKey("imageUrl"));
+        Assert.Null(model.MediaType);
+        Assert.False(model.RawData.ContainsKey("mediaType"));
+        Assert.Null(model.SourceID);
+        Assert.False(model.RawData.ContainsKey("sourceId"));
+        Assert.Null(model.SourceType);
+        Assert.False(model.RawData.ContainsKey("sourceType"));
+        Assert.Null(model.SourceUrl);
+        Assert.False(model.RawData.ContainsKey("sourceUrl"));
+        Assert.Null(model.ThumbnailUrl);
+        Assert.False(model.RawData.ContainsKey("thumbnailUrl"));
+        Assert.Null(model.VideoUrl);
+        Assert.False(model.RawData.ContainsKey("videoUrl"));
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new Referral { };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
+    {
+        var model = new Referral
+        {
+            // Null should be interpreted as omitted for these properties
+            Body = null,
+            CtwaClid = null,
+            Headline = null,
+            ImageUrl = null,
+            MediaType = null,
+            SourceID = null,
+            SourceType = null,
+            SourceUrl = null,
+            ThumbnailUrl = null,
+            VideoUrl = null,
+        };
+
+        Assert.Null(model.Body);
+        Assert.False(model.RawData.ContainsKey("body"));
+        Assert.Null(model.CtwaClid);
+        Assert.False(model.RawData.ContainsKey("ctwaClid"));
+        Assert.Null(model.Headline);
+        Assert.False(model.RawData.ContainsKey("headline"));
+        Assert.Null(model.ImageUrl);
+        Assert.False(model.RawData.ContainsKey("imageUrl"));
+        Assert.Null(model.MediaType);
+        Assert.False(model.RawData.ContainsKey("mediaType"));
+        Assert.Null(model.SourceID);
+        Assert.False(model.RawData.ContainsKey("sourceId"));
+        Assert.Null(model.SourceType);
+        Assert.False(model.RawData.ContainsKey("sourceType"));
+        Assert.Null(model.SourceUrl);
+        Assert.False(model.RawData.ContainsKey("sourceUrl"));
+        Assert.Null(model.ThumbnailUrl);
+        Assert.False(model.RawData.ContainsKey("thumbnailUrl"));
+        Assert.Null(model.VideoUrl);
+        Assert.False(model.RawData.ContainsKey("videoUrl"));
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new Referral
+        {
+            // Null should be interpreted as omitted for these properties
+            Body = null,
+            CtwaClid = null,
+            Headline = null,
+            ImageUrl = null,
+            MediaType = null,
+            SourceID = null,
+            SourceType = null,
+            SourceUrl = null,
+            ThumbnailUrl = null,
+            VideoUrl = null,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Referral
+        {
+            Body = "body",
+            CtwaClid = "ARIzZm9vYmFyY3R3YWNsaWQ",
+            Headline = "headline",
+            ImageUrl = "https://example.com",
+            MediaType = MediaType.Image,
+            SourceID = "120210000000000000",
+            SourceType = SourceType.Ad,
+            SourceUrl = "https://example.com",
+            ThumbnailUrl = "https://example.com",
+            VideoUrl = "https://example.com",
+        };
+
+        Referral copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class MediaTypeTest : TestBase
+{
+    [Theory]
+    [InlineData(MediaType.Image)]
+    [InlineData(MediaType.Video)]
+    public void Validation_Works(MediaType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, MediaType> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, MediaType>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<ZavudevInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(MediaType.Image)]
+    [InlineData(MediaType.Video)]
+    public void SerializationRoundtrip_Works(MediaType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, MediaType> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, MediaType>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, MediaType>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, MediaType>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class SourceTypeTest : TestBase
+{
+    [Theory]
+    [InlineData(SourceType.Ad)]
+    [InlineData(SourceType.Post)]
+    public void Validation_Works(SourceType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SourceType> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, SourceType>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<ZavudevInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(SourceType.Ad)]
+    [InlineData(SourceType.Post)]
+    public void SerializationRoundtrip_Works(SourceType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SourceType> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, SourceType>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, SourceType>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, SourceType>>(
             json,
             ModelBase.SerializerOptions
         );

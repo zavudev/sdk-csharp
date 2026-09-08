@@ -51,7 +51,6 @@ public class ContactTest : TestBase
             PrimaryEmail = "john@example.com",
             PrimaryPhone = "+56912345678",
             ProfileName = "John Doe",
-            SuggestedMergeWith = "suggestedMergeWith",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -92,7 +91,6 @@ public class ContactTest : TestBase
         string expectedPrimaryEmail = "john@example.com";
         string expectedPrimaryPhone = "+56912345678";
         string expectedProfileName = "John Doe";
-        string expectedSuggestedMergeWith = "suggestedMergeWith";
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
         Assert.Equal(expectedID, model.ID);
@@ -123,7 +121,6 @@ public class ContactTest : TestBase
         Assert.Equal(expectedPrimaryEmail, model.PrimaryEmail);
         Assert.Equal(expectedPrimaryPhone, model.PrimaryPhone);
         Assert.Equal(expectedProfileName, model.ProfileName);
-        Assert.Equal(expectedSuggestedMergeWith, model.SuggestedMergeWith);
         Assert.Equal(expectedUpdatedAt, model.UpdatedAt);
     }
 
@@ -169,7 +166,6 @@ public class ContactTest : TestBase
             PrimaryEmail = "john@example.com",
             PrimaryPhone = "+56912345678",
             ProfileName = "John Doe",
-            SuggestedMergeWith = "suggestedMergeWith",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -221,7 +217,6 @@ public class ContactTest : TestBase
             PrimaryEmail = "john@example.com",
             PrimaryPhone = "+56912345678",
             ProfileName = "John Doe",
-            SuggestedMergeWith = "suggestedMergeWith",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -269,7 +264,6 @@ public class ContactTest : TestBase
         string expectedPrimaryEmail = "john@example.com";
         string expectedPrimaryPhone = "+56912345678";
         string expectedProfileName = "John Doe";
-        string expectedSuggestedMergeWith = "suggestedMergeWith";
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
         Assert.Equal(expectedID, deserialized.ID);
@@ -300,7 +294,6 @@ public class ContactTest : TestBase
         Assert.Equal(expectedPrimaryEmail, deserialized.PrimaryEmail);
         Assert.Equal(expectedPrimaryPhone, deserialized.PrimaryPhone);
         Assert.Equal(expectedProfileName, deserialized.ProfileName);
-        Assert.Equal(expectedSuggestedMergeWith, deserialized.SuggestedMergeWith);
         Assert.Equal(expectedUpdatedAt, deserialized.UpdatedAt);
     }
 
@@ -346,7 +339,6 @@ public class ContactTest : TestBase
             PrimaryEmail = "john@example.com",
             PrimaryPhone = "+56912345678",
             ProfileName = "John Doe",
-            SuggestedMergeWith = "suggestedMergeWith",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -380,8 +372,6 @@ public class ContactTest : TestBase
         Assert.False(model.RawData.ContainsKey("primaryEmail"));
         Assert.Null(model.PrimaryPhone);
         Assert.False(model.RawData.ContainsKey("primaryPhone"));
-        Assert.Null(model.SuggestedMergeWith);
-        Assert.False(model.RawData.ContainsKey("suggestedMergeWith"));
         Assert.Null(model.UpdatedAt);
         Assert.False(model.RawData.ContainsKey("updatedAt"));
     }
@@ -422,7 +412,6 @@ public class ContactTest : TestBase
             PhoneNumber = null,
             PrimaryEmail = null,
             PrimaryPhone = null,
-            SuggestedMergeWith = null,
             UpdatedAt = null,
         };
 
@@ -440,8 +429,6 @@ public class ContactTest : TestBase
         Assert.False(model.RawData.ContainsKey("primaryEmail"));
         Assert.Null(model.PrimaryPhone);
         Assert.False(model.RawData.ContainsKey("primaryPhone"));
-        Assert.Null(model.SuggestedMergeWith);
-        Assert.False(model.RawData.ContainsKey("suggestedMergeWith"));
         Assert.Null(model.UpdatedAt);
         Assert.False(model.RawData.ContainsKey("updatedAt"));
     }
@@ -466,7 +453,6 @@ public class ContactTest : TestBase
             PhoneNumber = null,
             PrimaryEmail = null,
             PrimaryPhone = null,
-            SuggestedMergeWith = null,
             UpdatedAt = null,
         };
 
@@ -514,7 +500,6 @@ public class ContactTest : TestBase
             PhoneNumber = "+56912345678",
             PrimaryEmail = "john@example.com",
             PrimaryPhone = "+56912345678",
-            SuggestedMergeWith = "suggestedMergeWith",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -563,7 +548,6 @@ public class ContactTest : TestBase
             PhoneNumber = "+56912345678",
             PrimaryEmail = "john@example.com",
             PrimaryPhone = "+56912345678",
-            SuggestedMergeWith = "suggestedMergeWith",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -611,7 +595,6 @@ public class ContactTest : TestBase
             PhoneNumber = "+56912345678",
             PrimaryEmail = "john@example.com",
             PrimaryPhone = "+56912345678",
-            SuggestedMergeWith = "suggestedMergeWith",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
 
             ProfileName = null,
@@ -662,7 +645,6 @@ public class ContactTest : TestBase
             PhoneNumber = "+56912345678",
             PrimaryEmail = "john@example.com",
             PrimaryPhone = "+56912345678",
-            SuggestedMergeWith = "suggestedMergeWith",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
 
             ProfileName = null,
@@ -713,7 +695,6 @@ public class ContactTest : TestBase
             PrimaryEmail = "john@example.com",
             PrimaryPhone = "+56912345678",
             ProfileName = "John Doe",
-            SuggestedMergeWith = "suggestedMergeWith",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 

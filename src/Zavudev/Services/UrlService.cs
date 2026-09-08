@@ -35,6 +35,28 @@ public sealed class UrlService : IUrlService
     }
 
     /// <inheritdoc/>
+    public async Task<UrlEscalateResponse> Escalate(
+        UrlEscalateParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.Escalate(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public Task<UrlEscalateResponse> Escalate(
+        string urlID,
+        UrlEscalateParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        return this.Escalate(parameters with { UrlID = urlID }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
     public async Task<UrlListVerifiedPage> ListVerified(
         UrlListVerifiedParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -97,6 +119,49 @@ public sealed class UrlServiceWithRawResponse : IUrlServiceWithRawResponse
     public UrlServiceWithRawResponse(IZavudevClientWithRawResponse client)
     {
         _client = client;
+    }
+
+    /// <inheritdoc/>
+    public async Task<HttpResponse<UrlEscalateResponse>> Escalate(
+        UrlEscalateParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        if (parameters.UrlID == null)
+        {
+            throw new ZavudevInvalidDataException("'parameters.UrlID' cannot be null");
+        }
+
+        HttpRequest<UrlEscalateParams> request = new()
+        {
+            Method = HttpMethod.Post,
+            Params = parameters,
+        };
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var deserializedResponse = await response
+                    .Deserialize<UrlEscalateResponse>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    deserializedResponse.Validate();
+                }
+                return deserializedResponse;
+            }
+        );
+    }
+
+    /// <inheritdoc/>
+    public Task<HttpResponse<UrlEscalateResponse>> Escalate(
+        string urlID,
+        UrlEscalateParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        return this.Escalate(parameters with { UrlID = urlID }, cancellationToken);
     }
 
     /// <inheritdoc/>

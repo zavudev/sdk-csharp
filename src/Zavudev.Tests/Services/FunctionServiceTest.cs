@@ -70,6 +70,38 @@ public class FunctionServiceTest : TestBase
     }
 
     [Fact(Skip = "Mock server tests are disabled")]
+    public async Task ListDeployments_Works()
+    {
+        var response = await this.client.Functions.ListDeployments(
+            "functionId",
+            new(),
+            TestContext.Current.CancellationToken
+        );
+        response.Validate();
+    }
+
+    [Fact(Skip = "Mock server tests are disabled")]
+    public async Task ListEventTypes_Works()
+    {
+        var response = await this.client.Functions.ListEventTypes(
+            new(),
+            TestContext.Current.CancellationToken
+        );
+        response.Validate();
+    }
+
+    [Fact(Skip = "Mock server tests are disabled")]
+    public async Task RollbackDeployment_Works()
+    {
+        var response = await this.client.Functions.RollbackDeployment(
+            "functionId",
+            new() { DeploymentID = "fnd_abc123" },
+            TestContext.Current.CancellationToken
+        );
+        response.Validate();
+    }
+
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task TailLogs_Works()
     {
         var response = await this.client.Functions.TailLogs(

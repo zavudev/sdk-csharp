@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text.Json;
@@ -17,6 +18,9 @@ namespace Zavudev.Models.Contacts;
 /// </summary>
 public record class ContactListParams : ParamsBase
 {
+    /// <summary>
+    /// Opaque cursor from a previous response's `nextCursor`. Do not construct it.
+    /// </summary>
     public string? Cursor
     {
         get
@@ -53,6 +57,9 @@ public record class ContactListParams : ParamsBase
         }
     }
 
+    /// <summary>
+    /// Exact match on the contact's primary phone number, in E.164.
+    /// </summary>
     public string? PhoneNumber
     {
         get
@@ -68,6 +75,65 @@ public record class ContactListParams : ParamsBase
             }
 
             this._rawQueryData.Set("phoneNumber", value);
+        }
+    }
+
+    /// <summary>
+    /// Free-text match over the contact's name (`displayName` and the WhatsApp profile
+    /// name), phone numbers and email addresses. Case- and accent-insensitive. A
+    /// phone number matches on a trailing fragment too, so `5551234` finds `+14155551234`.
+    ///
+    /// <para>Contacts created automatically from an inbound message have no `displayName`
+    /// — they are matched by their identifier until you set one with `PATCH /v1/contacts/{contactId}`.</para>
+    ///
+    /// <para>Results come back in relevance order rather than newest-first. `cursor`
+    /// is opaque in both modes; pass back exactly what the previous response returned,
+    /// and start a new pagination run when the search term changes.</para>
+    /// </summary>
+    public string? Search
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<string>("search");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("search", value);
+        }
+    }
+
+    /// <summary>
+    /// Tag name. Repeatable: `?tag=vip&amp;tag=chile` returns contacts carrying **every**
+    /// tag given, not any of them — the same rule the dashboard filter applies.
+    ///
+    /// <para>Tags are matched by name, case-insensitively. An unknown tag returns
+    /// 400 rather than being ignored, because a typo that silently matched every
+    /// contact would be a worse answer than an error.</para>
+    /// </summary>
+    public IReadOnlyList<string>? Tag
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<ImmutableArray<string>>("tag");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set<ImmutableArray<string>?>(
+                "tag",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
         }
     }
 

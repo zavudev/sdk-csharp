@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Zavudev.Core;
 using Zavudev.Exceptions;
 using Zavudev.Models.Senders;
-using Zavudev.Services.Senders;
+using Senders = Zavudev.Services.Senders;
 
 namespace Zavudev.Services;
 
@@ -33,20 +33,27 @@ public sealed class SenderService : ISenderService
         _client = client;
 
         _withRawResponse = new(() => new SenderServiceWithRawResponse(client.WithRawResponse));
-        _agent = new(() => new AgentService(client));
-        _whatsappSync = new(() => new WhatsappSyncService(client));
+        _agent = new(() => new Senders::AgentService(client));
+        _whatsappSync = new(() => new Senders::WhatsappSyncService(client));
+        _telegram = new(() => new Senders::TelegramService(client));
     }
 
-    readonly Lazy<IAgentService> _agent;
-    public IAgentService Agent
+    readonly Lazy<Senders::IAgentService> _agent;
+    public Senders::IAgentService Agent
     {
         get { return _agent.Value; }
     }
 
-    readonly Lazy<IWhatsappSyncService> _whatsappSync;
-    public IWhatsappSyncService WhatsappSync
+    readonly Lazy<Senders::IWhatsappSyncService> _whatsappSync;
+    public Senders::IWhatsappSyncService WhatsappSync
     {
         get { return _whatsappSync.Value; }
+    }
+
+    readonly Lazy<Senders::ITelegramService> _telegram;
+    public Senders::ITelegramService Telegram
+    {
+        get { return _telegram.Value; }
     }
 
     /// <inheritdoc/>
@@ -262,20 +269,27 @@ public sealed class SenderServiceWithRawResponse : ISenderServiceWithRawResponse
     {
         _client = client;
 
-        _agent = new(() => new AgentServiceWithRawResponse(client));
-        _whatsappSync = new(() => new WhatsappSyncServiceWithRawResponse(client));
+        _agent = new(() => new Senders::AgentServiceWithRawResponse(client));
+        _whatsappSync = new(() => new Senders::WhatsappSyncServiceWithRawResponse(client));
+        _telegram = new(() => new Senders::TelegramServiceWithRawResponse(client));
     }
 
-    readonly Lazy<IAgentServiceWithRawResponse> _agent;
-    public IAgentServiceWithRawResponse Agent
+    readonly Lazy<Senders::IAgentServiceWithRawResponse> _agent;
+    public Senders::IAgentServiceWithRawResponse Agent
     {
         get { return _agent.Value; }
     }
 
-    readonly Lazy<IWhatsappSyncServiceWithRawResponse> _whatsappSync;
-    public IWhatsappSyncServiceWithRawResponse WhatsappSync
+    readonly Lazy<Senders::IWhatsappSyncServiceWithRawResponse> _whatsappSync;
+    public Senders::IWhatsappSyncServiceWithRawResponse WhatsappSync
     {
         get { return _whatsappSync.Value; }
+    }
+
+    readonly Lazy<Senders::ITelegramServiceWithRawResponse> _telegram;
+    public Senders::ITelegramServiceWithRawResponse Telegram
+    {
+        get { return _telegram.Value; }
     }
 
     /// <inheritdoc/>

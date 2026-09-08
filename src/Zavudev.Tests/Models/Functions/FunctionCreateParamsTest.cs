@@ -18,6 +18,18 @@ public class FunctionCreateParamsTest : TestBase
             Slug = "order-bot",
             Dependencies = new Dictionary<string, string>() { { "openai", "^4.20.0" } },
             Description = "Replies to order status questions on WhatsApp.",
+            Entrypoint = "index.ts",
+            Files = new Dictionary<string, string>()
+            {
+                {
+                    "index.ts",
+                    "import { formatOrder } from './lib/orders';\n\nexport default async function handler(event) {\n  return { statusCode: 200, body: formatOrder(event) };\n}\n"
+                },
+                {
+                    "lib/orders.ts",
+                    "export function formatOrder(event) {\n  return JSON.stringify(event);\n}\n"
+                },
+            },
             HttpEnabled = true,
             MemoryMB = MemoryMB.V128,
             Runtime = Runtime.Nodejs24,
@@ -30,6 +42,18 @@ public class FunctionCreateParamsTest : TestBase
         string expectedSlug = "order-bot";
         Dictionary<string, string> expectedDependencies = new() { { "openai", "^4.20.0" } };
         string expectedDescription = "Replies to order status questions on WhatsApp.";
+        string expectedEntrypoint = "index.ts";
+        Dictionary<string, string> expectedFiles = new()
+        {
+            {
+                "index.ts",
+                "import { formatOrder } from './lib/orders';\n\nexport default async function handler(event) {\n  return { statusCode: 200, body: formatOrder(event) };\n}\n"
+            },
+            {
+                "lib/orders.ts",
+                "export function formatOrder(event) {\n  return JSON.stringify(event);\n}\n"
+            },
+        };
         bool expectedHttpEnabled = true;
         ApiEnum<long, MemoryMB> expectedMemoryMB = MemoryMB.V128;
         ApiEnum<string, Runtime> expectedRuntime = Runtime.Nodejs24;
@@ -48,6 +72,15 @@ public class FunctionCreateParamsTest : TestBase
             Assert.Equal(value, parameters.Dependencies[item.Key]);
         }
         Assert.Equal(expectedDescription, parameters.Description);
+        Assert.Equal(expectedEntrypoint, parameters.Entrypoint);
+        Assert.NotNull(parameters.Files);
+        Assert.Equal(expectedFiles.Count, parameters.Files.Count);
+        foreach (var item in expectedFiles)
+        {
+            Assert.True(parameters.Files.TryGetValue(item.Key, out var value));
+
+            Assert.Equal(value, parameters.Files[item.Key]);
+        }
         Assert.Equal(expectedHttpEnabled, parameters.HttpEnabled);
         Assert.Equal(expectedMemoryMB, parameters.MemoryMB);
         Assert.Equal(expectedRuntime, parameters.Runtime);
@@ -64,6 +97,10 @@ public class FunctionCreateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("dependencies"));
         Assert.Null(parameters.Description);
         Assert.False(parameters.RawBodyData.ContainsKey("description"));
+        Assert.Null(parameters.Entrypoint);
+        Assert.False(parameters.RawBodyData.ContainsKey("entrypoint"));
+        Assert.Null(parameters.Files);
+        Assert.False(parameters.RawBodyData.ContainsKey("files"));
         Assert.Null(parameters.HttpEnabled);
         Assert.False(parameters.RawBodyData.ContainsKey("httpEnabled"));
         Assert.Null(parameters.MemoryMB);
@@ -87,6 +124,8 @@ public class FunctionCreateParamsTest : TestBase
             // Null should be interpreted as omitted for these properties
             Dependencies = null,
             Description = null,
+            Entrypoint = null,
+            Files = null,
             HttpEnabled = null,
             MemoryMB = null,
             Runtime = null,
@@ -98,6 +137,10 @@ public class FunctionCreateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("dependencies"));
         Assert.Null(parameters.Description);
         Assert.False(parameters.RawBodyData.ContainsKey("description"));
+        Assert.Null(parameters.Entrypoint);
+        Assert.False(parameters.RawBodyData.ContainsKey("entrypoint"));
+        Assert.Null(parameters.Files);
+        Assert.False(parameters.RawBodyData.ContainsKey("files"));
         Assert.Null(parameters.HttpEnabled);
         Assert.False(parameters.RawBodyData.ContainsKey("httpEnabled"));
         Assert.Null(parameters.MemoryMB);
@@ -129,6 +172,18 @@ public class FunctionCreateParamsTest : TestBase
             Slug = "order-bot",
             Dependencies = new Dictionary<string, string>() { { "openai", "^4.20.0" } },
             Description = "Replies to order status questions on WhatsApp.",
+            Entrypoint = "index.ts",
+            Files = new Dictionary<string, string>()
+            {
+                {
+                    "index.ts",
+                    "import { formatOrder } from './lib/orders';\n\nexport default async function handler(event) {\n  return { statusCode: 200, body: formatOrder(event) };\n}\n"
+                },
+                {
+                    "lib/orders.ts",
+                    "export function formatOrder(event) {\n  return JSON.stringify(event);\n}\n"
+                },
+            },
             HttpEnabled = true,
             MemoryMB = MemoryMB.V128,
             Runtime = Runtime.Nodejs24,

@@ -16,15 +16,18 @@ public class ContactUpdateParamsTest : TestBase
         {
             ContactID = "contactId",
             DefaultChannel = DefaultChannel.Sms,
+            DisplayName = "John Doe",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
         };
 
         string expectedContactID = "contactId";
         ApiEnum<string, DefaultChannel> expectedDefaultChannel = DefaultChannel.Sms;
+        string expectedDisplayName = "John Doe";
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
 
         Assert.Equal(expectedContactID, parameters.ContactID);
         Assert.Equal(expectedDefaultChannel, parameters.DefaultChannel);
+        Assert.Equal(expectedDisplayName, parameters.DisplayName);
         Assert.NotNull(parameters.Metadata);
         Assert.Equal(expectedMetadata.Count, parameters.Metadata.Count);
         foreach (var item in expectedMetadata)
@@ -42,6 +45,7 @@ public class ContactUpdateParamsTest : TestBase
         {
             ContactID = "contactId",
             DefaultChannel = DefaultChannel.Sms,
+            DisplayName = "John Doe",
         };
 
         Assert.Null(parameters.Metadata);
@@ -55,6 +59,7 @@ public class ContactUpdateParamsTest : TestBase
         {
             ContactID = "contactId",
             DefaultChannel = DefaultChannel.Sms,
+            DisplayName = "John Doe",
 
             // Null should be interpreted as omitted for these properties
             Metadata = null,
@@ -75,6 +80,8 @@ public class ContactUpdateParamsTest : TestBase
 
         Assert.Null(parameters.DefaultChannel);
         Assert.False(parameters.RawBodyData.ContainsKey("defaultChannel"));
+        Assert.Null(parameters.DisplayName);
+        Assert.False(parameters.RawBodyData.ContainsKey("displayName"));
     }
 
     [Fact]
@@ -86,10 +93,13 @@ public class ContactUpdateParamsTest : TestBase
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
 
             DefaultChannel = null,
+            DisplayName = null,
         };
 
         Assert.Null(parameters.DefaultChannel);
         Assert.True(parameters.RawBodyData.ContainsKey("defaultChannel"));
+        Assert.Null(parameters.DisplayName);
+        Assert.True(parameters.RawBodyData.ContainsKey("displayName"));
     }
 
     [Fact]
@@ -109,6 +119,7 @@ public class ContactUpdateParamsTest : TestBase
         {
             ContactID = "contactId",
             DefaultChannel = DefaultChannel.Sms,
+            DisplayName = "John Doe",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
         };
 

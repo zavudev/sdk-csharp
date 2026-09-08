@@ -71,6 +71,30 @@ public sealed class MessageService : IMessageService
     }
 
     /// <inheritdoc/>
+    public async Task<MessageListAttachmentsResponse> ListAttachments(
+        MessageListAttachmentsParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.ListAttachments(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public Task<MessageListAttachmentsResponse> ListAttachments(
+        string messageID,
+        MessageListAttachmentsParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.ListAttachments(parameters with { MessageID = messageID }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
     public async Task<MessageResponse> React(
         MessageReactParams parameters,
         CancellationToken cancellationToken = default
@@ -218,6 +242,51 @@ public sealed class MessageServiceWithRawResponse : IMessageServiceWithRawRespon
                 return new MessageListPage(this, parameters, page);
             }
         );
+    }
+
+    /// <inheritdoc/>
+    public async Task<HttpResponse<MessageListAttachmentsResponse>> ListAttachments(
+        MessageListAttachmentsParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        if (parameters.MessageID == null)
+        {
+            throw new ZavudevInvalidDataException("'parameters.MessageID' cannot be null");
+        }
+
+        HttpRequest<MessageListAttachmentsParams> request = new()
+        {
+            Method = HttpMethod.Get,
+            Params = parameters,
+        };
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var deserializedResponse = await response
+                    .Deserialize<MessageListAttachmentsResponse>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    deserializedResponse.Validate();
+                }
+                return deserializedResponse;
+            }
+        );
+    }
+
+    /// <inheritdoc/>
+    public Task<HttpResponse<MessageListAttachmentsResponse>> ListAttachments(
+        string messageID,
+        MessageListAttachmentsParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.ListAttachments(parameters with { MessageID = messageID }, cancellationToken);
     }
 
     /// <inheritdoc/>

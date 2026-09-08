@@ -23,6 +23,17 @@ public class MessageServiceTest : TestBase
     }
 
     [Fact(Skip = "Mock server tests are disabled")]
+    public async Task ListAttachments_Works()
+    {
+        var response = await this.client.Messages.ListAttachments(
+            "messageId",
+            new(),
+            TestContext.Current.CancellationToken
+        );
+        response.Validate();
+    }
+
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task React_Works()
     {
         var messageResponse = await this.client.Messages.React(

@@ -40,4 +40,26 @@ public class DocumentServiceTest : TestBase
             TestContext.Current.CancellationToken
         );
     }
+
+    [Fact(Skip = "Mock server tests are disabled")]
+    public async Task RetrieveDocument_Works()
+    {
+        var response = await this.client.Senders.Agent.KnowledgeBases.Documents.RetrieveDocument(
+            "docId",
+            new() { SenderID = "senderId", KBID = "kbId" },
+            TestContext.Current.CancellationToken
+        );
+        response.Validate();
+    }
+
+    [Fact(Skip = "Mock server tests are disabled")]
+    public async Task UpdateDocument_Works()
+    {
+        var response = await this.client.Senders.Agent.KnowledgeBases.Documents.UpdateDocument(
+            "docId",
+            new() { SenderID = "senderId", KBID = "kbId" },
+            TestContext.Current.CancellationToken
+        );
+        response.Validate();
+    }
 }
