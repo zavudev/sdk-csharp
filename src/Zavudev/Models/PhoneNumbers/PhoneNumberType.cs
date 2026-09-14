@@ -5,12 +5,18 @@ using Zavudev.Exceptions;
 
 namespace Zavudev.Models.PhoneNumbers;
 
+/// <summary>
+/// Type of phone number. `mobile` is stocked in countries where no geographic (`local`)
+/// or non-geographic (`national`) inventory exists, and in several markets it is
+/// the only type that can receive SMS.
+/// </summary>
 [JsonConverter(typeof(PhoneNumberTypeConverter))]
 public enum PhoneNumberType
 {
     Local,
     National,
     TollFree,
+    Mobile,
 }
 
 sealed class PhoneNumberTypeConverter : JsonConverter<PhoneNumberType>
@@ -26,6 +32,7 @@ sealed class PhoneNumberTypeConverter : JsonConverter<PhoneNumberType>
             "local" => PhoneNumberType.Local,
             "national" => PhoneNumberType.National,
             "tollFree" => PhoneNumberType.TollFree,
+            "mobile" => PhoneNumberType.Mobile,
             _ => (PhoneNumberType)(-1),
         };
     }
@@ -43,6 +50,7 @@ sealed class PhoneNumberTypeConverter : JsonConverter<PhoneNumberType>
                 PhoneNumberType.Local => "local",
                 PhoneNumberType.National => "national",
                 PhoneNumberType.TollFree => "tollFree",
+                PhoneNumberType.Mobile => "mobile",
                 _ => throw new ZavudevInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

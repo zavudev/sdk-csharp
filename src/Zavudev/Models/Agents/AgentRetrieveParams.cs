@@ -6,33 +6,31 @@ using System.Net.Http;
 using System.Text.Json;
 using Zavudev.Core;
 
-namespace Zavudev.Models.Contacts;
+namespace Zavudev.Models.Agents;
 
 /// <summary>
-/// Dismiss the merge suggestion for a contact.
+/// Get an agent
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that
 /// cause existing derived classes to break.</para>
 /// </summary>
-public record class ContactDismissMergeSuggestionParams : ParamsBase
+public record class AgentRetrieveParams : ParamsBase
 {
-    public string? ContactID { get; init; }
+    public string? AgentID { get; init; }
 
-    public ContactDismissMergeSuggestionParams() { }
+    public AgentRetrieveParams() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public ContactDismissMergeSuggestionParams(
-        ContactDismissMergeSuggestionParams contactDismissMergeSuggestionParams
-    )
-        : base(contactDismissMergeSuggestionParams)
+    public AgentRetrieveParams(AgentRetrieveParams agentRetrieveParams)
+        : base(agentRetrieveParams)
     {
-        this.ContactID = contactDismissMergeSuggestionParams.ContactID;
+        this.AgentID = agentRetrieveParams.AgentID;
     }
 #pragma warning restore CS8618
 
-    public ContactDismissMergeSuggestionParams(
+    public AgentRetrieveParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData
     )
@@ -43,29 +41,29 @@ public record class ContactDismissMergeSuggestionParams : ParamsBase
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    ContactDismissMergeSuggestionParams(
+    AgentRetrieveParams(
         FrozenDictionary<string, JsonElement> rawHeaderData,
         FrozenDictionary<string, JsonElement> rawQueryData,
-        string contactID
+        string agentID
     )
     {
         this._rawHeaderData = new(rawHeaderData);
         this._rawQueryData = new(rawQueryData);
-        this.ContactID = contactID;
+        this.AgentID = agentID;
     }
 #pragma warning restore CS8618
 
     /// <inheritdoc cref="IFromRawJson{T}.FromRawUnchecked"/>
-    public static ContactDismissMergeSuggestionParams FromRawUnchecked(
+    public static AgentRetrieveParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
-        string contactID
+        string agentID
     )
     {
         return new(
             FrozenDictionary.ToFrozenDictionary(rawHeaderData),
             FrozenDictionary.ToFrozenDictionary(rawQueryData),
-            contactID
+            agentID
         );
     }
 
@@ -74,7 +72,7 @@ public record class ContactDismissMergeSuggestionParams : ParamsBase
             FriendlyJsonPrinter.PrintValue(
                 new Dictionary<string, JsonElement>()
                 {
-                    ["ContactID"] = JsonSerializer.SerializeToElement(this.ContactID),
+                    ["AgentID"] = JsonSerializer.SerializeToElement(this.AgentID),
                     ["HeaderData"] = FriendlyJsonPrinter.PrintValue(
                         JsonSerializer.SerializeToElement(this._rawHeaderData.Freeze())
                     ),
@@ -86,13 +84,13 @@ public record class ContactDismissMergeSuggestionParams : ParamsBase
             ModelBase.ToStringSerializerOptions
         );
 
-    public virtual bool Equals(ContactDismissMergeSuggestionParams? other)
+    public virtual bool Equals(AgentRetrieveParams? other)
     {
         if (other == null)
         {
             return false;
         }
-        return (this.ContactID?.Equals(other.ContactID) ?? other.ContactID == null)
+        return (this.AgentID?.Equals(other.AgentID) ?? other.AgentID == null)
             && this._rawHeaderData.Equals(other._rawHeaderData)
             && this._rawQueryData.Equals(other._rawQueryData);
     }
@@ -100,8 +98,7 @@ public record class ContactDismissMergeSuggestionParams : ParamsBase
     public override Uri Url(ClientOptions options)
     {
         return new UriBuilder(
-            options.BaseUrl.ToString().TrimEnd('/')
-                + string.Format("/v1/contacts/{0}/merge-suggestion", this.ContactID)
+            options.BaseUrl.ToString().TrimEnd('/') + string.Format("/v1/agents/{0}", this.AgentID)
         )
         {
             Query = this.QueryString(options),

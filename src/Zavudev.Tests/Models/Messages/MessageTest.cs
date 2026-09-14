@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Zavudev.Core;
+using Zavudev.Exceptions;
 using Zavudev.Models.Messages;
 
 namespace Zavudev.Tests.Models.Messages;
@@ -16,6 +17,7 @@ public class MessageTest : TestBase
             ID = "jd7x2k3m4n5p6q7r8s9t0",
             Channel = MessageChannel.Auto,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Direction = Direction.Inbound,
             MessageType = MessageType.Text,
             Status = MessageStatus.Queued,
             To = "+56912345678",
@@ -40,6 +42,19 @@ public class MessageTest : TestBase
                 MediaUrl = "https://example.com/image.jpg",
                 MimeType = "image/jpeg",
                 ReactToMessageID = "reactToMessageId",
+                Referral = new()
+                {
+                    Body = "body",
+                    CtwaClid = "ARIzZm9vYmFyY3R3YWNsaWQ",
+                    Headline = "headline",
+                    ImageUrl = "https://example.com",
+                    MediaType = MediaType.Image,
+                    SourceID = "120210000000000000",
+                    SourceType = SourceType.Ad,
+                    SourceUrl = "https://example.com",
+                    ThumbnailUrl = "https://example.com",
+                    VideoUrl = "https://example.com",
+                },
                 ReplyToFrom = "replyToFrom",
                 ReplyToMessageID = "replyToMessageId",
                 ReplyToMessageType = "replyToMessageType",
@@ -93,6 +108,7 @@ public class MessageTest : TestBase
         string expectedID = "jd7x2k3m4n5p6q7r8s9t0";
         ApiEnum<string, MessageChannel> expectedChannel = MessageChannel.Auto;
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        ApiEnum<string, Direction> expectedDirection = Direction.Inbound;
         ApiEnum<string, MessageType> expectedMessageType = MessageType.Text;
         ApiEnum<string, MessageStatus> expectedStatus = MessageStatus.Queued;
         string expectedTo = "+56912345678";
@@ -117,6 +133,19 @@ public class MessageTest : TestBase
             MediaUrl = "https://example.com/image.jpg",
             MimeType = "image/jpeg",
             ReactToMessageID = "reactToMessageId",
+            Referral = new()
+            {
+                Body = "body",
+                CtwaClid = "ARIzZm9vYmFyY3R3YWNsaWQ",
+                Headline = "headline",
+                ImageUrl = "https://example.com",
+                MediaType = MediaType.Image,
+                SourceID = "120210000000000000",
+                SourceType = SourceType.Ad,
+                SourceUrl = "https://example.com",
+                ThumbnailUrl = "https://example.com",
+                VideoUrl = "https://example.com",
+            },
             ReplyToFrom = "replyToFrom",
             ReplyToMessageID = "replyToMessageId",
             ReplyToMessageType = "replyToMessageType",
@@ -166,6 +195,7 @@ public class MessageTest : TestBase
         Assert.Equal(expectedID, model.ID);
         Assert.Equal(expectedChannel, model.Channel);
         Assert.Equal(expectedCreatedAt, model.CreatedAt);
+        Assert.Equal(expectedDirection, model.Direction);
         Assert.Equal(expectedMessageType, model.MessageType);
         Assert.Equal(expectedStatus, model.Status);
         Assert.Equal(expectedTo, model.To);
@@ -199,6 +229,7 @@ public class MessageTest : TestBase
             ID = "jd7x2k3m4n5p6q7r8s9t0",
             Channel = MessageChannel.Auto,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Direction = Direction.Inbound,
             MessageType = MessageType.Text,
             Status = MessageStatus.Queued,
             To = "+56912345678",
@@ -223,6 +254,19 @@ public class MessageTest : TestBase
                 MediaUrl = "https://example.com/image.jpg",
                 MimeType = "image/jpeg",
                 ReactToMessageID = "reactToMessageId",
+                Referral = new()
+                {
+                    Body = "body",
+                    CtwaClid = "ARIzZm9vYmFyY3R3YWNsaWQ",
+                    Headline = "headline",
+                    ImageUrl = "https://example.com",
+                    MediaType = MediaType.Image,
+                    SourceID = "120210000000000000",
+                    SourceType = SourceType.Ad,
+                    SourceUrl = "https://example.com",
+                    ThumbnailUrl = "https://example.com",
+                    VideoUrl = "https://example.com",
+                },
                 ReplyToFrom = "replyToFrom",
                 ReplyToMessageID = "replyToMessageId",
                 ReplyToMessageType = "replyToMessageType",
@@ -287,6 +331,7 @@ public class MessageTest : TestBase
             ID = "jd7x2k3m4n5p6q7r8s9t0",
             Channel = MessageChannel.Auto,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Direction = Direction.Inbound,
             MessageType = MessageType.Text,
             Status = MessageStatus.Queued,
             To = "+56912345678",
@@ -311,6 +356,19 @@ public class MessageTest : TestBase
                 MediaUrl = "https://example.com/image.jpg",
                 MimeType = "image/jpeg",
                 ReactToMessageID = "reactToMessageId",
+                Referral = new()
+                {
+                    Body = "body",
+                    CtwaClid = "ARIzZm9vYmFyY3R3YWNsaWQ",
+                    Headline = "headline",
+                    ImageUrl = "https://example.com",
+                    MediaType = MediaType.Image,
+                    SourceID = "120210000000000000",
+                    SourceType = SourceType.Ad,
+                    SourceUrl = "https://example.com",
+                    ThumbnailUrl = "https://example.com",
+                    VideoUrl = "https://example.com",
+                },
                 ReplyToFrom = "replyToFrom",
                 ReplyToMessageID = "replyToMessageId",
                 ReplyToMessageType = "replyToMessageType",
@@ -371,6 +429,7 @@ public class MessageTest : TestBase
         string expectedID = "jd7x2k3m4n5p6q7r8s9t0";
         ApiEnum<string, MessageChannel> expectedChannel = MessageChannel.Auto;
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        ApiEnum<string, Direction> expectedDirection = Direction.Inbound;
         ApiEnum<string, MessageType> expectedMessageType = MessageType.Text;
         ApiEnum<string, MessageStatus> expectedStatus = MessageStatus.Queued;
         string expectedTo = "+56912345678";
@@ -395,6 +454,19 @@ public class MessageTest : TestBase
             MediaUrl = "https://example.com/image.jpg",
             MimeType = "image/jpeg",
             ReactToMessageID = "reactToMessageId",
+            Referral = new()
+            {
+                Body = "body",
+                CtwaClid = "ARIzZm9vYmFyY3R3YWNsaWQ",
+                Headline = "headline",
+                ImageUrl = "https://example.com",
+                MediaType = MediaType.Image,
+                SourceID = "120210000000000000",
+                SourceType = SourceType.Ad,
+                SourceUrl = "https://example.com",
+                ThumbnailUrl = "https://example.com",
+                VideoUrl = "https://example.com",
+            },
             ReplyToFrom = "replyToFrom",
             ReplyToMessageID = "replyToMessageId",
             ReplyToMessageType = "replyToMessageType",
@@ -444,6 +516,7 @@ public class MessageTest : TestBase
         Assert.Equal(expectedID, deserialized.ID);
         Assert.Equal(expectedChannel, deserialized.Channel);
         Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
+        Assert.Equal(expectedDirection, deserialized.Direction);
         Assert.Equal(expectedMessageType, deserialized.MessageType);
         Assert.Equal(expectedStatus, deserialized.Status);
         Assert.Equal(expectedTo, deserialized.To);
@@ -477,6 +550,7 @@ public class MessageTest : TestBase
             ID = "jd7x2k3m4n5p6q7r8s9t0",
             Channel = MessageChannel.Auto,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Direction = Direction.Inbound,
             MessageType = MessageType.Text,
             Status = MessageStatus.Queued,
             To = "+56912345678",
@@ -501,6 +575,19 @@ public class MessageTest : TestBase
                 MediaUrl = "https://example.com/image.jpg",
                 MimeType = "image/jpeg",
                 ReactToMessageID = "reactToMessageId",
+                Referral = new()
+                {
+                    Body = "body",
+                    CtwaClid = "ARIzZm9vYmFyY3R3YWNsaWQ",
+                    Headline = "headline",
+                    ImageUrl = "https://example.com",
+                    MediaType = MediaType.Image,
+                    SourceID = "120210000000000000",
+                    SourceType = SourceType.Ad,
+                    SourceUrl = "https://example.com",
+                    ThumbnailUrl = "https://example.com",
+                    VideoUrl = "https://example.com",
+                },
                 ReplyToFrom = "replyToFrom",
                 ReplyToMessageID = "replyToMessageId",
                 ReplyToMessageType = "replyToMessageType",
@@ -562,6 +649,7 @@ public class MessageTest : TestBase
             ID = "jd7x2k3m4n5p6q7r8s9t0",
             Channel = MessageChannel.Auto,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Direction = Direction.Inbound,
             MessageType = MessageType.Text,
             Status = MessageStatus.Queued,
             To = "+56912345678",
@@ -598,6 +686,7 @@ public class MessageTest : TestBase
             ID = "jd7x2k3m4n5p6q7r8s9t0",
             Channel = MessageChannel.Auto,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Direction = Direction.Inbound,
             MessageType = MessageType.Text,
             Status = MessageStatus.Queued,
             To = "+56912345678",
@@ -619,6 +708,7 @@ public class MessageTest : TestBase
             ID = "jd7x2k3m4n5p6q7r8s9t0",
             Channel = MessageChannel.Auto,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Direction = Direction.Inbound,
             MessageType = MessageType.Text,
             Status = MessageStatus.Queued,
             To = "+56912345678",
@@ -665,6 +755,7 @@ public class MessageTest : TestBase
             ID = "jd7x2k3m4n5p6q7r8s9t0",
             Channel = MessageChannel.Auto,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Direction = Direction.Inbound,
             MessageType = MessageType.Text,
             Status = MessageStatus.Queued,
             To = "+56912345678",
@@ -696,6 +787,7 @@ public class MessageTest : TestBase
             ID = "jd7x2k3m4n5p6q7r8s9t0",
             Channel = MessageChannel.Auto,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Direction = Direction.Inbound,
             MessageType = MessageType.Text,
             Status = MessageStatus.Queued,
             To = "+56912345678",
@@ -720,6 +812,19 @@ public class MessageTest : TestBase
                 MediaUrl = "https://example.com/image.jpg",
                 MimeType = "image/jpeg",
                 ReactToMessageID = "reactToMessageId",
+                Referral = new()
+                {
+                    Body = "body",
+                    CtwaClid = "ARIzZm9vYmFyY3R3YWNsaWQ",
+                    Headline = "headline",
+                    ImageUrl = "https://example.com",
+                    MediaType = MediaType.Image,
+                    SourceID = "120210000000000000",
+                    SourceType = SourceType.Ad,
+                    SourceUrl = "https://example.com",
+                    ThumbnailUrl = "https://example.com",
+                    VideoUrl = "https://example.com",
+                },
                 ReplyToFrom = "replyToFrom",
                 ReplyToMessageID = "replyToMessageId",
                 ReplyToMessageType = "replyToMessageType",
@@ -785,6 +890,7 @@ public class MessageTest : TestBase
             ID = "jd7x2k3m4n5p6q7r8s9t0",
             Channel = MessageChannel.Auto,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Direction = Direction.Inbound,
             MessageType = MessageType.Text,
             Status = MessageStatus.Queued,
             To = "+56912345678",
@@ -809,6 +915,19 @@ public class MessageTest : TestBase
                 MediaUrl = "https://example.com/image.jpg",
                 MimeType = "image/jpeg",
                 ReactToMessageID = "reactToMessageId",
+                Referral = new()
+                {
+                    Body = "body",
+                    CtwaClid = "ARIzZm9vYmFyY3R3YWNsaWQ",
+                    Headline = "headline",
+                    ImageUrl = "https://example.com",
+                    MediaType = MediaType.Image,
+                    SourceID = "120210000000000000",
+                    SourceType = SourceType.Ad,
+                    SourceUrl = "https://example.com",
+                    ThumbnailUrl = "https://example.com",
+                    VideoUrl = "https://example.com",
+                },
                 ReplyToFrom = "replyToFrom",
                 ReplyToMessageID = "replyToMessageId",
                 ReplyToMessageType = "replyToMessageType",
@@ -865,6 +984,7 @@ public class MessageTest : TestBase
             ID = "jd7x2k3m4n5p6q7r8s9t0",
             Channel = MessageChannel.Auto,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Direction = Direction.Inbound,
             MessageType = MessageType.Text,
             Status = MessageStatus.Queued,
             To = "+56912345678",
@@ -889,6 +1009,19 @@ public class MessageTest : TestBase
                 MediaUrl = "https://example.com/image.jpg",
                 MimeType = "image/jpeg",
                 ReactToMessageID = "reactToMessageId",
+                Referral = new()
+                {
+                    Body = "body",
+                    CtwaClid = "ARIzZm9vYmFyY3R3YWNsaWQ",
+                    Headline = "headline",
+                    ImageUrl = "https://example.com",
+                    MediaType = MediaType.Image,
+                    SourceID = "120210000000000000",
+                    SourceType = SourceType.Ad,
+                    SourceUrl = "https://example.com",
+                    ThumbnailUrl = "https://example.com",
+                    VideoUrl = "https://example.com",
+                },
                 ReplyToFrom = "replyToFrom",
                 ReplyToMessageID = "replyToMessageId",
                 ReplyToMessageType = "replyToMessageType",
@@ -960,6 +1093,7 @@ public class MessageTest : TestBase
             ID = "jd7x2k3m4n5p6q7r8s9t0",
             Channel = MessageChannel.Auto,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Direction = Direction.Inbound,
             MessageType = MessageType.Text,
             Status = MessageStatus.Queued,
             To = "+56912345678",
@@ -984,6 +1118,19 @@ public class MessageTest : TestBase
                 MediaUrl = "https://example.com/image.jpg",
                 MimeType = "image/jpeg",
                 ReactToMessageID = "reactToMessageId",
+                Referral = new()
+                {
+                    Body = "body",
+                    CtwaClid = "ARIzZm9vYmFyY3R3YWNsaWQ",
+                    Headline = "headline",
+                    ImageUrl = "https://example.com",
+                    MediaType = MediaType.Image,
+                    SourceID = "120210000000000000",
+                    SourceType = SourceType.Ad,
+                    SourceUrl = "https://example.com",
+                    ThumbnailUrl = "https://example.com",
+                    VideoUrl = "https://example.com",
+                },
                 ReplyToFrom = "replyToFrom",
                 ReplyToMessageID = "replyToMessageId",
                 ReplyToMessageType = "replyToMessageType",
@@ -1046,6 +1193,7 @@ public class MessageTest : TestBase
             ID = "jd7x2k3m4n5p6q7r8s9t0",
             Channel = MessageChannel.Auto,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Direction = Direction.Inbound,
             MessageType = MessageType.Text,
             Status = MessageStatus.Queued,
             To = "+56912345678",
@@ -1070,6 +1218,19 @@ public class MessageTest : TestBase
                 MediaUrl = "https://example.com/image.jpg",
                 MimeType = "image/jpeg",
                 ReactToMessageID = "reactToMessageId",
+                Referral = new()
+                {
+                    Body = "body",
+                    CtwaClid = "ARIzZm9vYmFyY3R3YWNsaWQ",
+                    Headline = "headline",
+                    ImageUrl = "https://example.com",
+                    MediaType = MediaType.Image,
+                    SourceID = "120210000000000000",
+                    SourceType = SourceType.Ad,
+                    SourceUrl = "https://example.com",
+                    ThumbnailUrl = "https://example.com",
+                    VideoUrl = "https://example.com",
+                },
                 ReplyToFrom = "replyToFrom",
                 ReplyToMessageID = "replyToMessageId",
                 ReplyToMessageType = "replyToMessageType",
@@ -1123,5 +1284,63 @@ public class MessageTest : TestBase
         Message copied = new(model);
 
         Assert.Equal(model, copied);
+    }
+}
+
+public class DirectionTest : TestBase
+{
+    [Theory]
+    [InlineData(Direction.Inbound)]
+    [InlineData(Direction.Outbound)]
+    public void Validation_Works(Direction rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Direction> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Direction>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<ZavudevInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(Direction.Inbound)]
+    [InlineData(Direction.Outbound)]
+    public void SerializationRoundtrip_Works(Direction rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Direction> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Direction>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Direction>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Direction>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
     }
 }

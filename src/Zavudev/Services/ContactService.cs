@@ -137,34 +137,6 @@ public sealed class ContactService : IContactService
     }
 
     /// <inheritdoc/>
-    public Task DismissMergeSuggestion(
-        ContactDismissMergeSuggestionParams parameters,
-        CancellationToken cancellationToken = default
-    )
-    {
-        return this.WithRawResponse.DismissMergeSuggestion(parameters, cancellationToken);
-    }
-
-    /// <inheritdoc/>
-    public async Task DismissMergeSuggestion(
-        string contactID,
-        ContactDismissMergeSuggestionParams? parameters = null,
-        CancellationToken cancellationToken = default
-    )
-    {
-        parameters ??= new();
-
-        await this.DismissMergeSuggestion(
-                parameters with
-                {
-                    ContactID = contactID,
-                },
-                cancellationToken
-            )
-            .ConfigureAwait(false);
-    }
-
-    /// <inheritdoc/>
     public async Task<Contact> Merge(
         ContactMergeParams parameters,
         CancellationToken cancellationToken = default
@@ -412,43 +384,6 @@ public sealed class ContactServiceWithRawResponse : IContactServiceWithRawRespon
         parameters ??= new();
 
         return this.Delete(parameters with { ContactID = contactID }, cancellationToken);
-    }
-
-    /// <inheritdoc/>
-    public Task<HttpResponse> DismissMergeSuggestion(
-        ContactDismissMergeSuggestionParams parameters,
-        CancellationToken cancellationToken = default
-    )
-    {
-        if (parameters.ContactID == null)
-        {
-            throw new ZavudevInvalidDataException("'parameters.ContactID' cannot be null");
-        }
-
-        HttpRequest<ContactDismissMergeSuggestionParams> request = new()
-        {
-            Method = HttpMethod.Delete,
-            Params = parameters,
-        };
-        return this._client.Execute(request, cancellationToken);
-    }
-
-    /// <inheritdoc/>
-    public Task<HttpResponse> DismissMergeSuggestion(
-        string contactID,
-        ContactDismissMergeSuggestionParams? parameters = null,
-        CancellationToken cancellationToken = default
-    )
-    {
-        parameters ??= new();
-
-        return this.DismissMergeSuggestion(
-            parameters with
-            {
-                ContactID = contactID,
-            },
-            cancellationToken
-        );
     }
 
     /// <inheritdoc/>

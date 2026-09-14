@@ -27,6 +27,22 @@ public interface IUrlService
     IUrlService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
+    /// Request manual review of a rejected URL. Only URLs in 'rejected' status can be
+    /// escalated; the status then moves to 'escalated'.
+    /// </summary>
+    Task<UrlEscalateResponse> Escalate(
+        UrlEscalateParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="Escalate(UrlEscalateParams, CancellationToken)"/>
+    Task<UrlEscalateResponse> Escalate(
+        string urlID,
+        UrlEscalateParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// List URLs that have been verified for this project.
     /// </summary>
     Task<UrlListVerifiedPage> ListVerified(
@@ -76,6 +92,22 @@ public interface IUrlServiceWithRawResponse
     /// <para>The original service is not modified.</para>
     /// </summary>
     IUrlServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
+
+    /// <summary>
+    /// Returns a raw HTTP response for <c>post /v1/urls/{urlId}/escalate</c>, but is otherwise the
+    /// same as <see cref="IUrlService.Escalate(UrlEscalateParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<UrlEscalateResponse>> Escalate(
+        UrlEscalateParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="Escalate(UrlEscalateParams, CancellationToken)"/>
+    Task<HttpResponse<UrlEscalateResponse>> Escalate(
+        string urlID,
+        UrlEscalateParams parameters,
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     /// Returns a raw HTTP response for <c>get /v1/urls</c>, but is otherwise the

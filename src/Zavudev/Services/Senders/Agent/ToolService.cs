@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Zavudev.Core;
 using Zavudev.Exceptions;
 using Zavudev.Models.Senders.Agent.Tools;
+using Zavudev.Services.Senders.Agent.Tools;
 
 namespace Zavudev.Services.Senders.Agent;
 
@@ -32,6 +33,13 @@ public sealed class ToolService : IToolService
         _client = client;
 
         _withRawResponse = new(() => new ToolServiceWithRawResponse(client.WithRawResponse));
+        _webhook = new(() => new WebhookService(client));
+    }
+
+    readonly Lazy<IWebhookService> _webhook;
+    public IWebhookService Webhook
+    {
+        get { return _webhook.Value; }
     }
 
     /// <inheritdoc/>
@@ -142,6 +150,28 @@ public sealed class ToolService : IToolService
     }
 
     /// <inheritdoc/>
+    public async Task<ToolListTestRunsResponse> ListTestRuns(
+        ToolListTestRunsParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.ListTestRuns(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public Task<ToolListTestRunsResponse> ListTestRuns(
+        string toolID,
+        ToolListTestRunsParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        return this.ListTestRuns(parameters with { ToolID = toolID }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
     public async Task<ToolTestResponse> Test(
         ToolTestParams parameters,
         CancellationToken cancellationToken = default
@@ -178,6 +208,14 @@ public sealed class ToolServiceWithRawResponse : IToolServiceWithRawResponse
     public ToolServiceWithRawResponse(IZavudevClientWithRawResponse client)
     {
         _client = client;
+
+        _webhook = new(() => new WebhookServiceWithRawResponse(client));
+    }
+
+    readonly Lazy<IWebhookServiceWithRawResponse> _webhook;
+    public IWebhookServiceWithRawResponse Webhook
+    {
+        get { return _webhook.Value; }
     }
 
     /// <inheritdoc/>
@@ -381,6 +419,49 @@ public sealed class ToolServiceWithRawResponse : IToolServiceWithRawResponse
     )
     {
         return this.Delete(parameters with { ToolID = toolID }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public async Task<HttpResponse<ToolListTestRunsResponse>> ListTestRuns(
+        ToolListTestRunsParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        if (parameters.ToolID == null)
+        {
+            throw new ZavudevInvalidDataException("'parameters.ToolID' cannot be null");
+        }
+
+        HttpRequest<ToolListTestRunsParams> request = new()
+        {
+            Method = HttpMethod.Get,
+            Params = parameters,
+        };
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var deserializedResponse = await response
+                    .Deserialize<ToolListTestRunsResponse>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    deserializedResponse.Validate();
+                }
+                return deserializedResponse;
+            }
+        );
+    }
+
+    /// <inheritdoc/>
+    public Task<HttpResponse<ToolListTestRunsResponse>> ListTestRuns(
+        string toolID,
+        ToolListTestRunsParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        return this.ListTestRuns(parameters with { ToolID = toolID }, cancellationToken);
     }
 
     /// <inheritdoc/>

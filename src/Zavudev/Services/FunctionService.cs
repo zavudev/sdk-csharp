@@ -34,12 +34,26 @@ public sealed class FunctionService : IFunctionService
 
         _withRawResponse = new(() => new FunctionServiceWithRawResponse(client.WithRawResponse));
         _secrets = new(() => new SecretService(client));
+        _triggers = new(() => new TriggerService(client));
+        _gitLink = new(() => new GitLinkService(client));
     }
 
     readonly Lazy<ISecretService> _secrets;
     public ISecretService Secrets
     {
         get { return _secrets.Value; }
+    }
+
+    readonly Lazy<ITriggerService> _triggers;
+    public ITriggerService Triggers
+    {
+        get { return _triggers.Value; }
+    }
+
+    readonly Lazy<IGitLinkService> _gitLink;
+    public IGitLinkService GitLink
+    {
+        get { return _gitLink.Value; }
     }
 
     /// <inheritdoc/>
@@ -181,6 +195,70 @@ public sealed class FunctionService : IFunctionService
     }
 
     /// <inheritdoc/>
+    public async Task<FunctionListDeploymentsResponse> ListDeployments(
+        FunctionListDeploymentsParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.ListDeployments(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public Task<FunctionListDeploymentsResponse> ListDeployments(
+        string functionID,
+        FunctionListDeploymentsParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.ListDeployments(parameters with { FunctionID = functionID }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public async Task<FunctionListEventTypesResponse> ListEventTypes(
+        FunctionListEventTypesParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.ListEventTypes(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public async Task<FunctionRollbackDeploymentResponse> RollbackDeployment(
+        FunctionRollbackDeploymentParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.RollbackDeployment(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public Task<FunctionRollbackDeploymentResponse> RollbackDeployment(
+        string functionID,
+        FunctionRollbackDeploymentParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        return this.RollbackDeployment(
+            parameters with
+            {
+                FunctionID = functionID,
+            },
+            cancellationToken
+        );
+    }
+
+    /// <inheritdoc/>
     public async Task<FunctionTailLogsResponse> TailLogs(
         FunctionTailLogsParams parameters,
         CancellationToken cancellationToken = default
@@ -221,12 +299,26 @@ public sealed class FunctionServiceWithRawResponse : IFunctionServiceWithRawResp
         _client = client;
 
         _secrets = new(() => new SecretServiceWithRawResponse(client));
+        _triggers = new(() => new TriggerServiceWithRawResponse(client));
+        _gitLink = new(() => new GitLinkServiceWithRawResponse(client));
     }
 
     readonly Lazy<ISecretServiceWithRawResponse> _secrets;
     public ISecretServiceWithRawResponse Secrets
     {
         get { return _secrets.Value; }
+    }
+
+    readonly Lazy<ITriggerServiceWithRawResponse> _triggers;
+    public ITriggerServiceWithRawResponse Triggers
+    {
+        get { return _triggers.Value; }
+    }
+
+    readonly Lazy<IGitLinkServiceWithRawResponse> _gitLink;
+    public IGitLinkServiceWithRawResponse GitLink
+    {
+        get { return _gitLink.Value; }
     }
 
     /// <inheritdoc/>
@@ -483,6 +575,130 @@ public sealed class FunctionServiceWithRawResponse : IFunctionServiceWithRawResp
             parameters with
             {
                 DeploymentID = deploymentID,
+            },
+            cancellationToken
+        );
+    }
+
+    /// <inheritdoc/>
+    public async Task<HttpResponse<FunctionListDeploymentsResponse>> ListDeployments(
+        FunctionListDeploymentsParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        if (parameters.FunctionID == null)
+        {
+            throw new ZavudevInvalidDataException("'parameters.FunctionID' cannot be null");
+        }
+
+        HttpRequest<FunctionListDeploymentsParams> request = new()
+        {
+            Method = HttpMethod.Get,
+            Params = parameters,
+        };
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var deserializedResponse = await response
+                    .Deserialize<FunctionListDeploymentsResponse>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    deserializedResponse.Validate();
+                }
+                return deserializedResponse;
+            }
+        );
+    }
+
+    /// <inheritdoc/>
+    public Task<HttpResponse<FunctionListDeploymentsResponse>> ListDeployments(
+        string functionID,
+        FunctionListDeploymentsParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.ListDeployments(parameters with { FunctionID = functionID }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public async Task<HttpResponse<FunctionListEventTypesResponse>> ListEventTypes(
+        FunctionListEventTypesParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        HttpRequest<FunctionListEventTypesParams> request = new()
+        {
+            Method = HttpMethod.Get,
+            Params = parameters,
+        };
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var deserializedResponse = await response
+                    .Deserialize<FunctionListEventTypesResponse>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    deserializedResponse.Validate();
+                }
+                return deserializedResponse;
+            }
+        );
+    }
+
+    /// <inheritdoc/>
+    public async Task<HttpResponse<FunctionRollbackDeploymentResponse>> RollbackDeployment(
+        FunctionRollbackDeploymentParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        if (parameters.FunctionID == null)
+        {
+            throw new ZavudevInvalidDataException("'parameters.FunctionID' cannot be null");
+        }
+
+        HttpRequest<FunctionRollbackDeploymentParams> request = new()
+        {
+            Method = HttpMethod.Post,
+            Params = parameters,
+        };
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var deserializedResponse = await response
+                    .Deserialize<FunctionRollbackDeploymentResponse>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    deserializedResponse.Validate();
+                }
+                return deserializedResponse;
+            }
+        );
+    }
+
+    /// <inheritdoc/>
+    public Task<HttpResponse<FunctionRollbackDeploymentResponse>> RollbackDeployment(
+        string functionID,
+        FunctionRollbackDeploymentParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        return this.RollbackDeployment(
+            parameters with
+            {
+                FunctionID = functionID,
             },
             cancellationToken
         );

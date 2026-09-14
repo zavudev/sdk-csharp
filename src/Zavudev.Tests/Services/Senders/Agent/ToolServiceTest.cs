@@ -79,6 +79,17 @@ public class ToolServiceTest : TestBase
     }
 
     [Fact(Skip = "Mock server tests are disabled")]
+    public async Task ListTestRuns_Works()
+    {
+        var response = await this.client.Senders.Agent.Tools.ListTestRuns(
+            "toolId",
+            new() { SenderID = "senderId" },
+            TestContext.Current.CancellationToken
+        );
+        response.Validate();
+    }
+
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task Test_Works()
     {
         var response = await this.client.Senders.Agent.Tools.Test(

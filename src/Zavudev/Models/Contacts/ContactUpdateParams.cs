@@ -43,6 +43,21 @@ public record class ContactUpdateParams : ParamsBase
         init { this._rawBodyData.Set("defaultChannel", value); }
     }
 
+    /// <summary>
+    /// Human-readable name for this contact. Set to null to clear it and fall back
+    /// to the contact's identifier. Contacts created automatically from an inbound
+    /// message have no display name until you set one.
+    /// </summary>
+    public string? DisplayName
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("displayName");
+        }
+        init { this._rawBodyData.Set("displayName", value); }
+    }
+
     public IReadOnlyDictionary<string, string>? Metadata
     {
         get
