@@ -13,6 +13,9 @@ namespace Zavudev.Models.PhoneNumbers;
 [JsonConverter(typeof(JsonModelConverter<RequirementType, RequirementTypeFromRaw>))]
 public sealed record class RequirementType : JsonModel
 {
+    /// <summary>
+    /// Send this as `requirementType` in `regulatoryRequirements` when purchasing.
+    /// </summary>
     public required string ID
     {
         get

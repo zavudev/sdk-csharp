@@ -11,35 +11,35 @@ public class AddressCreateParamsTest : TestBase
         var parameters = new AddressCreateParams
         {
             CountryCode = "DE",
+            FirstName = "John",
+            LastName = "Doe",
             Locality = "Berlin",
             PostalCode = "10115",
             StreetAddress = "123 Main St",
             AdministrativeArea = "administrativeArea",
             BusinessName = "businessName",
             ExtendedAddress = "extendedAddress",
-            FirstName = "John",
-            LastName = "Doe",
         };
 
         string expectedCountryCode = "DE";
+        string expectedFirstName = "John";
+        string expectedLastName = "Doe";
         string expectedLocality = "Berlin";
         string expectedPostalCode = "10115";
         string expectedStreetAddress = "123 Main St";
         string expectedAdministrativeArea = "administrativeArea";
         string expectedBusinessName = "businessName";
         string expectedExtendedAddress = "extendedAddress";
-        string expectedFirstName = "John";
-        string expectedLastName = "Doe";
 
         Assert.Equal(expectedCountryCode, parameters.CountryCode);
+        Assert.Equal(expectedFirstName, parameters.FirstName);
+        Assert.Equal(expectedLastName, parameters.LastName);
         Assert.Equal(expectedLocality, parameters.Locality);
         Assert.Equal(expectedPostalCode, parameters.PostalCode);
         Assert.Equal(expectedStreetAddress, parameters.StreetAddress);
         Assert.Equal(expectedAdministrativeArea, parameters.AdministrativeArea);
         Assert.Equal(expectedBusinessName, parameters.BusinessName);
         Assert.Equal(expectedExtendedAddress, parameters.ExtendedAddress);
-        Assert.Equal(expectedFirstName, parameters.FirstName);
-        Assert.Equal(expectedLastName, parameters.LastName);
     }
 
     [Fact]
@@ -48,6 +48,8 @@ public class AddressCreateParamsTest : TestBase
         var parameters = new AddressCreateParams
         {
             CountryCode = "DE",
+            FirstName = "John",
+            LastName = "Doe",
             Locality = "Berlin",
             PostalCode = "10115",
             StreetAddress = "123 Main St",
@@ -59,10 +61,6 @@ public class AddressCreateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("businessName"));
         Assert.Null(parameters.ExtendedAddress);
         Assert.False(parameters.RawBodyData.ContainsKey("extendedAddress"));
-        Assert.Null(parameters.FirstName);
-        Assert.False(parameters.RawBodyData.ContainsKey("firstName"));
-        Assert.Null(parameters.LastName);
-        Assert.False(parameters.RawBodyData.ContainsKey("lastName"));
     }
 
     [Fact]
@@ -71,6 +69,8 @@ public class AddressCreateParamsTest : TestBase
         var parameters = new AddressCreateParams
         {
             CountryCode = "DE",
+            FirstName = "John",
+            LastName = "Doe",
             Locality = "Berlin",
             PostalCode = "10115",
             StreetAddress = "123 Main St",
@@ -79,8 +79,6 @@ public class AddressCreateParamsTest : TestBase
             AdministrativeArea = null,
             BusinessName = null,
             ExtendedAddress = null,
-            FirstName = null,
-            LastName = null,
         };
 
         Assert.Null(parameters.AdministrativeArea);
@@ -89,10 +87,6 @@ public class AddressCreateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("businessName"));
         Assert.Null(parameters.ExtendedAddress);
         Assert.False(parameters.RawBodyData.ContainsKey("extendedAddress"));
-        Assert.Null(parameters.FirstName);
-        Assert.False(parameters.RawBodyData.ContainsKey("firstName"));
-        Assert.Null(parameters.LastName);
-        Assert.False(parameters.RawBodyData.ContainsKey("lastName"));
     }
 
     [Fact]
@@ -101,6 +95,8 @@ public class AddressCreateParamsTest : TestBase
         AddressCreateParams parameters = new()
         {
             CountryCode = "DE",
+            FirstName = "John",
+            LastName = "Doe",
             Locality = "Berlin",
             PostalCode = "10115",
             StreetAddress = "123 Main St",
@@ -117,14 +113,14 @@ public class AddressCreateParamsTest : TestBase
         var parameters = new AddressCreateParams
         {
             CountryCode = "DE",
+            FirstName = "John",
+            LastName = "Doe",
             Locality = "Berlin",
             PostalCode = "10115",
             StreetAddress = "123 Main St",
             AdministrativeArea = "administrativeArea",
             BusinessName = "businessName",
             ExtendedAddress = "extendedAddress",
-            FirstName = "John",
-            LastName = "Doe",
         };
 
         AddressCreateParams copied = new(parameters);

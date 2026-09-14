@@ -9,7 +9,9 @@ using Zavudev.Core;
 namespace Zavudev.Models.Addresses;
 
 /// <summary>
-/// Delete a regulatory address. Cannot delete addresses that are in use.
+/// Delete a regulatory address from this project. Any address can be deleted, whatever
+/// its status. Phone numbers already purchased with it are not affected, and neither
+/// is information already submitted for later purchases in its country.
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that
