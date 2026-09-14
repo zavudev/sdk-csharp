@@ -11,6 +11,8 @@ public class AddressServiceTest : TestBase
             new()
             {
                 CountryCode = "DE",
+                FirstName = "John",
+                LastName = "Doe",
                 Locality = "Berlin",
                 PostalCode = "10115",
                 StreetAddress = "123 Main St",
