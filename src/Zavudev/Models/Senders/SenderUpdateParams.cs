@@ -118,7 +118,10 @@ public record class SenderUpdateParams : ParamsBase
     }
 
     /// <summary>
-    /// Enable or disable inbound email receiving for this sender.
+    /// Enable or disable inbound email receiving for this sender. Enabling requires
+    /// a verified inbound MX record on the domain; the request is ignored otherwise,
+    /// and `emailReceivingEnabled` comes back `false` on the response. Disabling
+    /// always applies.
     /// </summary>
     public bool? EmailReceivingEnabled
     {
