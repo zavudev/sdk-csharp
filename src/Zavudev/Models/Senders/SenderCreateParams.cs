@@ -104,8 +104,10 @@ public record class SenderCreateParams : ParamsBase
     }
 
     /// <summary>
-    /// Enable inbound email receiving on this sender. Requires a verified MX record
-    /// on the domain; ignored otherwise.
+    /// Enable inbound email receiving on this sender. Requires a verified inbound
+    /// MX record on the domain; the request is ignored otherwise. Read `emailReceivingEnabled`
+    /// back off the response to see whether it was applied — it comes back `false`
+    /// when the MX has not verified.
     /// </summary>
     public bool? EmailReceivingEnabled
     {
