@@ -10,10 +10,18 @@ using Zavudev.Core;
 namespace Zavudev.Models.Templates;
 
 /// <summary>
-/// Reconcile this project's templates against WhatsApp. Two things happen per connected
-/// WhatsApp Business Account: templates that exist on Meta but not in Zavu are imported
-/// (or linked to an existing template with the same name), and the approval status
-/// of the templates Zavu already knows about is refreshed from Meta.
+/// Reconcile this project's templates against WhatsApp. Three things happen per
+/// connected WhatsApp Business Account: templates that exist on Meta but not in
+/// Zavu are imported (or linked to an existing template with the same name), the
+/// approval status of the templates Zavu already knows about is refreshed from Meta,
+/// and their **category** is refreshed from Meta.
+///
+/// <para>The category matters because it is what each message is billed under, and
+/// Meta reassigns it on its own — commonly `UTILITY` to `MARKETING`, on a template
+/// that is already approved and whose status therefore never moves. A template whose
+/// category changed but whose status did not is still counted in `updated`. This
+/// is the way to repair templates whose category drifted before you started listening
+/// for `template.status_changed`.</para>
 ///
 /// <para>This is what to call when a template was created outside Zavu — in Meta
 /// Business Manager, or by another tool — or when a `template.status_changed` webhook
