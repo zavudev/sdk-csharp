@@ -86,7 +86,8 @@ public sealed record class TemplateSyncResponse : JsonModel
     }
 
     /// <summary>
-    /// Templates whose approval status changed to match Meta.
+    /// Templates brought back in line with Meta — approval status, category, or
+    /// both. A template whose status and category both moved is counted once.
     /// </summary>
     public required long Updated
     {
