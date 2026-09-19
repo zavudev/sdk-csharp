@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Zavudev.Core;
+using Zavudev.Exceptions;
 using Zavudev.Models.PhoneNumbers;
 
 namespace Zavudev.Tests.Models.PhoneNumbers;
@@ -24,6 +25,7 @@ public class OwnedPhoneNumberTest : TestBase
                 MonthlyPrice = 0,
                 UpfrontCost = 0,
             },
+            RegulatoryStatus = RegulatoryStatus.Approved,
             Status = PhoneNumberStatus.Active,
             Name = "name",
             NextRenewalDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -42,6 +44,7 @@ public class OwnedPhoneNumberTest : TestBase
             MonthlyPrice = 0,
             UpfrontCost = 0,
         };
+        ApiEnum<string, RegulatoryStatus> expectedRegulatoryStatus = RegulatoryStatus.Approved;
         ApiEnum<string, PhoneNumberStatus> expectedStatus = PhoneNumberStatus.Active;
         string expectedName = "name";
         DateTimeOffset expectedNextRenewalDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -57,6 +60,7 @@ public class OwnedPhoneNumberTest : TestBase
         Assert.Equal(expectedCreatedAt, model.CreatedAt);
         Assert.Equal(expectedPhoneNumber, model.PhoneNumber);
         Assert.Equal(expectedPricing, model.Pricing);
+        Assert.Equal(expectedRegulatoryStatus, model.RegulatoryStatus);
         Assert.Equal(expectedStatus, model.Status);
         Assert.Equal(expectedName, model.Name);
         Assert.Equal(expectedNextRenewalDate, model.NextRenewalDate);
@@ -80,6 +84,7 @@ public class OwnedPhoneNumberTest : TestBase
                 MonthlyPrice = 0,
                 UpfrontCost = 0,
             },
+            RegulatoryStatus = RegulatoryStatus.Approved,
             Status = PhoneNumberStatus.Active,
             Name = "name",
             NextRenewalDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -112,6 +117,7 @@ public class OwnedPhoneNumberTest : TestBase
                 MonthlyPrice = 0,
                 UpfrontCost = 0,
             },
+            RegulatoryStatus = RegulatoryStatus.Approved,
             Status = PhoneNumberStatus.Active,
             Name = "name",
             NextRenewalDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -137,6 +143,7 @@ public class OwnedPhoneNumberTest : TestBase
             MonthlyPrice = 0,
             UpfrontCost = 0,
         };
+        ApiEnum<string, RegulatoryStatus> expectedRegulatoryStatus = RegulatoryStatus.Approved;
         ApiEnum<string, PhoneNumberStatus> expectedStatus = PhoneNumberStatus.Active;
         string expectedName = "name";
         DateTimeOffset expectedNextRenewalDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -152,6 +159,7 @@ public class OwnedPhoneNumberTest : TestBase
         Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
         Assert.Equal(expectedPhoneNumber, deserialized.PhoneNumber);
         Assert.Equal(expectedPricing, deserialized.Pricing);
+        Assert.Equal(expectedRegulatoryStatus, deserialized.RegulatoryStatus);
         Assert.Equal(expectedStatus, deserialized.Status);
         Assert.Equal(expectedName, deserialized.Name);
         Assert.Equal(expectedNextRenewalDate, deserialized.NextRenewalDate);
@@ -175,6 +183,7 @@ public class OwnedPhoneNumberTest : TestBase
                 MonthlyPrice = 0,
                 UpfrontCost = 0,
             },
+            RegulatoryStatus = RegulatoryStatus.Approved,
             Status = PhoneNumberStatus.Active,
             Name = "name",
             NextRenewalDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -201,6 +210,7 @@ public class OwnedPhoneNumberTest : TestBase
                 MonthlyPrice = 0,
                 UpfrontCost = 0,
             },
+            RegulatoryStatus = RegulatoryStatus.Approved,
             Status = PhoneNumberStatus.Active,
         };
 
@@ -230,6 +240,7 @@ public class OwnedPhoneNumberTest : TestBase
                 MonthlyPrice = 0,
                 UpfrontCost = 0,
             },
+            RegulatoryStatus = RegulatoryStatus.Approved,
             Status = PhoneNumberStatus.Active,
         };
 
@@ -252,6 +263,7 @@ public class OwnedPhoneNumberTest : TestBase
                 MonthlyPrice = 0,
                 UpfrontCost = 0,
             },
+            RegulatoryStatus = RegulatoryStatus.Approved,
             Status = PhoneNumberStatus.Active,
 
             // Null should be interpreted as omitted for these properties
@@ -287,6 +299,7 @@ public class OwnedPhoneNumberTest : TestBase
                 MonthlyPrice = 0,
                 UpfrontCost = 0,
             },
+            RegulatoryStatus = RegulatoryStatus.Approved,
             Status = PhoneNumberStatus.Active,
 
             // Null should be interpreted as omitted for these properties
@@ -315,6 +328,7 @@ public class OwnedPhoneNumberTest : TestBase
                 MonthlyPrice = 0,
                 UpfrontCost = 0,
             },
+            RegulatoryStatus = RegulatoryStatus.Approved,
             Status = PhoneNumberStatus.Active,
             Name = "name",
             NextRenewalDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -325,5 +339,65 @@ public class OwnedPhoneNumberTest : TestBase
         OwnedPhoneNumber copied = new(model);
 
         Assert.Equal(model, copied);
+    }
+}
+
+public class RegulatoryStatusTest : TestBase
+{
+    [Theory]
+    [InlineData(RegulatoryStatus.Approved)]
+    [InlineData(RegulatoryStatus.PendingReview)]
+    [InlineData(RegulatoryStatus.Rejected)]
+    public void Validation_Works(RegulatoryStatus rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, RegulatoryStatus> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, RegulatoryStatus>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<ZavudevInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(RegulatoryStatus.Approved)]
+    [InlineData(RegulatoryStatus.PendingReview)]
+    [InlineData(RegulatoryStatus.Rejected)]
+    public void SerializationRoundtrip_Works(RegulatoryStatus rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, RegulatoryStatus> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, RegulatoryStatus>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, RegulatoryStatus>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, RegulatoryStatus>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
     }
 }

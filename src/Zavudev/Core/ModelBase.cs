@@ -94,6 +94,7 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, LineType>(),
             new ApiEnumConverter<string, Reason>(),
             new ApiEnumConverter<string, Verdict>(),
+            new ApiEnumConverter<string, RegulatoryStatus>(),
             new ApiEnumConverter<string, PhoneNumberStatus>(),
             new ApiEnumConverter<string, PhoneNumberType>(),
             new ApiEnumConverter<string, RequirementFieldType>(),

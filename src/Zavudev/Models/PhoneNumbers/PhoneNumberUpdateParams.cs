@@ -40,7 +40,9 @@ public record class PhoneNumberUpdateParams : ParamsBase
     }
 
     /// <summary>
-    /// Sender ID to assign the phone number to. Set to null to unassign.
+    /// Sender ID to assign the phone number to. Set to null to unassign. A number
+    /// under regulatory review is recorded now and connected to the sender when approved;
+    /// a rejected number is refused.
     /// </summary>
     public string? SenderID
     {

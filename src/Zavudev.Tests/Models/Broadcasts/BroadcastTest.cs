@@ -52,6 +52,7 @@ public class BroadcastTest : TestBase
             ScheduledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             SenderID = "senderId",
             SendingCount = 0,
+            SentCount = 0,
             StartedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Text = "text",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -96,6 +97,7 @@ public class BroadcastTest : TestBase
         DateTimeOffset expectedScheduledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedSenderID = "senderId";
         long expectedSendingCount = 0;
+        long expectedSentCount = 0;
         DateTimeOffset expectedStartedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedText = "text";
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -129,6 +131,7 @@ public class BroadcastTest : TestBase
         Assert.Equal(expectedScheduledAt, model.ScheduledAt);
         Assert.Equal(expectedSenderID, model.SenderID);
         Assert.Equal(expectedSendingCount, model.SendingCount);
+        Assert.Equal(expectedSentCount, model.SentCount);
         Assert.Equal(expectedStartedAt, model.StartedAt);
         Assert.Equal(expectedText, model.Text);
         Assert.Equal(expectedUpdatedAt, model.UpdatedAt);
@@ -178,6 +181,7 @@ public class BroadcastTest : TestBase
             ScheduledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             SenderID = "senderId",
             SendingCount = 0,
+            SentCount = 0,
             StartedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Text = "text",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -233,6 +237,7 @@ public class BroadcastTest : TestBase
             ScheduledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             SenderID = "senderId",
             SendingCount = 0,
+            SentCount = 0,
             StartedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Text = "text",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -284,6 +289,7 @@ public class BroadcastTest : TestBase
         DateTimeOffset expectedScheduledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedSenderID = "senderId";
         long expectedSendingCount = 0;
+        long expectedSentCount = 0;
         DateTimeOffset expectedStartedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedText = "text";
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -317,6 +323,7 @@ public class BroadcastTest : TestBase
         Assert.Equal(expectedScheduledAt, deserialized.ScheduledAt);
         Assert.Equal(expectedSenderID, deserialized.SenderID);
         Assert.Equal(expectedSendingCount, deserialized.SendingCount);
+        Assert.Equal(expectedSentCount, deserialized.SentCount);
         Assert.Equal(expectedStartedAt, deserialized.StartedAt);
         Assert.Equal(expectedText, deserialized.Text);
         Assert.Equal(expectedUpdatedAt, deserialized.UpdatedAt);
@@ -366,6 +373,7 @@ public class BroadcastTest : TestBase
             ScheduledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             SenderID = "senderId",
             SendingCount = 0,
+            SentCount = 0,
             StartedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Text = "text",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -420,6 +428,8 @@ public class BroadcastTest : TestBase
         Assert.False(model.RawData.ContainsKey("senderId"));
         Assert.Null(model.SendingCount);
         Assert.False(model.RawData.ContainsKey("sendingCount"));
+        Assert.Null(model.SentCount);
+        Assert.False(model.RawData.ContainsKey("sentCount"));
         Assert.Null(model.StartedAt);
         Assert.False(model.RawData.ContainsKey("startedAt"));
         Assert.Null(model.Text);
@@ -493,6 +503,7 @@ public class BroadcastTest : TestBase
             ScheduledAt = null,
             SenderID = null,
             SendingCount = null,
+            SentCount = null,
             StartedAt = null,
             Text = null,
             UpdatedAt = null,
@@ -518,6 +529,8 @@ public class BroadcastTest : TestBase
         Assert.False(model.RawData.ContainsKey("senderId"));
         Assert.Null(model.SendingCount);
         Assert.False(model.RawData.ContainsKey("sendingCount"));
+        Assert.Null(model.SentCount);
+        Assert.False(model.RawData.ContainsKey("sentCount"));
         Assert.Null(model.StartedAt);
         Assert.False(model.RawData.ContainsKey("startedAt"));
         Assert.Null(model.Text);
@@ -562,6 +575,7 @@ public class BroadcastTest : TestBase
             ScheduledAt = null,
             SenderID = null,
             SendingCount = null,
+            SentCount = null,
             StartedAt = null,
             Text = null,
             UpdatedAt = null,
@@ -602,6 +616,7 @@ public class BroadcastTest : TestBase
             ScheduledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             SenderID = "senderId",
             SendingCount = 0,
+            SentCount = 0,
             StartedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Text = "text",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -651,6 +666,7 @@ public class BroadcastTest : TestBase
             ScheduledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             SenderID = "senderId",
             SendingCount = 0,
+            SentCount = 0,
             StartedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Text = "text",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -691,6 +707,7 @@ public class BroadcastTest : TestBase
             ScheduledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             SenderID = "senderId",
             SendingCount = 0,
+            SentCount = 0,
             StartedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Text = "text",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -746,6 +763,7 @@ public class BroadcastTest : TestBase
             ScheduledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             SenderID = "senderId",
             SendingCount = 0,
+            SentCount = 0,
             StartedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Text = "text",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -804,6 +822,7 @@ public class BroadcastTest : TestBase
             ScheduledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             SenderID = "senderId",
             SendingCount = 0,
+            SentCount = 0,
             StartedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Text = "text",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),

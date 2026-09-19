@@ -118,7 +118,10 @@ public record class SenderUpdateParams : ParamsBase
     }
 
     /// <summary>
-    /// Enable or disable inbound email receiving for this sender.
+    /// Enable or disable inbound email receiving for this sender. Enabling requires
+    /// a verified inbound MX record on the domain; the request is ignored otherwise,
+    /// and `emailReceivingEnabled` comes back `false` on the response. Disabling
+    /// always applies.
     /// </summary>
     public bool? EmailReceivingEnabled
     {
@@ -141,7 +144,9 @@ public record class SenderUpdateParams : ParamsBase
     /// <summary>
     /// Turn the one-way SMS channel on or off. Enabling needs nothing else and takes
     /// effect immediately; disabling removes the channel from the sender. Confirm
-    /// with the `channels` array on the response.
+    /// with the `channels` array on the response. Turning the channel on needs nothing,
+    /// but SENDING on it requires an approved business verification (KYB): without
+    /// one every send is refused with `403 kyb_required`.
     /// </summary>
     public bool? EnableSmsOneway
     {

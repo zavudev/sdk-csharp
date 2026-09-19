@@ -130,7 +130,7 @@ public sealed class PhoneNumberService : IPhoneNumberService
 
     /// <inheritdoc/>
     public async Task<PhoneNumberRequirementsResponse> Requirements(
-        PhoneNumberRequirementsParams parameters,
+        PhoneNumberRequirementsParams? parameters = null,
         CancellationToken cancellationToken = default
     )
     {
@@ -352,10 +352,12 @@ public sealed class PhoneNumberServiceWithRawResponse : IPhoneNumberServiceWithR
 
     /// <inheritdoc/>
     public async Task<HttpResponse<PhoneNumberRequirementsResponse>> Requirements(
-        PhoneNumberRequirementsParams parameters,
+        PhoneNumberRequirementsParams? parameters = null,
         CancellationToken cancellationToken = default
     )
     {
+        parameters ??= new();
+
         HttpRequest<PhoneNumberRequirementsParams> request = new()
         {
             Method = HttpMethod.Get,

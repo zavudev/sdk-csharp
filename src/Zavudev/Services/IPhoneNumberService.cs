@@ -66,11 +66,41 @@ public interface IPhoneNumberService
 
     /// <summary>
     /// Purchase an available phone number. Requires a paid plan: the Free plan cannot
-    /// purchase phone numbers and receives `402` with code `paid_plan_required`. Paid
-    /// plans include one US number at no charge. The included number is one per account
-    /// and is granted once: claiming it spends the benefit for good, so releasing that
-    /// number does not make another one free, and numbers the account already bought do
-    /// not consume it.
+    /// purchase phone numbers and receives `402` with code `paid_plan_required`.
+    ///
+    /// <para>**The included number.** A paid plan includes one number at no charge,
+    /// once per account: it must be a US or Canadian number (a +1 number) costing $20 a
+    /// month or less. `isFreeEligible` in `GET /v1/phone-numbers/available` marks the
+    /// numbers that qualify. Claiming it spends the benefit for good, across every team
+    /// the account owner owns, so releasing that number does not make another one free.</para>
+    ///
+    /// <para>**Numbers with regulatory requirements.** Which numbers need regulatory
+    /// information is decided per number, not by a fixed country list. The purchase
+    /// looks the requirements up for the exact number before charging anything:</para>
+    ///
+    /// <para>1. `GET /v1/phone-numbers/requirements?phoneNumber=...`. If `items` is
+    /// empty, buy normally. 2. Create what it asks for: addresses with `POST
+    /// /v1/addresses`, documents with `POST /v1/documents`. 3. Purchase with `type` and
+    /// `regulatoryRequirements`. The number is bought and billed at once with
+    /// `regulatoryStatus: pending_review`. 4. Poll `GET
+    /// /v1/phone-numbers/{phoneNumberId}` until `regulatoryStatus` is `approved`.
+    /// Assign it to a sender before or after approval; it starts carrying messages once
+    /// approved.</para>
+    ///
+    /// <para>**Reuse.** Information you submitted is kept for your project, per country
+    /// and `type`, and a later purchase there may omit `regulatoryRequirements`. Reuse
+    /// only happens when what is kept still covers every requirement of the new number
+    /// and every address and document in it belongs to the project. Otherwise, or when
+    /// nothing is kept, the purchase returns `400 regulatory_compliance_required` with
+    /// the missing requirements in `details`.</para>
+    ///
+    /// <para>Invalid values (a missing, unknown or repeated requirement id, an address
+    /// or document from another project, or one rejected in review) return `400
+    /// invalid_request`. If an address or document cannot be registered for review, the
+    /// purchase returns `400 invalid_request` naming the requirement. If the
+    /// requirements cannot be looked up, the purchase returns `502
+    /// requirements_unavailable`, except for US and Canadian numbers, which are sold as
+    /// numbers without requirements. None of these errors charge anything.</para>
     /// </summary>
     Task<PhoneNumberPurchaseResponse> Purchase(
         PhoneNumberPurchaseParams parameters,
@@ -93,12 +123,24 @@ public interface IPhoneNumberService
     );
 
     /// <summary>
-    /// Get regulatory requirements for purchasing phone numbers in a specific country.
-    /// Some countries require additional documentation (addresses, identity documents)
-    /// before phone numbers can be activated.
+    /// Get the regulatory information needed to buy a phone number, for one specific
+    /// number or for a country and number type. Prefer `phoneNumber`: the response is
+    /// then exactly the list the purchase of that number validates against. Pass each
+    /// `requirementTypes[].id` back as `requirementType` in `regulatoryRequirements` on
+    /// `POST /v1/phone-numbers`.
+    ///
+    /// <para>For `phoneNumber`, the requirements of that exact number are returned.
+    /// When they cannot be resolved for the number itself, the list for its country and
+    /// `type` is returned instead, and the purchase uses the same list. An empty
+    /// `items` array means the number needs no regulatory information. If the
+    /// requirements cannot be retrieved at all, the response is `502
+    /// requirements_unavailable`, never an empty list.</para>
+    ///
+    /// <para>URL-encode the `+` of `phoneNumber` as `%2B`. An unencoded `+` is also
+    /// accepted.</para>
     /// </summary>
     Task<PhoneNumberRequirementsResponse> Requirements(
-        PhoneNumberRequirementsParams parameters,
+        PhoneNumberRequirementsParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 
@@ -192,10 +234,10 @@ public interface IPhoneNumberServiceWithRawResponse
 
     /// <summary>
     /// Returns a raw HTTP response for <c>get /v1/phone-numbers/requirements</c>, but is otherwise the
-    /// same as <see cref="IPhoneNumberService.Requirements(PhoneNumberRequirementsParams, CancellationToken)"/>.
+    /// same as <see cref="IPhoneNumberService.Requirements(PhoneNumberRequirementsParams?, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<PhoneNumberRequirementsResponse>> Requirements(
-        PhoneNumberRequirementsParams parameters,
+        PhoneNumberRequirementsParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 

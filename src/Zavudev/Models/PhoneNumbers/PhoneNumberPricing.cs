@@ -11,9 +11,9 @@ namespace Zavudev.Models.PhoneNumbers;
 public sealed record class PhoneNumberPricing : JsonModel
 {
     /// <summary>
-    /// Whether this number qualifies as the plan-included US number on paid plans.
-    /// The benefit is one per account: it is never offered again once claimed, not
-    /// even after the number is released.
+    /// Whether this number qualifies as the plan-included number: a US or Canadian
+    /// number (a +1 number) costing $20 a month or less. The benefit is one per account:
+    /// it is never offered again once claimed, not even after the number is released.
     /// </summary>
     public bool? IsFreeEligible
     {

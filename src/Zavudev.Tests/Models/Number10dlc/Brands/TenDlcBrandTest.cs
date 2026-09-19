@@ -33,6 +33,7 @@ public class TenDlcBrandTest : TestBase
             Ein = "12-3456789",
             FailureReason = "failureReason",
             FirstName = "firstName",
+            IdentityStatus = "VERIFIED",
             LastName = "lastName",
             StockExchange = "stockExchange",
             StockSymbol = "stockSymbol",
@@ -62,6 +63,7 @@ public class TenDlcBrandTest : TestBase
         string expectedEin = "12-3456789";
         string expectedFailureReason = "failureReason";
         string expectedFirstName = "firstName";
+        string expectedIdentityStatus = "VERIFIED";
         string expectedLastName = "lastName";
         string expectedStockExchange = "stockExchange";
         string expectedStockSymbol = "stockSymbol";
@@ -89,6 +91,7 @@ public class TenDlcBrandTest : TestBase
         Assert.Equal(expectedEin, model.Ein);
         Assert.Equal(expectedFailureReason, model.FailureReason);
         Assert.Equal(expectedFirstName, model.FirstName);
+        Assert.Equal(expectedIdentityStatus, model.IdentityStatus);
         Assert.Equal(expectedLastName, model.LastName);
         Assert.Equal(expectedStockExchange, model.StockExchange);
         Assert.Equal(expectedStockSymbol, model.StockSymbol);
@@ -122,6 +125,7 @@ public class TenDlcBrandTest : TestBase
             Ein = "12-3456789",
             FailureReason = "failureReason",
             FirstName = "firstName",
+            IdentityStatus = "VERIFIED",
             LastName = "lastName",
             StockExchange = "stockExchange",
             StockSymbol = "stockSymbol",
@@ -164,6 +168,7 @@ public class TenDlcBrandTest : TestBase
             Ein = "12-3456789",
             FailureReason = "failureReason",
             FirstName = "firstName",
+            IdentityStatus = "VERIFIED",
             LastName = "lastName",
             StockExchange = "stockExchange",
             StockSymbol = "stockSymbol",
@@ -200,6 +205,7 @@ public class TenDlcBrandTest : TestBase
         string expectedEin = "12-3456789";
         string expectedFailureReason = "failureReason";
         string expectedFirstName = "firstName";
+        string expectedIdentityStatus = "VERIFIED";
         string expectedLastName = "lastName";
         string expectedStockExchange = "stockExchange";
         string expectedStockSymbol = "stockSymbol";
@@ -227,6 +233,7 @@ public class TenDlcBrandTest : TestBase
         Assert.Equal(expectedEin, deserialized.Ein);
         Assert.Equal(expectedFailureReason, deserialized.FailureReason);
         Assert.Equal(expectedFirstName, deserialized.FirstName);
+        Assert.Equal(expectedIdentityStatus, deserialized.IdentityStatus);
         Assert.Equal(expectedLastName, deserialized.LastName);
         Assert.Equal(expectedStockExchange, deserialized.StockExchange);
         Assert.Equal(expectedStockSymbol, deserialized.StockSymbol);
@@ -260,6 +267,7 @@ public class TenDlcBrandTest : TestBase
             Ein = "12-3456789",
             FailureReason = "failureReason",
             FirstName = "firstName",
+            IdentityStatus = "VERIFIED",
             LastName = "lastName",
             StockExchange = "stockExchange",
             StockSymbol = "stockSymbol",
@@ -304,6 +312,8 @@ public class TenDlcBrandTest : TestBase
         Assert.False(model.RawData.ContainsKey("failureReason"));
         Assert.Null(model.FirstName);
         Assert.False(model.RawData.ContainsKey("firstName"));
+        Assert.Null(model.IdentityStatus);
+        Assert.False(model.RawData.ContainsKey("identityStatus"));
         Assert.Null(model.LastName);
         Assert.False(model.RawData.ContainsKey("lastName"));
         Assert.Null(model.StockExchange);
@@ -368,6 +378,7 @@ public class TenDlcBrandTest : TestBase
             Ein = null,
             FailureReason = null,
             FirstName = null,
+            IdentityStatus = null,
             LastName = null,
             StockExchange = null,
             StockSymbol = null,
@@ -388,6 +399,8 @@ public class TenDlcBrandTest : TestBase
         Assert.True(model.RawData.ContainsKey("failureReason"));
         Assert.Null(model.FirstName);
         Assert.True(model.RawData.ContainsKey("firstName"));
+        Assert.Null(model.IdentityStatus);
+        Assert.True(model.RawData.ContainsKey("identityStatus"));
         Assert.Null(model.LastName);
         Assert.True(model.RawData.ContainsKey("lastName"));
         Assert.Null(model.StockExchange);
@@ -428,6 +441,7 @@ public class TenDlcBrandTest : TestBase
             Ein = null,
             FailureReason = null,
             FirstName = null,
+            IdentityStatus = null,
             LastName = null,
             StockExchange = null,
             StockSymbol = null,
@@ -464,6 +478,7 @@ public class TenDlcBrandTest : TestBase
             Ein = "12-3456789",
             FailureReason = "failureReason",
             FirstName = "firstName",
+            IdentityStatus = "VERIFIED",
             LastName = "lastName",
             StockExchange = "stockExchange",
             StockSymbol = "stockSymbol",
@@ -548,7 +563,9 @@ public class StatusTest : TestBase
     [InlineData(Status.Draft)]
     [InlineData(Status.Pending)]
     [InlineData(Status.Verified)]
+    [InlineData(Status.Unverified)]
     [InlineData(Status.Rejected)]
+    [InlineData(Status.Failed)]
     public void Validation_Works(Status rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -572,7 +589,9 @@ public class StatusTest : TestBase
     [InlineData(Status.Draft)]
     [InlineData(Status.Pending)]
     [InlineData(Status.Verified)]
+    [InlineData(Status.Unverified)]
     [InlineData(Status.Rejected)]
+    [InlineData(Status.Failed)]
     public void SerializationRoundtrip_Works(Status rawValue)
     {
         // force implicit conversion because Theory can't do that for us

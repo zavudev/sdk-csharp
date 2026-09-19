@@ -104,8 +104,10 @@ public record class SenderCreateParams : ParamsBase
     }
 
     /// <summary>
-    /// Enable inbound email receiving on this sender. Requires a verified MX record
-    /// on the domain; ignored otherwise.
+    /// Enable inbound email receiving on this sender. Requires a verified inbound
+    /// MX record on the domain; the request is ignored otherwise. Read `emailReceivingEnabled`
+    /// back off the response to see whether it was applied — it comes back `false`
+    /// when the MX has not verified.
     /// </summary>
     public bool? EmailReceivingEnabled
     {
@@ -129,7 +131,9 @@ public record class SenderCreateParams : ParamsBase
     /// Enable the one-way SMS channel (`sms_oneway`). Needs nothing else — no phone
     /// number, no credential — so it is the fastest way to get a sender that can
     /// send. Recipients cannot reply. Confirm with `sms_oneway` in the `channels`
-    /// array on the response.
+    /// array on the response. Turning the channel on needs nothing, but SENDING
+    /// on it requires an approved business verification (KYB): without one every
+    /// send is refused with `403 kyb_required`.
     /// </summary>
     public bool? EnableSmsOneway
     {
@@ -176,8 +180,10 @@ public record class SenderCreateParams : ParamsBase
     /// Phone number in E.164 format, and it must be a number your project already
     /// owns (see `GET /v1/phone-numbers`). The number is routed to the sender as
     /// part of this call, which is what turns the SMS channel on. Passing a number
-    /// the project does not own, or one already attached to another sender, returns
-    /// 400 rather than creating a sender that cannot send. Omit for an email-only sender.
+    /// the project does not own, one already attached to another sender, or one
+    /// rejected in regulatory review returns 400 rather than creating a sender that
+    /// cannot send. A number still under review is attached and starts carrying
+    /// messages when it is approved. Omit for an email-only sender.
     /// </summary>
     public string? PhoneNumber
     {
