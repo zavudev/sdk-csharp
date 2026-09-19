@@ -25,6 +25,7 @@ public class BroadcastProgressTest : TestBase
             EstimatedCompletionAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EstimatedCost = 0,
             ReservedAmount = 0,
+            Sent = 0,
             StartedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -43,6 +44,7 @@ public class BroadcastProgressTest : TestBase
         );
         double expectedEstimatedCost = 0;
         double expectedReservedAmount = 0;
+        long expectedSent = 0;
         DateTimeOffset expectedStartedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
         Assert.Equal(expectedBroadcastID, model.BroadcastID);
@@ -58,6 +60,7 @@ public class BroadcastProgressTest : TestBase
         Assert.Equal(expectedEstimatedCompletionAt, model.EstimatedCompletionAt);
         Assert.Equal(expectedEstimatedCost, model.EstimatedCost);
         Assert.Equal(expectedReservedAmount, model.ReservedAmount);
+        Assert.Equal(expectedSent, model.Sent);
         Assert.Equal(expectedStartedAt, model.StartedAt);
     }
 
@@ -79,6 +82,7 @@ public class BroadcastProgressTest : TestBase
             EstimatedCompletionAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EstimatedCost = 0,
             ReservedAmount = 0,
+            Sent = 0,
             StartedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -109,6 +113,7 @@ public class BroadcastProgressTest : TestBase
             EstimatedCompletionAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EstimatedCost = 0,
             ReservedAmount = 0,
+            Sent = 0,
             StartedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -134,6 +139,7 @@ public class BroadcastProgressTest : TestBase
         );
         double expectedEstimatedCost = 0;
         double expectedReservedAmount = 0;
+        long expectedSent = 0;
         DateTimeOffset expectedStartedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
         Assert.Equal(expectedBroadcastID, deserialized.BroadcastID);
@@ -149,6 +155,7 @@ public class BroadcastProgressTest : TestBase
         Assert.Equal(expectedEstimatedCompletionAt, deserialized.EstimatedCompletionAt);
         Assert.Equal(expectedEstimatedCost, deserialized.EstimatedCost);
         Assert.Equal(expectedReservedAmount, deserialized.ReservedAmount);
+        Assert.Equal(expectedSent, deserialized.Sent);
         Assert.Equal(expectedStartedAt, deserialized.StartedAt);
     }
 
@@ -170,6 +177,7 @@ public class BroadcastProgressTest : TestBase
             EstimatedCompletionAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EstimatedCost = 0,
             ReservedAmount = 0,
+            Sent = 0,
             StartedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -197,6 +205,8 @@ public class BroadcastProgressTest : TestBase
 
         Assert.Null(model.EstimatedCompletionAt);
         Assert.False(model.RawData.ContainsKey("estimatedCompletionAt"));
+        Assert.Null(model.Sent);
+        Assert.False(model.RawData.ContainsKey("sent"));
         Assert.Null(model.StartedAt);
         Assert.False(model.RawData.ContainsKey("startedAt"));
     }
@@ -243,11 +253,14 @@ public class BroadcastProgressTest : TestBase
 
             // Null should be interpreted as omitted for these properties
             EstimatedCompletionAt = null,
+            Sent = null,
             StartedAt = null,
         };
 
         Assert.Null(model.EstimatedCompletionAt);
         Assert.False(model.RawData.ContainsKey("estimatedCompletionAt"));
+        Assert.Null(model.Sent);
+        Assert.False(model.RawData.ContainsKey("sent"));
         Assert.Null(model.StartedAt);
         Assert.False(model.RawData.ContainsKey("startedAt"));
     }
@@ -272,6 +285,7 @@ public class BroadcastProgressTest : TestBase
 
             // Null should be interpreted as omitted for these properties
             EstimatedCompletionAt = null,
+            Sent = null,
             StartedAt = null,
         };
 
@@ -293,6 +307,7 @@ public class BroadcastProgressTest : TestBase
             Status = BroadcastStatus.Draft,
             Total = 0,
             EstimatedCompletionAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Sent = 0,
             StartedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -319,6 +334,7 @@ public class BroadcastProgressTest : TestBase
             Status = BroadcastStatus.Draft,
             Total = 0,
             EstimatedCompletionAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Sent = 0,
             StartedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -340,6 +356,7 @@ public class BroadcastProgressTest : TestBase
             Status = BroadcastStatus.Draft,
             Total = 0,
             EstimatedCompletionAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Sent = 0,
             StartedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
 
             ActualCost = null,
@@ -370,6 +387,7 @@ public class BroadcastProgressTest : TestBase
             Status = BroadcastStatus.Draft,
             Total = 0,
             EstimatedCompletionAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Sent = 0,
             StartedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
 
             ActualCost = null,
@@ -398,6 +416,7 @@ public class BroadcastProgressTest : TestBase
             EstimatedCompletionAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EstimatedCost = 0,
             ReservedAmount = 0,
+            Sent = 0,
             StartedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 

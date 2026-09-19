@@ -22,7 +22,7 @@ public sealed record class BroadcastProgress : JsonModel
     }
 
     /// <summary>
-    /// Successfully delivered.
+    /// Confirmed delivered to the device.
     /// </summary>
     public required long Delivered
     {
@@ -182,6 +182,27 @@ public sealed record class BroadcastProgress : JsonModel
         init { this._rawData.Set("reservedAmount", value); }
     }
 
+    /// <summary>
+    /// Accepted by the provider, delivery not confirmed yet.
+    /// </summary>
+    public long? Sent
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<long>("sent");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("sent", value);
+        }
+    }
+
     public DateTimeOffset? StartedAt
     {
         get
@@ -216,6 +237,7 @@ public sealed record class BroadcastProgress : JsonModel
         _ = this.EstimatedCompletionAt;
         _ = this.EstimatedCost;
         _ = this.ReservedAmount;
+        _ = this.Sent;
         _ = this.StartedAt;
     }
 
