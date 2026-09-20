@@ -60,7 +60,7 @@ public class PhoneNumberServiceTest : TestBase
     public async Task Requirements_Works()
     {
         var response = await this.client.PhoneNumbers.Requirements(
-            new() { CountryCode = "xx" },
+            new(),
             TestContext.Current.CancellationToken
         );
         response.Validate();

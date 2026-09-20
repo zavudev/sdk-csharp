@@ -41,7 +41,7 @@ public class FlowCreateParamsTest : TestBase
             Trigger = new()
             {
                 Type = Flows::FlowTriggerType.Keyword,
-                Intent = "intent",
+                Intent = "quiere saber precios o cotizar",
                 Keywords = ["info", "pricing", "demo"],
             },
             Description = "Capture lead information",
@@ -78,7 +78,7 @@ public class FlowCreateParamsTest : TestBase
         Flows::FlowTrigger expectedTrigger = new()
         {
             Type = Flows::FlowTriggerType.Keyword,
-            Intent = "intent",
+            Intent = "quiere saber precios o cotizar",
             Keywords = ["info", "pricing", "demo"],
         };
         string expectedDescription = "Capture lead information";
@@ -132,7 +132,7 @@ public class FlowCreateParamsTest : TestBase
             Trigger = new()
             {
                 Type = Flows::FlowTriggerType.Keyword,
-                Intent = "intent",
+                Intent = "quiere saber precios o cotizar",
                 Keywords = ["info", "pricing", "demo"],
             },
         };
@@ -179,7 +179,7 @@ public class FlowCreateParamsTest : TestBase
             Trigger = new()
             {
                 Type = Flows::FlowTriggerType.Keyword,
-                Intent = "intent",
+                Intent = "quiere saber precios o cotizar",
                 Keywords = ["info", "pricing", "demo"],
             },
 
@@ -231,7 +231,7 @@ public class FlowCreateParamsTest : TestBase
             Trigger = new()
             {
                 Type = Flows::FlowTriggerType.Keyword,
-                Intent = "intent",
+                Intent = "quiere saber precios o cotizar",
                 Keywords = ["info", "pricing", "demo"],
             },
         };
@@ -277,7 +277,7 @@ public class FlowCreateParamsTest : TestBase
             Trigger = new()
             {
                 Type = Flows::FlowTriggerType.Keyword,
-                Intent = "intent",
+                Intent = "quiere saber precios o cotizar",
                 Keywords = ["info", "pricing", "demo"],
             },
             Description = "Capture lead information",

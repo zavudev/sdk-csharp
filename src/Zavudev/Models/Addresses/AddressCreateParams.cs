@@ -10,8 +10,8 @@ using Zavudev.Core;
 namespace Zavudev.Models.Addresses;
 
 /// <summary>
-/// Create a regulatory address for phone number purchases. Some countries require
-/// a verified address before phone numbers can be activated.
+/// Create a regulatory address, to use as the value of an `address` requirement when
+/// buying a phone number. It is registered for review when it is created, with status `pending`.
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that
@@ -33,6 +33,32 @@ public record class AddressCreateParams : ParamsBase
             return this._rawBodyData.GetNotNullClass<string>("countryCode");
         }
         init { this._rawBodyData.Set("countryCode", value); }
+    }
+
+    /// <summary>
+    /// First name of the person the address is registered to.
+    /// </summary>
+    public required string FirstName
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNotNullClass<string>("firstName");
+        }
+        init { this._rawBodyData.Set("firstName", value); }
+    }
+
+    /// <summary>
+    /// Last name of the person the address is registered to.
+    /// </summary>
+    public required string LastName
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNotNullClass<string>("lastName");
+        }
+        init { this._rawBodyData.Set("lastName", value); }
     }
 
     public required string Locality
@@ -83,6 +109,10 @@ public record class AddressCreateParams : ParamsBase
         }
     }
 
+    /// <summary>
+    /// Business name, when the address belongs to a business. Defaults to the person's
+    /// full name.
+    /// </summary>
     public string? BusinessName
     {
         get
@@ -116,42 +146,6 @@ public record class AddressCreateParams : ParamsBase
             }
 
             this._rawBodyData.Set("extendedAddress", value);
-        }
-    }
-
-    public string? FirstName
-    {
-        get
-        {
-            this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNullableClass<string>("firstName");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawBodyData.Set("firstName", value);
-        }
-    }
-
-    public string? LastName
-    {
-        get
-        {
-            this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNullableClass<string>("lastName");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawBodyData.Set("lastName", value);
         }
     }
 

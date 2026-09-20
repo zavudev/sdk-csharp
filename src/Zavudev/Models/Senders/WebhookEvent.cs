@@ -41,15 +41,26 @@ namespace Zavudev.Models.Senders;
 /// contact. `data` carries `conversationId` (the inbox thread id — deep-link with
 /// `https://dashboard.zavu.dev/{locale}/inbox?conv={conversationId}`), the `phoneNumber`
 /// or `email` key, `channel`, `firstMessageId`, `firstMessageText`, and `profileName`.
-/// - `template.status_changed`: WhatsApp template approval status changed</para>
+/// - `template.status_changed`: WhatsApp template approval status changed. `data`
+/// carries `templateId`, `name`, `previousStatus`, `currentStatus`, `rejectionReason`,
+/// and `category` — the category Meta currently bills the template under. Meta can
+/// recategorize a template (typically `UTILITY` to `MARKETING`) at approval or long
+/// afterwards, which changes what each message costs; `category` is how that reaches
+/// you. A recategorization with no status change is delivered as this same event,
+/// so compare `category` against what you hold rather than only reacting to `currentStatus`.</para>
 ///
-/// <para>**Partner events:** - `invitation.status_changed`: A partner invitation
-/// status changed (pending, in_progress, completed, cancelled, failed). `data` carries
-/// `invitationId`, `clientName`, `clientEmail`, `connectionType` (`whatsapp_waba`
-/// or `messenger`), `previousStatus`, and `currentStatus`. On `completed` it also
-/// carries `senderId` and `connectedAccount` (`channel`, `id`, `name`) — the WhatsApp
-/// number or Facebook Page that was linked. On `failed` it carries `failureReason`;
-/// the invitation link stays usable, so a client can retry it.</para>
+/// <para>**Partner events:** - `invitation.status_changed`: A partner invitation's
+/// stored status changed: to `in_progress`, `completed`, `failed`, `cancelled`, or
+/// back to `pending` when it is resent from the dashboard. A change to the same status
+/// sends nothing, and expiry is not a stored change, so no event is sent when an
+/// invitation expires. Delivered to the project webhook (`POST /v1/invitations/webhook`)
+/// of the project that created the invitation; a parent project does not receive
+/// its sub-accounts' events. `data` carries `invitationId`, `clientName`, `clientEmail`,
+/// `connectionType` (`whatsapp_waba` or `messenger`), `previousStatus`, and `currentStatus`.
+/// On `completed` it also carries `senderId`, `connectedAccount` (`channel`, `id`,
+/// `name`) — the WhatsApp number or Facebook Page that was linked — and, for WhatsApp,
+/// `wabaAccountId`. On `failed` it carries `failureReason`; the invitation link
+/// stays usable, so a client can retry it.</para>
 ///
 /// <para>**Voice Agent events:** For every voice event, `data` carries `callId`,
 /// `direction`, `from`, `to`, `status`, `durationSeconds`, `endReason`, and `transcriptAvailable`.

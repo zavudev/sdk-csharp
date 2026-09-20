@@ -9,9 +9,20 @@ using Zavudev.Core;
 namespace Zavudev.Models.PhoneNumbers;
 
 /// <summary>
-/// Get regulatory requirements for purchasing phone numbers in a specific country.
-/// Some countries require additional documentation (addresses, identity documents)
-/// before phone numbers can be activated.
+/// Get the regulatory information needed to buy a phone number, for one specific
+/// number or for a country and number type. Prefer `phoneNumber`: the response is
+/// then exactly the list the purchase of that number validates against. Pass each
+/// `requirementTypes[].id` back as `requirementType` in `regulatoryRequirements`
+/// on `POST /v1/phone-numbers`.
+///
+/// <para>For `phoneNumber`, the requirements of that exact number are returned.
+/// When they cannot be resolved for the number itself, the list for its country
+/// and `type` is returned instead, and the purchase uses the same list. An empty
+/// `items` array means the number needs no regulatory information. If the requirements
+/// cannot be retrieved at all, the response is `502 requirements_unavailable`, never
+/// an empty list.</para>
+///
+/// <para>URL-encode the `+` of `phoneNumber` as `%2B`. An unencoded `+` is also accepted.</para>
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that
@@ -20,20 +31,53 @@ namespace Zavudev.Models.PhoneNumbers;
 public record class PhoneNumberRequirementsParams : ParamsBase
 {
     /// <summary>
-    /// Two-letter ISO country code.
+    /// Two-letter ISO country code. Required unless `phoneNumber` is given.
     /// </summary>
-    public required string CountryCode
+    public string? CountryCode
     {
         get
         {
             this._rawQueryData.Freeze();
-            return this._rawQueryData.GetNotNullClass<string>("countryCode");
+            return this._rawQueryData.GetNullableClass<string>("countryCode");
         }
-        init { this._rawQueryData.Set("countryCode", value); }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("countryCode", value);
+        }
     }
 
     /// <summary>
-    /// Type of phone number (local, mobile, tollFree).
+    /// E.164 number from `GET /v1/phone-numbers/available`, with `+` encoded as `%2B`.
+    /// Returns the requirements the purchase of that number checks. Takes precedence
+    /// over `countryCode`.
+    /// </summary>
+    public string? PhoneNumber
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<string>("phoneNumber");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("phoneNumber", value);
+        }
+    }
+
+    /// <summary>
+    /// Type of phone number (local, national, mobile, tollFree). Defaults to `local`.
+    /// With `phoneNumber`, used only when the number's own requirements cannot be
+    /// resolved and the country list is returned.
     /// </summary>
     public ApiEnum<string, PhoneNumberType>? Type
     {

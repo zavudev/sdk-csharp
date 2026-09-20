@@ -12,21 +12,28 @@ public class PhoneNumberRequirementsParamsTest : TestBase
         var parameters = new PhoneNumberRequirementsParams
         {
             CountryCode = "xx",
+            PhoneNumber = "phoneNumber",
             Type = PhoneNumberType.Local,
         };
 
         string expectedCountryCode = "xx";
+        string expectedPhoneNumber = "phoneNumber";
         ApiEnum<string, PhoneNumberType> expectedType = PhoneNumberType.Local;
 
         Assert.Equal(expectedCountryCode, parameters.CountryCode);
+        Assert.Equal(expectedPhoneNumber, parameters.PhoneNumber);
         Assert.Equal(expectedType, parameters.Type);
     }
 
     [Fact]
     public void OptionalNonNullableParamsUnsetAreNotSet_Works()
     {
-        var parameters = new PhoneNumberRequirementsParams { CountryCode = "xx" };
+        var parameters = new PhoneNumberRequirementsParams { };
 
+        Assert.Null(parameters.CountryCode);
+        Assert.False(parameters.RawQueryData.ContainsKey("countryCode"));
+        Assert.Null(parameters.PhoneNumber);
+        Assert.False(parameters.RawQueryData.ContainsKey("phoneNumber"));
         Assert.Null(parameters.Type);
         Assert.False(parameters.RawQueryData.ContainsKey("type"));
     }
@@ -36,12 +43,16 @@ public class PhoneNumberRequirementsParamsTest : TestBase
     {
         var parameters = new PhoneNumberRequirementsParams
         {
-            CountryCode = "xx",
-
             // Null should be interpreted as omitted for these properties
+            CountryCode = null,
+            PhoneNumber = null,
             Type = null,
         };
 
+        Assert.Null(parameters.CountryCode);
+        Assert.False(parameters.RawQueryData.ContainsKey("countryCode"));
+        Assert.Null(parameters.PhoneNumber);
+        Assert.False(parameters.RawQueryData.ContainsKey("phoneNumber"));
         Assert.Null(parameters.Type);
         Assert.False(parameters.RawQueryData.ContainsKey("type"));
     }
@@ -52,6 +63,7 @@ public class PhoneNumberRequirementsParamsTest : TestBase
         PhoneNumberRequirementsParams parameters = new()
         {
             CountryCode = "xx",
+            PhoneNumber = "phoneNumber",
             Type = PhoneNumberType.Local,
         };
 
@@ -60,7 +72,7 @@ public class PhoneNumberRequirementsParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://api.zavu.dev/v1/phone-numbers/requirements?countryCode=xx&type=local"
+                    "https://api.zavu.dev/v1/phone-numbers/requirements?countryCode=xx&phoneNumber=phoneNumber&type=local"
                 ),
                 url
             )
@@ -73,6 +85,7 @@ public class PhoneNumberRequirementsParamsTest : TestBase
         var parameters = new PhoneNumberRequirementsParams
         {
             CountryCode = "xx",
+            PhoneNumber = "phoneNumber",
             Type = PhoneNumberType.Local,
         };
 

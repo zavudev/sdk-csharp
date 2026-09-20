@@ -148,6 +148,9 @@ public sealed record class Broadcast : JsonModel
         }
     }
 
+    /// <summary>
+    /// Recipients with confirmed delivery to the device.
+    /// </summary>
     public long? DeliveredCount
     {
         get
@@ -347,6 +350,28 @@ public sealed record class Broadcast : JsonModel
         }
     }
 
+    /// <summary>
+    /// Recipients whose message the provider accepted, without a confirmed delivery
+    /// yet. Channels that never report delivery keep their recipients here.
+    /// </summary>
+    public long? SentCount
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<long>("sentCount");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("sentCount", value);
+        }
+    }
+
     public DateTimeOffset? StartedAt
     {
         get
@@ -426,6 +451,7 @@ public sealed record class Broadcast : JsonModel
         _ = this.ScheduledAt;
         _ = this.SenderID;
         _ = this.SendingCount;
+        _ = this.SentCount;
         _ = this.StartedAt;
         _ = this.Text;
         _ = this.UpdatedAt;

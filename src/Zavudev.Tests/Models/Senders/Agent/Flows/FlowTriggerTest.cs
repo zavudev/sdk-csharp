@@ -14,12 +14,12 @@ public class FlowTriggerTest : TestBase
         var model = new FlowTrigger
         {
             Type = FlowTriggerType.Keyword,
-            Intent = "intent",
+            Intent = "quiere saber precios o cotizar",
             Keywords = ["string"],
         };
 
         ApiEnum<string, FlowTriggerType> expectedType = FlowTriggerType.Keyword;
-        string expectedIntent = "intent";
+        string expectedIntent = "quiere saber precios o cotizar";
         List<string> expectedKeywords = ["string"];
 
         Assert.Equal(expectedType, model.Type);
@@ -38,7 +38,7 @@ public class FlowTriggerTest : TestBase
         var model = new FlowTrigger
         {
             Type = FlowTriggerType.Keyword,
-            Intent = "intent",
+            Intent = "quiere saber precios o cotizar",
             Keywords = ["string"],
         };
 
@@ -57,7 +57,7 @@ public class FlowTriggerTest : TestBase
         var model = new FlowTrigger
         {
             Type = FlowTriggerType.Keyword,
-            Intent = "intent",
+            Intent = "quiere saber precios o cotizar",
             Keywords = ["string"],
         };
 
@@ -69,7 +69,7 @@ public class FlowTriggerTest : TestBase
         Assert.NotNull(deserialized);
 
         ApiEnum<string, FlowTriggerType> expectedType = FlowTriggerType.Keyword;
-        string expectedIntent = "intent";
+        string expectedIntent = "quiere saber precios o cotizar";
         List<string> expectedKeywords = ["string"];
 
         Assert.Equal(expectedType, deserialized.Type);
@@ -88,7 +88,7 @@ public class FlowTriggerTest : TestBase
         var model = new FlowTrigger
         {
             Type = FlowTriggerType.Keyword,
-            Intent = "intent",
+            Intent = "quiere saber precios o cotizar",
             Keywords = ["string"],
         };
 
@@ -153,7 +153,7 @@ public class FlowTriggerTest : TestBase
         var model = new FlowTrigger
         {
             Type = FlowTriggerType.Keyword,
-            Intent = "intent",
+            Intent = "quiere saber precios o cotizar",
             Keywords = ["string"],
         };
 

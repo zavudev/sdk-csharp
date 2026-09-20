@@ -11,6 +11,8 @@ public class PhoneNumberStatusTest : TestBase
     [InlineData(PhoneNumberStatus.Active)]
     [InlineData(PhoneNumberStatus.Suspended)]
     [InlineData(PhoneNumberStatus.Pending)]
+    [InlineData(PhoneNumberStatus.Releasing)]
+    [InlineData(PhoneNumberStatus.Released)]
     public void Validation_Works(PhoneNumberStatus rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -34,6 +36,8 @@ public class PhoneNumberStatusTest : TestBase
     [InlineData(PhoneNumberStatus.Active)]
     [InlineData(PhoneNumberStatus.Suspended)]
     [InlineData(PhoneNumberStatus.Pending)]
+    [InlineData(PhoneNumberStatus.Releasing)]
+    [InlineData(PhoneNumberStatus.Released)]
     public void SerializationRoundtrip_Works(PhoneNumberStatus rawValue)
     {
         // force implicit conversion because Theory can't do that for us

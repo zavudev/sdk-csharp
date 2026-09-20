@@ -5,12 +5,20 @@ using Zavudev.Exceptions;
 
 namespace Zavudev.Models.PhoneNumbers;
 
+/// <summary>
+/// Billing state of an owned number, separate from `regulatoryStatus`. `pending`
+/// is legacy and is not written to numbers today. The SDKs carry `active`, `suspended`
+/// and `pending` only; `releasing` and `released` are returned by the REST API until
+/// their next release.
+/// </summary>
 [JsonConverter(typeof(PhoneNumberStatusConverter))]
 public enum PhoneNumberStatus
 {
     Active,
     Suspended,
     Pending,
+    Releasing,
+    Released,
 }
 
 sealed class PhoneNumberStatusConverter : JsonConverter<PhoneNumberStatus>
@@ -26,6 +34,8 @@ sealed class PhoneNumberStatusConverter : JsonConverter<PhoneNumberStatus>
             "active" => PhoneNumberStatus.Active,
             "suspended" => PhoneNumberStatus.Suspended,
             "pending" => PhoneNumberStatus.Pending,
+            "releasing" => PhoneNumberStatus.Releasing,
+            "released" => PhoneNumberStatus.Released,
             _ => (PhoneNumberStatus)(-1),
         };
     }
@@ -43,6 +53,8 @@ sealed class PhoneNumberStatusConverter : JsonConverter<PhoneNumberStatus>
                 PhoneNumberStatus.Active => "active",
                 PhoneNumberStatus.Suspended => "suspended",
                 PhoneNumberStatus.Pending => "pending",
+                PhoneNumberStatus.Releasing => "releasing",
+                PhoneNumberStatus.Released => "released",
                 _ => throw new ZavudevInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
