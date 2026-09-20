@@ -144,9 +144,7 @@ public record class SenderUpdateParams : ParamsBase
     /// <summary>
     /// Turn the one-way SMS channel on or off. Enabling needs nothing else and takes
     /// effect immediately; disabling removes the channel from the sender. Confirm
-    /// with the `channels` array on the response. Turning the channel on needs nothing,
-    /// but SENDING on it requires an approved business verification (KYB): without
-    /// one every send is refused with `403 kyb_required`.
+    /// with the `channels` array on the response.
     /// </summary>
     public bool? EnableSmsOneway
     {
