@@ -35,7 +35,7 @@ public class AgentFlowTest : TestBase
             Trigger = new()
             {
                 Type = Flows::FlowTriggerType.Keyword,
-                Intent = "intent",
+                Intent = "quiere saber precios o cotizar",
                 Keywords = ["string"],
             },
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -64,7 +64,7 @@ public class AgentFlowTest : TestBase
         Flows::FlowTrigger expectedTrigger = new()
         {
             Type = Flows::FlowTriggerType.Keyword,
-            Intent = "intent",
+            Intent = "quiere saber precios o cotizar",
             Keywords = ["string"],
         };
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -113,7 +113,7 @@ public class AgentFlowTest : TestBase
             Trigger = new()
             {
                 Type = Flows::FlowTriggerType.Keyword,
-                Intent = "intent",
+                Intent = "quiere saber precios o cotizar",
                 Keywords = ["string"],
             },
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -156,7 +156,7 @@ public class AgentFlowTest : TestBase
             Trigger = new()
             {
                 Type = Flows::FlowTriggerType.Keyword,
-                Intent = "intent",
+                Intent = "quiere saber precios o cotizar",
                 Keywords = ["string"],
             },
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -192,7 +192,7 @@ public class AgentFlowTest : TestBase
         Flows::FlowTrigger expectedTrigger = new()
         {
             Type = Flows::FlowTriggerType.Keyword,
-            Intent = "intent",
+            Intent = "quiere saber precios o cotizar",
             Keywords = ["string"],
         };
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -241,7 +241,7 @@ public class AgentFlowTest : TestBase
             Trigger = new()
             {
                 Type = Flows::FlowTriggerType.Keyword,
-                Intent = "intent",
+                Intent = "quiere saber precios o cotizar",
                 Keywords = ["string"],
             },
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -278,7 +278,7 @@ public class AgentFlowTest : TestBase
             Trigger = new()
             {
                 Type = Flows::FlowTriggerType.Keyword,
-                Intent = "intent",
+                Intent = "quiere saber precios o cotizar",
                 Keywords = ["string"],
             },
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -315,7 +315,7 @@ public class AgentFlowTest : TestBase
             Trigger = new()
             {
                 Type = Flows::FlowTriggerType.Keyword,
-                Intent = "intent",
+                Intent = "quiere saber precios o cotizar",
                 Keywords = ["string"],
             },
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -351,7 +351,7 @@ public class AgentFlowTest : TestBase
             Trigger = new()
             {
                 Type = Flows::FlowTriggerType.Keyword,
-                Intent = "intent",
+                Intent = "quiere saber precios o cotizar",
                 Keywords = ["string"],
             },
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -390,7 +390,7 @@ public class AgentFlowTest : TestBase
             Trigger = new()
             {
                 Type = Flows::FlowTriggerType.Keyword,
-                Intent = "intent",
+                Intent = "quiere saber precios o cotizar",
                 Keywords = ["string"],
             },
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -428,7 +428,7 @@ public class AgentFlowTest : TestBase
             Trigger = new()
             {
                 Type = Flows::FlowTriggerType.Keyword,
-                Intent = "intent",
+                Intent = "quiere saber precios o cotizar",
                 Keywords = ["string"],
             },
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),

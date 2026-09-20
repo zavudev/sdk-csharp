@@ -39,7 +39,7 @@ public class FlowListPageResponseTest : TestBase
                     Trigger = new()
                     {
                         Type = Flows::FlowTriggerType.Keyword,
-                        Intent = "intent",
+                        Intent = "quiere saber precios o cotizar",
                         Keywords = ["string"],
                     },
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -75,7 +75,7 @@ public class FlowListPageResponseTest : TestBase
                 Trigger = new()
                 {
                     Type = Flows::FlowTriggerType.Keyword,
-                    Intent = "intent",
+                    Intent = "quiere saber precios o cotizar",
                     Keywords = ["string"],
                 },
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -123,7 +123,7 @@ public class FlowListPageResponseTest : TestBase
                     Trigger = new()
                     {
                         Type = Flows::FlowTriggerType.Keyword,
-                        Intent = "intent",
+                        Intent = "quiere saber precios o cotizar",
                         Keywords = ["string"],
                     },
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -173,7 +173,7 @@ public class FlowListPageResponseTest : TestBase
                     Trigger = new()
                     {
                         Type = Flows::FlowTriggerType.Keyword,
-                        Intent = "intent",
+                        Intent = "quiere saber precios o cotizar",
                         Keywords = ["string"],
                     },
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -216,7 +216,7 @@ public class FlowListPageResponseTest : TestBase
                 Trigger = new()
                 {
                     Type = Flows::FlowTriggerType.Keyword,
-                    Intent = "intent",
+                    Intent = "quiere saber precios o cotizar",
                     Keywords = ["string"],
                 },
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -264,7 +264,7 @@ public class FlowListPageResponseTest : TestBase
                     Trigger = new()
                     {
                         Type = Flows::FlowTriggerType.Keyword,
-                        Intent = "intent",
+                        Intent = "quiere saber precios o cotizar",
                         Keywords = ["string"],
                     },
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -308,7 +308,7 @@ public class FlowListPageResponseTest : TestBase
                     Trigger = new()
                     {
                         Type = Flows::FlowTriggerType.Keyword,
-                        Intent = "intent",
+                        Intent = "quiere saber precios o cotizar",
                         Keywords = ["string"],
                     },
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -352,7 +352,7 @@ public class FlowListPageResponseTest : TestBase
                     Trigger = new()
                     {
                         Type = Flows::FlowTriggerType.Keyword,
-                        Intent = "intent",
+                        Intent = "quiere saber precios o cotizar",
                         Keywords = ["string"],
                     },
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -395,7 +395,7 @@ public class FlowListPageResponseTest : TestBase
                     Trigger = new()
                     {
                         Type = Flows::FlowTriggerType.Keyword,
-                        Intent = "intent",
+                        Intent = "quiere saber precios o cotizar",
                         Keywords = ["string"],
                     },
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -441,7 +441,7 @@ public class FlowListPageResponseTest : TestBase
                     Trigger = new()
                     {
                         Type = Flows::FlowTriggerType.Keyword,
-                        Intent = "intent",
+                        Intent = "quiere saber precios o cotizar",
                         Keywords = ["string"],
                     },
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -486,7 +486,7 @@ public class FlowListPageResponseTest : TestBase
                     Trigger = new()
                     {
                         Type = Flows::FlowTriggerType.Keyword,
-                        Intent = "intent",
+                        Intent = "quiere saber precios o cotizar",
                         Keywords = ["string"],
                     },
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
