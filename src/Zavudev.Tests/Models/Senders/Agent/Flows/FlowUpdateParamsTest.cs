@@ -34,7 +34,7 @@ public class FlowUpdateParamsTest : TestBase
             Trigger = new()
             {
                 Type = Flows::FlowTriggerType.Keyword,
-                Intent = "intent",
+                Intent = "quiere saber precios o cotizar",
                 Keywords = ["string"],
             },
         };
@@ -61,7 +61,7 @@ public class FlowUpdateParamsTest : TestBase
         Flows::FlowTrigger expectedTrigger = new()
         {
             Type = Flows::FlowTriggerType.Keyword,
-            Intent = "intent",
+            Intent = "quiere saber precios o cotizar",
             Keywords = ["string"],
         };
 
@@ -172,7 +172,7 @@ public class FlowUpdateParamsTest : TestBase
             Trigger = new()
             {
                 Type = Flows::FlowTriggerType.Keyword,
-                Intent = "intent",
+                Intent = "quiere saber precios o cotizar",
                 Keywords = ["string"],
             },
         };

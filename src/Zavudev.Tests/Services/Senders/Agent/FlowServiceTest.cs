@@ -42,7 +42,7 @@ public class FlowServiceTest : TestBase
                 Trigger = new()
                 {
                     Type = FlowTriggerType.Keyword,
-                    Intent = "intent",
+                    Intent = "quiere saber precios o cotizar",
                     Keywords = ["info", "pricing", "demo"],
                 },
             },
