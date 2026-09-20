@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.2.0 (2026-09-20)
+
+Full Changelog: [v0.1.0...v0.2.0](https://github.com/zavudev/sdk-csharp/compare/v0.1.0...v0.2.0)
+
+### Features
+
+* **api:** api update ([5fb8697](https://github.com/zavudev/sdk-csharp/commit/5fb8697f9affa1b561efce67b6be0f56d13677fb))
+* **api:** api update ([da0a2c0](https://github.com/zavudev/sdk-csharp/commit/da0a2c07b9299dcaa0c1ae7c078e5642ca679531))
+* **api:** api update ([d73876e](https://github.com/zavudev/sdk-csharp/commit/d73876e64f5cf89766a28baddb7979576157c928))
+* **api:** api update ([2c961fc](https://github.com/zavudev/sdk-csharp/commit/2c961fc5c02d0de95ec3c4dbed98333f097818f8))
+* **api:** api update ([3e405cc](https://github.com/zavudev/sdk-csharp/commit/3e405cc8b4b01a0e4ac758f7f2d45b9a81d4f80c))
+* **api:** api update ([0d869f1](https://github.com/zavudev/sdk-csharp/commit/0d869f1ea9fd1fc2049483bfd76d6ce8803df627))
+* **api:** api update ([415d31d](https://github.com/zavudev/sdk-csharp/commit/415d31dbddf1211b0ce0fe66310f5c1e453c2de4))
+* **api:** api update ([5456b2c](https://github.com/zavudev/sdk-csharp/commit/5456b2c8998185dff2f91bf699cc506f32c02864))
+* **api:** api update ([01367bb](https://github.com/zavudev/sdk-csharp/commit/01367bbf6af82761f861601a214216e503fdd481))
+* **api:** api update ([710ab9f](https://github.com/zavudev/sdk-csharp/commit/710ab9f1f328f1aeef304b058650140f0f0285db))
+* **api:** api update ([c1e8938](https://github.com/zavudev/sdk-csharp/commit/c1e89384e72a0a05e2a94819a2e8656872a804e2))
+
 ## 0.1.0 (2026-09-08)
 
 Full Changelog: [v0.0.2...v0.1.0](https://github.com/zavudev/sdk-csharp/compare/v0.0.2...v0.1.0)
