@@ -5,8 +5,8 @@
     <PackageTags>sdk;api;http;library</PackageTags>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <Copyright>Copyright 2026 Zavudev</Copyright>
-    <PackageProjectUrl>https://docs.zavu.dev</PackageProjectUrl>
-    <RepositoryUrl>https://www.github.com/zavudev/sdk-csharp</RepositoryUrl>
+    <PackageProjectUrl>https://zavu.dev</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/zavudev/sdk-csharp</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
 
     <!-- Documentation-->
