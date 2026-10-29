@@ -6,11 +6,16 @@
     <VersionPrefix>0.1.0</VersionPrefix>
     <Description>The official .NET library for the Zavudev API.</Description>
     <OutputType>Library</OutputType>
+    <PackageId>Zavudev</PackageId>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageTags>zavu;sms;whatsapp;telegram;email;messaging;sdk;api</PackageTags>
+    <PackageReleaseNotes>https://github.com/zavudev/sdk-csharp/blob/main/CHANGELOG.md</PackageReleaseNotes>
   </PropertyGroup>
   <ItemGroup>
     <InternalsVisibleTo Include="Zavudev.Tests"/>
     <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
+    <None Include="..\..\assets\icon.png" Pack="true" PackagePath="\"/>
     <PackageReference Include="System.Text.Json" Version="9.0.9"/>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All"/>
   </ItemGroup>
